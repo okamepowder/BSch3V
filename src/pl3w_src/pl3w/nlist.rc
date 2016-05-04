@@ -1,0 +1,178 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// âpåÍ (ïƒçë) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""afxres.rc""         // ?????????\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\plst.ico"
+IDI_SMALL               ICON                    "res\\small.ico"
+IDI_ICON2               ICON                    "res\\icon2.ico"
+IDI_ICON3               ICON                    "res\\icon3.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 210, 58
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About PL3W"
+FONT 9, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,10,10,20,20
+    CTEXT           "PL3W Version xxxx",IDC_STATIC_VERSION,39,10,119,8,SS_NOPREFIX
+    CTEXT           "Copyright (C) 2004-2014 H.Okada(Suigyodo)",IDC_STATIC,35,25,168,8
+    DEFPUSHBUTTON   "OK",IDOK,170,5,33,14,WS_GROUP
+    CTEXT           "Partslist utility for BSch3V",IDC_STATIC,20,41,175,8
+END
+
+IDD_NLIST_DIALOG DIALOGEX 0, 0, 283, 201
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "PL3W Partslist utility for BSch3V"
+FONT 9, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    LISTBOX         IDC_LIST_SRC,5,15,230,90,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP,WS_EX_ACCEPTFILES
+    PUSHBUTTON      "&Ref...",IDC_REFSRC,240,63,40,15
+    EDITTEXT        IDC_EDIT_DST,5,125,232,15,ES_AUTOHSCROLL
+    PUSHBUTTON      "Re&f...",IDC_REFDST,240,126,40,15
+    CONTROL         "Manufacturer",IDC_CHECK_MFR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,171,60,10
+    CONTROL         "Manufacturer Partnumber",IDC_CHECK_MFRPN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,81,171,114,10
+    CONTROL         "Package",IDC_CHECK_PKG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,183,54,10
+    CONTROL         "Note",IDC_CHECK_NOTE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,81,183,54,10
+    DEFPUSHBUTTON   "Execute",IDOK,240,15,40,15
+    PUSHBUTTON      "Exit",IDCANCEL,240,36,40,13
+    PUSHBUTTON      "&Clear",IDC_CLR,240,84,40,15
+    LTEXT           "Input(If you select multi .CE3 files, they are regarded as one circuit)",IDC_STATIC,11,5,259,8
+    LTEXT           "Output",IDC_STATIC,10,115,38,8
+    GROUPBOX        "Option",IDC_STATIC,6,159,255,39
+    CONTROL         "Component Info",IDC_CHECK_COMPINFO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,150,183,96,10
+    CONTROL         "CSV with BOM code",IDC_RADIO_CSVOUT,"Button",BS_AUTORADIOBUTTON,45,144,83,10
+    CONTROL         "Excel XML",IDC_RADIO_SYLKOUT,"Button",BS_AUTORADIOBUTTON,150,144,87,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 203
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 51
+    END
+
+    IDD_NLIST_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 276
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 194
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About..."
+    IDS_DSTOPENERR          "Open error output file."
+    IDS_SRCOPENERR          "Open error input file."
+    IDS_FINISHED            "Finished"
+    IDS_VERSION             "0.81.10"
+END
+
+#endif    // âpåÍ (ïƒçë) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#include "afxres.rc"         // ?????????
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
