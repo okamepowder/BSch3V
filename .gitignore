@@ -1,0 +1,19 @@
+Debug
+Release
+Backup
+.vs
+
+UpgradeLog.htm
+UpgradeLog.xml
+*.vcproj
+*.vcxproj.user
+*.suo
+*.obj
+*.db
+
+# other files folders
+.svn
+desktop.ini
+Thumbs.db
+.thumbnails
+
