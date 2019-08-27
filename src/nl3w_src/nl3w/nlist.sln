@@ -1,5 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nlist", "nlist.vcxproj", "{E9E21C62-5BCA-4172-B5B0-680FC59F0873}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nl3w_lang", "..\nl3w_lang\nl3w_lang.vcxproj", "{8B0248A5-5CB4-46C3-AD99-FB9A456B6F8C}"
@@ -27,5 +29,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {85DC6155-BF85-4AEA-832D-B9F7AACE31A6}
 	EndGlobalSection
 EndGlobal

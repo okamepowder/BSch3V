@@ -1,5 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LCoV", "LCoV.vcxproj", "{CC30CACE-C721-4D2E-A80E-89D4A272F199}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lcov_lang", "..\lcov_lang\lcov_lang.vcxproj", "{F80AB0C8-A951-4DFF-9245-5C83379F172A}"
@@ -21,5 +23,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {91441228-F09B-4F3B-88DE-37332C4613DC}
 	EndGlobalSection
 EndGlobal

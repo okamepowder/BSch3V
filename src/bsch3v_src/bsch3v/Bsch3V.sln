@@ -1,5 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bsch3V", "Bsch3V.vcxproj", "{DC9E9BC6-8563-4599-908F-C766481DD263}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bsch3v_lang", "..\bsch3v_lang\bsch3v_lang.vcxproj", "{868F498B-28E4-492C-AE6D-FD7F98E70C9A}"
@@ -21,5 +23,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {439BEFE9-BCA9-433A-B265-291A05A3032E}
 	EndGlobalSection
 EndGlobal

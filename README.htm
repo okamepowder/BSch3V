@@ -4,14 +4,17 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <META name="GENERATOR" content="IBM WebSphere Studio Homepage Builder Version 11.0.0.0 for Windows">
 <META http-equiv="Content-Style-Type" content="text/css">
-<TITLE></TITLE>
+<TITLE>はじめにお読みください</TITLE>
 </HEAD>
 <BODY>
-<P><FONT size="+1"><B>BSch3V パッケージ 160504版</B></FONT></P>
+<div style="border-color: red; padding: 2em; border-width: 2px;border-style: dotted;">(2019/08)<br>本パッケージはオリジナルパッケージ(160504版)をもとに最新のランタイム用(VC2017)に再コンパイルされています。</div>
+
+<HR>
+  <P><FONT size="+1"><B>BSch3V パッケージ 160504版</B></FONT></P>
 <P align="right">水魚堂&nbsp; &nbsp;岡田 仁史 &nbsp;2016/05/04</P>
 <HR>
 <P><FONT size="-1"><B><U><FONT size="+0">1. 概要</FONT></U></B></FONT></P>
-<BLOCKQUOTE>&nbsp; BSch3V (Basic Schematic 3V) はWindows Vista/7/8で(そしてたぶんXPでも)動作するフリーソフトウェアの回路図エディタです。
+<BLOCKQUOTE>&nbsp; BSch3V (Basic Schematic 3V) はWindows Vista/7/8/10で(そしてたぶんXPでも)動作するフリーソフトウェアの回路図エディタです。
 操作の見通しが悪くならないように、一般的な回路図作成に必要な基本的な機能に絞ってあります。<BR>
 &nbsp;&nbsp;本パッケージは、BSch3Vとその周辺ユーティリティソフトウェアをまとめたものです。<BR>
 &nbsp;&nbsp;<BR>
@@ -72,17 +75,6 @@
       <TD bgcolor="#fff0e1">ライセンス文書</TD>
     </TR>
     <TR>
-      <TD bgcolor="#fff0e1">Runtimeフォルダ(注5)</TD>
-      <TD bgcolor="#fff0e1">ランタイムライブラリのインストーラ</TD>
-    </TR>
-    <TR>
-      <TD bgcolor="#fff0e1">msvcr110.dll&nbsp;&nbsp;&nbsp;(注6)<BR>
-      msvcp110.dll<BR>
-      mfc110u.dll<BR>
-      mfc110jpn.dll</TD>
-      <TD bgcolor="#fff0e1">ランタイムライブラリ</TD>
-    </TR>
-    <TR>
       <TD bgcolor="#fff0e1">SRCフォルダ</TD>
       <TD bgcolor="#fff0e1">プログラムのソースファイル</TD>
     </TR>
@@ -97,18 +89,15 @@
   <LI>(注2)NL3WでPADSタイプのネットリストを作成するためのアドインです。nl3w.exeと同じフォルダに保存して、NL3Wのアドインで指定してください。
   <LI>(注3)ランタイム同梱パッケージにのみ
   <LI>(注4)SAMPLEフォルダの回路図は、回路図エディタおよび周辺プログラムの試用評価のためのものです。回路図に従って組み立てたときの動作を保証するものではありません。
-  <LI>(注5)インストールするランタイム同梱パッケージのみ
-  <LI>(注6)インストールせずに使うランタイム同梱パッケージのみ
   <LI>(注7)LOGIC74ライブラリのゲートのデザインを修正したものを ksmakoto さんに提供していただきました。ありがとうございます。
-  <LI>各プログラムの更新履歴は水魚堂ホームページの<A href="http://www.suigyodo.com/online/history/index.htm">ソフトウェアの履歴</A>をご覧ください。
+  <LI>各プログラムの更新履歴は水魚堂ホームページの<A href="https://www.suigyodo.com/online/history/index.htm">ソフトウェアの履歴</A>をご覧ください。
 </UL>
 <P><B><U>3. インストール</U></B>&nbsp;&nbsp;</P>
 <BLOCKQUOTE>
-<P><B>1. 準備 ～ ランタイムライブラリのインストール <FONT color="#ff0000">(インストールするランタイム同梱パッケージのみ)</FONT></B><BR>
-&nbsp; BSch3Vシリーズをお使いになる前に、ランタイムライブラリである「Microsoft Visual C++ 2012 Update3
-再頒布可能パッケージ (x86)」を予めインストールしておく必要があります。<BR>
-&nbsp;&nbsp;Runtimeフォルダに、ランタイムライブラリのインストールプログラム vcredist_x86.exe を収めています。これを実行すると、ランタイムライブラリのインストールができます。&nbsp;&nbsp;<BR>
+<P><B>1. 準備 ～ ランタイムライブラリのインストール</B><BR>
+&nbsp; BSch3Vシリーズをお使いになる前に、ランタイムライブラリである「<a href="https://aka.ms/vs/16/release/vc_redist.x86.exe" target="_blank" rel="nofollow noreferrer">Microsoft Visual C++ 2017 再頒布可能パッケージ (x86)</a>」を予めインストールしておく必要があります。<BR>
 &nbsp;&nbsp;<FONT color="#ff0000">Version 0.7xまでのBSch3Vとはビルド環境が変わりました。これまで、Version 0.7xまでをお使いであっても、ランタイムライブラリのインストールが必要になります。</FONT></P>
+<div style="border-color: red; padding:1em; border-width: 2px;border-style: dotted;">static版パッケージの場合はアプリに必要な機能が内蔵されているため、ランタイムライブラリは不要です。</div>
 <P><B>2. BSch3Vパッケージ版のインストール</B><BR>
 &nbsp;&nbsp;BSch3V自体には特にインストーラは準備していません。<BR>
 </P>
@@ -123,7 +112,7 @@ color=#ff0000><B>ユーザーフォルダの下の</B></FONT>適当なフォル�
 <P>&nbsp;&nbsp;ユーザーインターフェースが英語になる場合は、exeファイルと同じフォルダに、一緒に配布された *_lang.dllがあるかどうか確認してください。</P>
 </BLOCKQUOTE>
 <P><B><U>4. 使い方</U></B></P>
-<BLOCKQUOTE><A href="http://www.suigyodo.com/online/manual/index.htm">水魚堂ONLINEのマニュアルページ</A>をご覧ください。</BLOCKQUOTE>
+<BLOCKQUOTE><A href="https://www.suigyodo.com/online/manual/index.htm">水魚堂ONLINEのマニュアルページ</A>をご覧ください。</BLOCKQUOTE>
 <P><BR>
 <B><U>5. Version 0.8x以降の固有の注意点</U></B></P>
 <UL>
@@ -151,15 +140,14 @@ color=#ff0000><B>ユーザーフォルダの下の</B></FONT>適当なフォル�
 <BLOCKQUOTE>&nbsp;&nbsp;ライセンスは<B>2条項BSDライセンス</B>です。詳細についてはLicenseフォルダの文書をご覧ください。<BR>
 &nbsp;&nbsp;本プログラムで回路図を作成されるぶんには、無保証という点だけご理解いただければ、使用目的などの制限はありません。<BR>
 <BR>
-&nbsp;&nbsp;添付しているソースファイルは Visual C++ 2012 Update4 Professional Edition
-以上でコンパイルできます。<BR>
-Express Editionではコンパイルできませんが、Visual Studio Community 2015 ではコンパイルできるはずです。</BLOCKQUOTE>
+&nbsp;&nbsp;添付しているソースファイルは Visual C++ 2012 Update4 Professional Edition ～ 2019 でコンパイルできます。<BR>
+</BLOCKQUOTE>
 <P><B><U>7. プログラムのアップデート</U></B></P>
-<BLOCKQUOTE>&nbsp;&nbsp;プログラムの最新版は、<A href="http://www.suigyodo.com/online">水魚堂オンライン(http://www.suigyodo.com/online)</A>で公開します。<BR>
+<BLOCKQUOTE>&nbsp;&nbsp;プログラムの最新版は、<A href="https://www.suigyodo.com/online">水魚堂オンライン(https://www.suigyodo.com/online)</A>で公開します。<BR>
 &nbsp;&nbsp;ときどきアクセスするようにしてください。</BLOCKQUOTE>
 <HR>
 <P>水魚堂  岡田 仁史<BR>
-URL    : http://www.suigyodo.com/online<BR>
+URL    : https://www.suigyodo.com/online<BR>
 E-Mail : hitoshi@suigyodo.com</P>
 </BODY>
 </HTML>

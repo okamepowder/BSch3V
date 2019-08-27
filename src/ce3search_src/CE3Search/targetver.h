@@ -8,19 +8,19 @@
 
 // Modify the following defines if you have to target a platform prior to the ones specified below.
 // Refer to MSDN for the latest info on corresponding values for different platforms.
-#ifndef WINVER                          // Specifies that the minimum required platform is Windows Vista.
-#define WINVER 0x0600           // Change this to the appropriate value to target other versions of Windows.
+#ifndef WINVER                  // Windows XP 以降のバージョンに固有の機能の使用を許可します。
+#define WINVER 0x0501           // これを Windows XP またはそれ以降のバージョン向けに適切な値に変更してください。
 #endif
 
-#ifndef _WIN32_WINNT            // Specifies that the minimum required platform is Windows Vista.
-#define _WIN32_WINNT 0x0600     // Change this to the appropriate value to target other versions of Windows.
+#ifndef _WIN32_WINNT            // Windows XP 以降のバージョンに固有の機能の使用を許可します。
+#define _WIN32_WINNT 0x0501     // これを Windows XP またはそれ以降のバージョン向けに適切な値に変更してください。
 #endif
 
-#ifndef _WIN32_WINDOWS          // Specifies that the minimum required platform is Windows 98.
-#define _WIN32_WINDOWS 0x0410 // Change this to the appropriate value to target Windows Me or later.
+#ifndef _WIN32_WINDOWS          // Windows ME 以降のバージョンに固有の機能の使用を許可します。
+#define _WIN32_WINDOWS 0x0500   // これを Windows Me またはそれ以降のバージョン向けに適切な値に変更してください。
 #endif
 
-#ifndef _WIN32_IE                       // Specifies that the minimum required platform is Internet Explorer 7.0.
-#define _WIN32_IE 0x0700        // Change this to the appropriate value to target other versions of IE.
+#ifndef _WIN32_IE               // IE 6.0 以降のバージョンに固有の機能の使用を許可します。
+#define _WIN32_IE 0x0600        // これを IE 6.0  またはそれ以降のバージョン向けに適切な値に変更してください。
 #endif
 

@@ -14,6 +14,11 @@
 #include <string>
 #include <list>
 #include <Shlobj.h>
+
+#ifndef LC_ALL
+#include <locale.h>
+#endif
+
 using namespace std;
 
 
