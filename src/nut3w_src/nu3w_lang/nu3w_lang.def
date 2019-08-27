@@ -1,6 +1,0 @@
-; nu3w_lang.def : DLL のモジュール パラメータを宣言します。
-
-LIBRARY      "nu3w_lang"
-
-EXPORTS
-    ; 明示的なエクスポートはここへ記述できます

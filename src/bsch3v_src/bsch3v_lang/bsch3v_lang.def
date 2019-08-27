@@ -1,6 +1,0 @@
-; bsch3v_lang.def : DLL のモジュール パラメータを宣言します。
-
-LIBRARY      "bsch3v_lang"
-
-EXPORTS
-    ; 明示的なエクスポートはここへ記述できます
