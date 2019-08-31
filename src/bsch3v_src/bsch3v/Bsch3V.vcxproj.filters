@@ -150,9 +150,6 @@
     <ClCompile Include="SMarkupTextLine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Splash.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SPtnObj.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -370,9 +367,6 @@
     <ClInclude Include="SMarkupTextLine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Splash.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SPtnObj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -484,9 +478,6 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\OBJFILTER.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\SPLASH.BMP">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\tag_l.ico">

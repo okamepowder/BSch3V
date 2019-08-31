@@ -47,13 +47,48 @@ BEGIN
     "LANGUAGE 9, 1\r\n"
     "#pragma code_page(1252)\r\n"
     "#include ""res\\LCoV.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
-    "#include ""afxres.rc""         // ?????????\r\n"
+    "#include ""afxres.rc""         // 標準のコンポーネント\r\n"
     "#endif\r\n"
     "\0"
 END
 
 #endif    // APSTUDIO_INVOKED
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 0,82,1,0
+ PRODUCTVERSION 0,82,1,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004e4"
+        BEGIN
+            VALUE "FileVersion", "0.82.01"
+            VALUE "InternalName", "LCoV"
+            VALUE "LegalCopyright", "Copyright (C) 2004-2014 H.Okada(Suigyodo)"
+            VALUE "OriginalFilename", "lcov.exe"
+            VALUE "ProductName", "LCoV"
+            VALUE "ProductVersion", "0.82.01"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1252
+    END
+END
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -259,7 +294,7 @@ END
 IDD_ABOUTBOX DIALOGEX 0, 0, 191, 49
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "About LCoV"
-FONT 9, "MS Shell Dlg", 0, 0, 0x1
+FONT 11, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,6,6,20,20
     CTEXT           "LCoV Version xxxx",IDC_STATIC_VERSION,30,12,92,8,SS_NOPREFIX
@@ -269,7 +304,7 @@ END
 
 IDD_DIALOGBAR DIALOGEX 0, 0, 105, 210
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
-FONT 9, "MS Shell Dlg", 0, 0, 0x0
+FONT 11, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
     PUSHBUTTON      "Button1",IDC_BUTTON_UP,3,3,47,12,BS_ICON | BS_CENTER
     PUSHBUTTON      "Button2",IDC_BUTTON_DOWN,53,3,49,12,BS_ICON
@@ -279,7 +314,7 @@ END
 IDD_DIALOG_PIN_PROP DIALOGEX 0, 0, 241, 145
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Pin - property"
-FONT 9, "MS Shell Dlg", 400, 0, 0x1
+FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     LTEXT           "&Name",IDC_STATIC,6,6,24,12,SS_CENTERIMAGE,WS_EX_RIGHT
     EDITTEXT        IDC_EDIT_PIN_NAME,36,6,114,15,ES_AUTOHSCROLL
@@ -303,7 +338,7 @@ END
 IDD_DLG_PROP_COMP DIALOGEX 0, 0, 264, 239
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Property - component"
-FONT 9, "MS Shell Dlg", 400, 0, 0x1
+FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     LTEXT           "&Name",IDC_STATIC,3,9,42,9,SS_CENTERIMAGE,WS_EX_RIGHT
     EDITTEXT        IDC_EDIT_COMP_NAME,51,9,108,12,ES_UPPERCASE | ES_AUTOHSCROLL
@@ -338,7 +373,7 @@ END
 IDD_PTN_PROP DIALOGEX 0, 0, 155, 43
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Property - pattern"
-FONT 9, "MS Shell Dlg", 400, 0, 0x1
+FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     LTEXT           "&Width",IDC_STATIC,12,3,39,12,SS_CENTERIMAGE,WS_EX_RIGHT
     COMBOBOX        IDC_COMBO_WIDTH,57,3,33,45,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
@@ -351,7 +386,7 @@ END
 IDD_DIALOG_PROP_LIB DIALOGEX 0, 0, 203, 55
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Property - library"
-FONT 9, "MS Shell Dlg", 400, 0, 0x1
+FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     EDITTEXT        IDC_EDIT_STRING,3,3,156,48,ES_MULTILINE | ES_AUTOHSCROLL | ES_WANTRETURN
     DEFPUSHBUTTON   "OK",IDOK,165,6,33,14
@@ -361,7 +396,7 @@ END
 IDD_DIALOG_ALIAS DIALOGEX 0, 0, 186, 49
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Add alias"
-FONT 9, "MS Shell Dlg", 400, 0, 0x1
+FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     EDITTEXT        IDC_EDIT_NAME,54,6,66,12,ES_AUTOHSCROLL | ES_READONLY | NOT WS_TABSTOP
     RTEXT           "Alias for",IDC_STATIC,6,6,40,8
@@ -373,7 +408,7 @@ END
 IDD_PTNTEXT DIALOGEX 0, 0, 191, 119
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Property -text"
-FONT 9, "MS Shell Dlg", 400, 0, 0x1
+FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     LTEXT           "&Text",IDC_STATIC,12,6,30,12,SS_CENTERIMAGE,WS_EX_RIGHT
     EDITTEXT        IDC_EDIT_TEXT,48,6,90,14,ES_AUTOHSCROLL
@@ -394,7 +429,7 @@ END
 IDD_PINPROPS DIALOGEX 0, 0, 340, 143
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Pin property"
-FONT 8, "MS Shell Dlg", 400, 0, 0x1
+FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     PUSHBUTTON      "Close",IDCANCEL,282,126,50,14
     SCROLLBAR       IDC_VSCROLL,324,25,12,83,SBS_VERT
@@ -404,7 +439,7 @@ END
 IDD_DISPNAMESETTING DIALOGEX 0, 0, 207, 153
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Show/Hide name individually"
-FONT 8, "MS Shell Dlg", 400, 0, 0x1
+FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,150,114,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,150,132,50,14
@@ -416,7 +451,7 @@ END
 IDD_LINE_PROP DIALOGEX 0, 0, 156, 59
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Property - Line"
-FONT 9, "MS Shell Dlg", 400, 0, 0x1
+FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     LTEXT           "&Width",IDC_STATIC,12,3,39,12,SS_CENTERIMAGE,WS_EX_RIGHT
     COMBOBOX        IDC_COMBO_WIDTH,57,3,33,45,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
@@ -671,8 +706,8 @@ END
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE 9, 1
 #pragma code_page(1252)
-#include "res\LCoV.rc2"  // non-Microsoft Visual C++ edited resources
-#include "afxres.rc"         // ?????????
+#include "res\LCoV.rc2"  // Microsoft Visual C++ 以外のツールで編集されたリソース
+#include "afxres.rc"         // 標準のコンポーネント
 #endif
 
 /////////////////////////////////////////////////////////////////////////////

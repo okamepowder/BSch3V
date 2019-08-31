@@ -4755,11 +4755,7 @@ void CBSchView::OnInsertBitmap()
 	// TODO: ここにコマンド ハンドラ コードを追加します。
 
 	CString strFilter;
-	if(g_bAvailableGDIplus){
-		strFilter = _T("Bitmap(*.bmp)|*.BMP|JPEG(*.jpg;*.jpeg)|*.JPG;*.JPEG|PNG(*.png)|*.PNG||");
-	}else{
-		strFilter = _T("Bitmap(*.bmp)|*.BMP||");
-	}
+	strFilter = _T("Bitmap(*.bmp)|*.BMP|JPEG(*.jpg;*.jpeg)|*.JPG;*.JPEG|PNG(*.png)|*.PNG||");
 
 
 	CFileDialog dlg(TRUE,				//オープンダイアログ

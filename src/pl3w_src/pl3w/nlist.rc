@@ -48,13 +48,49 @@ BEGIN
     "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
     "LANGUAGE 9, 1\r\n"
     "#pragma code_page(1252)\r\n"
-    "#include ""afxres.rc""         // ?????????\r\n"
+    "#include ""afxres.rc""         // 標準のコンポーネント\r\n"
     "#endif\r\n"
     "\0"
 END
 
 #endif    // APSTUDIO_INVOKED
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 0,81,10,0
+ PRODUCTVERSION 0,81,10,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004e4"
+        BEGIN
+            VALUE "FileDescription","Partslist utility for BSch3V"
+            VALUE "FileVersion", "0.81.10"
+            VALUE "InternalName", "PL3W"
+            VALUE "LegalCopyright", "Copyright (C) 2004-2014 H.Okada(Suigyodo)"
+            VALUE "OriginalFilename", "pl3w.exe"
+            VALUE "ProductName", "PL3W"
+            VALUE "ProductVersion", "0.81.10"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1252
+    END
+END
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -76,7 +112,7 @@ IDI_ICON3               ICON                    "res\\icon3.ico"
 IDD_ABOUTBOX DIALOGEX 0, 0, 210, 58
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "About PL3W"
-FONT 9, "MS Shell Dlg", 0, 0, 0x0
+FONT 11, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,10,10,20,20
     CTEXT           "PL3W Version xxxx",IDC_STATIC_VERSION,39,10,119,8,SS_NOPREFIX
@@ -85,16 +121,16 @@ BEGIN
     CTEXT           "Partslist utility for BSch3V",IDC_STATIC,20,41,175,8
 END
 
-IDD_NLIST_DIALOG DIALOGEX 0, 0, 283, 201
+IDD_NLIST_DIALOG DIALOGEX 0, 0, 293, 203
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "PL3W Partslist utility for BSch3V"
-FONT 9, "MS Shell Dlg", 0, 0, 0x0
+FONT 11, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
-    LISTBOX         IDC_LIST_SRC,5,15,230,90,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP,WS_EX_ACCEPTFILES
+    LISTBOX         IDC_LIST_SRC,7,15,230,90,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP,WS_EX_ACCEPTFILES
     PUSHBUTTON      "&Ref...",IDC_REFSRC,240,63,40,15
-    EDITTEXT        IDC_EDIT_DST,5,125,232,15,ES_AUTOHSCROLL
-    PUSHBUTTON      "Re&f...",IDC_REFDST,240,126,40,15
+    EDITTEXT        IDC_EDIT_DST,7,125,231,15,ES_AUTOHSCROLL
+    PUSHBUTTON      "Re&f...",IDC_REFDST,241,125,40,15
     CONTROL         "Manufacturer",IDC_CHECK_MFR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,171,60,10
     CONTROL         "Manufacturer Partnumber",IDC_CHECK_MFRPN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,81,171,114,10
     CONTROL         "Package",IDC_CHECK_PKG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,183,54,10
@@ -102,9 +138,9 @@ BEGIN
     DEFPUSHBUTTON   "Execute",IDOK,240,15,40,15
     PUSHBUTTON      "Exit",IDCANCEL,240,36,40,13
     PUSHBUTTON      "&Clear",IDC_CLR,240,84,40,15
-    LTEXT           "Input(If you select multi .CE3 files, they are regarded as one circuit)",IDC_STATIC,11,5,259,8
-    LTEXT           "Output",IDC_STATIC,10,115,38,8
-    GROUPBOX        "Option",IDC_STATIC,6,159,255,39
+    LTEXT           "Input(If you select multi .CE3 files, they are regarded as one circuit)",IDC_STATIC,9,5,277,8
+    LTEXT           "Output",IDC_STATIC,9,114,38,8
+    GROUPBOX        "Option",IDC_STATIC,7,159,255,39
     CONTROL         "Component Info",IDC_CHECK_COMPINFO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,150,183,96,10
     CONTROL         "CSV with BOM code",IDC_RADIO_CSVOUT,"Button",BS_AUTORADIOBUTTON,45,144,83,10
     CONTROL         "Excel XML",IDC_RADIO_SYLKOUT,"Button",BS_AUTORADIOBUTTON,150,144,87,10
@@ -117,7 +153,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
@@ -130,9 +166,9 @@ BEGIN
     IDD_NLIST_DIALOG, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 276
+        RIGHTMARGIN, 286
         TOPMARGIN, 7
-        BOTTOMMARGIN, 194
+        BOTTOMMARGIN, 196
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -143,7 +179,7 @@ END
 // String Table
 //
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_ABOUTBOX            "&About..."
     IDS_DSTOPENERR          "Open error output file."
@@ -170,7 +206,7 @@ END
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE 9, 1
 #pragma code_page(1252)
-#include "afxres.rc"         // ?????????
+#include "afxres.rc"         // 標準のコンポーネント
 #endif
 
 /////////////////////////////////////////////////////////////////////////////

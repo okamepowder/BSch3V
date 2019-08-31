@@ -19,14 +19,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v141</PlatformToolset>
-    <UseOfMfc>Dynamic</UseOfMfc>
+    <UseOfMfc>Static</UseOfMfc>
     <UseOfAtl>false</UseOfAtl>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v141_xp</PlatformToolset>
-    <UseOfMfc>Dynamic</UseOfMfc>
+    <UseOfMfc>Static</UseOfMfc>
     <UseOfAtl>false</UseOfAtl>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -46,8 +46,8 @@
     <_ProjectFileVersion>11.0.51106.1</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>.\Release\</OutDir>
-    <IntDir>.\Release\</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)$(Configuration)</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -69,7 +69,7 @@
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_BSCH;_MFCBSCH;_BSCHCAPTURE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <StructMemberAlignment>4Bytes</StructMemberAlignment>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -90,7 +90,7 @@
     <Link>
       <AdditionalDependencies>imm32.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>LinkVerboseLib</ShowProgress>
-      <OutputFile>Release\bsch3v.exe</OutputFile>
+      <OutputFile>$(SolutionDir)..\..\$(Configuration)\bsch3v.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DelayLoadDLLs>gdiplus.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
       <ProgramDatabaseFile>.\Release/bsch3.pdb</ProgramDatabaseFile>
@@ -114,7 +114,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_BSCH;_MFCBSCH;_BSCHCAPTURE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <StructMemberAlignment>4Bytes</StructMemberAlignment>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
@@ -312,12 +312,6 @@
     <ClCompile Include="SetQuickProp.cpp" />
     <ClCompile Include="SetTagFrame.cpp" />
     <ClCompile Include="SMarkupTextLine.cpp" />
-    <ClCompile Include="Splash.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</BrowseInformation>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MaxSpeed</Optimization>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</BrowseInformation>
-    </ClCompile>
     <ClCompile Include="SPtnObj.cpp" />
     <ClCompile Include="SPtnObjArc.cpp" />
     <ClCompile Include="SPtnObjCircle.cpp" />
@@ -465,7 +459,6 @@
     <ClInclude Include="SetTagFrame.h" />
     <ClInclude Include="SheetSizeInfo.h" />
     <ClInclude Include="SMarkupTextLine.h" />
-    <ClInclude Include="Splash.h" />
     <ClInclude Include="SPtnObj.h" />
     <ClInclude Include="SPtnObjArc.h" />
     <ClInclude Include="SPtnObjCircle.h" />
@@ -504,7 +497,6 @@
     <Image Include="res\imageSelect.bmp" />
     <Image Include="res\LineEndStyle.bmp" />
     <Image Include="res\OBJFILTER.bmp" />
-    <Image Include="res\SPLASH.BMP" />
     <Image Include="res\tag_l.ico" />
     <Image Include="res\tag_lr.ico" />
     <Image Include="res\tag_r.ico" />

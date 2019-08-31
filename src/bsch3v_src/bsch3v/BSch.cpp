@@ -32,7 +32,6 @@ using namespace std;
 #include "complib.h"
 #include "BSchFont.h"
 #include "Global.h"
-#include "Splash.h"
 
 // Import from Qt-BSch project
 #include "xbschglobal.h"
@@ -188,13 +187,7 @@ CBSchApp theApp;
 BOOL CBSchApp::InitInstance()
 {
 	_tsetlocale(LC_ALL, _T(""));
-	// CG: 次のブロックは「スプラッシュ スクリーン」コンポーネントにより追加されています。
-	{
-		CCommandLineInfo cmdInfo;
-		ParseCommandLine(cmdInfo);
-		if(cmdInfo.m_nShellCommand != CCommandLineInfo::FileNew)cmdInfo.m_bShowSplash=FALSE;
-		CSplashWnd::EnableSplashScreen(cmdInfo.m_bShowSplash);
-	}
+
 	// 標準的な初期化処理
 	// もしこれらの機能を使用せず、実行ファイルのサイズを小さく
 	// したければ以下の特定の初期化ルーチンの中から不必要なもの
@@ -250,22 +243,6 @@ BOOL CBSchApp::InitInstance()
 
 	//::_tmakepath(g_logPath,drive,dir,_T("bsch3v_log"),_T("txt"));
 	//g_log = _T("BSCH3V_LOG\n");
-	
-
-
-	g_bAvailableGDIplus = TRUE;
-
-	//----- 2016/05/03 GDI+のない環境を前提にしない
-	//GDIPLUS.DLLの有無をチェックする。
-	//GDIPLUS.DLLはリンカ指定で、遅延ロード指定をすること。
-	//g_bAvailableGDIplus = FALSE;
-	//HINSTANCE		hInstDGIPLUS;
-	//hInstDGIPLUS = LoadLibrary(_T("gdiplus.dll"));
-	//if ( hInstDGIPLUS){				// gdiplus.dllが見つかった.
-	//	g_bAvailableGDIplus = TRUE;
-	//	FreeLibrary(hInstDGIPLUS);
-	//}
-
 
 
 //	SetRegistryKey("Suigyodo");	//INIファイルの代わりにレジストリ"Suigyodo(水魚堂)"を使う
@@ -457,9 +434,6 @@ CDocument* CBSchApp::OpenDocumentFile(LPCTSTR lpszFileName)
 
 BOOL CBSchApp::PreTranslateMessage(MSG* pMsg)
 {
-	// CG: 次の行は「スプラッシュ スクリーン」コンポーネントにより追加されています。
-	CSplashWnd::PreTranslateAppMessage(pMsg);
-
 	return CWinApp::PreTranslateMessage(pMsg);
 }
 
@@ -635,20 +609,6 @@ void CBSchApp::UpdatePrinterSelection(BOOL bForceDefaults)
 
 
 		GlobalUnlock(m_hDevNames);
-
-
-		//DEVNAMES* lpDevNames = (DEVNAMES*)::GlobalLock(m_hDevNames);
-		//if(
-		//		_tcscmp((LPCTSTR)lpDevNames+lpDevNames->wDriverOffset,strDriver)==0
-		//	&&	_tcscmp((LPCTSTR)lpDevNames+lpDevNames->wDeviceOffset,strDevice)==0
-		//	&&	_tcscmp((LPCTSTR)lpDevNames+lpDevNames->wOutputOffset,strOutput)==0
-		//	){
-		//	DEVMODE* lpDevMode = (DEVMODE*)::GlobalLock(m_hDevMode);
-		//	if(nOrientation!=0) lpDevMode->dmOrientation = nOrientation;
-		//	if(nPaperSize!=0)	lpDevMode->dmPaperSize   = nPaperSize;
-		//	GlobalUnlock(m_hDevMode);
-		//}
-		//GlobalUnlock(m_hDevNames);
 	}
 }
 

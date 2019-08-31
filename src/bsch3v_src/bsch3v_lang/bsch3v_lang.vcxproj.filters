@@ -96,9 +96,6 @@
     <Image Include="RES\OBJFILTER.bmp">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="RES\SPLASH.BMP">
-      <Filter>リソース ファイル</Filter>
-    </Image>
     <Image Include="RES\TAG_L.ICO">
       <Filter>リソース ファイル</Filter>
     </Image>

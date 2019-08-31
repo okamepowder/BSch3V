@@ -93,13 +93,49 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 0,81,10,0
+ PRODUCTVERSION 0,81,10,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004e4"
+        BEGIN
+            VALUE "FileVersion", "0.81.10"
+            VALUE "InternalName", "CE3Search"
+            VALUE "LegalCopyright", "Copyright (C) 2010-2014 H.Okada(Suigyodo)"
+            VALUE "OriginalFilename", "CE3Search.exe"
+            VALUE "ProductName", "CE3Search"
+            VALUE "ProductVersion", "0.81.10"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1252
+    END
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // Dialog
 //
 
 IDD_ABOUTBOX DIALOGEX 0, 0, 214, 62
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "About CE3Search"
-FONT 8, "MS Shell Dlg", 0, 0, 0x1
+FONT 11, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,14,14,20,20
     LTEXT           "CE3Search, Version 0.81.10",IDC_STATIC,42,14,114,8,SS_NOPREFIX
@@ -111,7 +147,7 @@ IDD_CE3SEARCH_DIALOG DIALOGEX 0, 0, 337, 200
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "CE3Search"
-FONT 8, "MS Shell Dlg", 400, 0, 0x1
+FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     LTEXT           "Text",IDC_STATIC,3,30,21,12
     EDITTEXT        IDC_EDIT_TEXT,30,27,138,15,ES_AUTOHSCROLL
@@ -128,7 +164,7 @@ END
 IDD_FIND2_OPTION DIALOGEX 0, 0, 159, 193
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Find Option"
-FONT 8, "MS Shell Dlg", 400, 0, 0x1
+FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         "Match whole",IDC_FIND_MATCHWHOLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,6,69,12
     CONTROL         "Case sensitive",IDC_FIND_CASE_SENSITIVE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,84,6,69,12

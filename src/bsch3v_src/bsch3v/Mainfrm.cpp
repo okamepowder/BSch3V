@@ -10,7 +10,6 @@
 #include "BSch.h"
 
 #include "MainFrm.h"
-#include "Splash.h"
 #include ".\mainfrm.h"
 #include "Global.h"
 
@@ -254,8 +253,6 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	addExtensionMenu();
 
-	// CG: 次の行は「スプラッシュ スクリーン」コンポーネントにより追加されています。
-	CSplashWnd::ShowSplashScreen(this);
 	return 0;
 }
 

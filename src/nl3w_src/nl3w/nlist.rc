@@ -48,14 +48,50 @@ BEGIN
     "LANGUAGE 9, 1\r\n"
     "#pragma code_page(1252)\r\n"
     "#endif //_WIN32\r\n"
-    "#include ""res\\nlist.rc2""  // Microsoft Visual C++ ????????????????\r\n"
-    "#include ""afxres.rc""          // ??????????\r\n"
+    "#include ""res\\nlist.rc2""  // Microsoft Visual C++ 以外のツールで編集されたリソース\r\n"
+    "#include ""afxres.rc""          // 標準のコンポーネント\r\n"
     "#endif\r\n"
     "\0"
 END
 
 #endif    // APSTUDIO_INVOKED
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 0,81,10,0
+ PRODUCTVERSION 0,81,10,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004e4"
+        BEGIN
+            VALUE "FileDescription","Netlist utility for BSch3V"
+            VALUE "FileVersion", "0.81.10"
+            VALUE "InternalName", "NL3W"
+            VALUE "LegalCopyright", "Copyright (C) 2004-2014 H.Okada(Suigyodo)"
+            VALUE "OriginalFilename", "nl3w.exe"
+            VALUE "ProductName", "NL3W"
+            VALUE "ProductVersion", "0.81.10"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1252
+    END
+END
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -75,7 +111,7 @@ IDI_SMALL               ICON                    "res\\icon1.ico"
 IDD_ABOUTBOX DIALOGEX 0, 0, 209, 65
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "About NL3W"
-FONT 9, "MS Shell Dlg", 0, 0, 0x0
+FONT 11, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,10,10,20,20
     CTEXT           "NL3W Version xxxx",IDC_STATIC_VERSION,39,10,119,8,SS_NOPREFIX
@@ -88,7 +124,7 @@ IDD_NLIST_DIALOG DIALOGEX 0, 0, 283, 251
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "NL3W Netlist utility for BSch3V"
-FONT 9, "MS Shell Dlg", 0, 0, 0x0
+FONT 11, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
     LISTBOX         IDC_LIST_SRC,6,15,230,90,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP,WS_EX_ACCEPTFILES
     PUSHBUTTON      "&Ref...",IDC_REFSRC,240,65,40,15
@@ -113,7 +149,7 @@ END
 IDD_DIALOG_SETADDIN DIALOGEX 0, 0, 244, 121
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "SET Add-in"
-FONT 8, "MS Shell Dlg", 400, 0, 0x1
+FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,192,6,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,192,24,50,14
@@ -197,8 +233,8 @@ END
 LANGUAGE 9, 1
 #pragma code_page(1252)
 #endif //_WIN32
-#include "res\nlist.rc2"  // Microsoft Visual C++ ????????????????
-#include "afxres.rc"          // ??????????
+#include "res\nlist.rc2"  // Microsoft Visual C++ 以外のツールで編集されたリソース
+#include "afxres.rc"          // 標準のコンポーネント
 #endif
 
 /////////////////////////////////////////////////////////////////////////////

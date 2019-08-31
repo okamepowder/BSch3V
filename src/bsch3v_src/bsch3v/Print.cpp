@@ -516,16 +516,7 @@ void CBSchView::OnFileExpoBmp()
 {
 	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
 
-
-	//0.64.03で、GDIPLUS.DLLが使えるときは、CImageを使ってPNGやGIFで保存できるようにした。
 	CString strFilter;
-	
-	//----- 2016/05/03 GDI+のない環境を前提にしない
-	//if(g_bAvailableGDIplus){
-	//	strFilter = "Bitmap file(*.bmp)|*.BMP|PNG file(*.png)|*.PNG||";
-	//}else{
-	//	strFilter = "Bitmap file(*.bmp)|*.BMP||";
-	//}
 
 	//----- 2016/05/03 pngを優先度高にする 
 	strFilter = _T("PNG file(*.png)|*.PNG|Bitmap file(*.bmp)|*.BMP||");
@@ -581,203 +572,59 @@ BOOL CBSchView::ExportBitmapFile(LPCTSTR pszFileName)
 
 	int image_x, image_y;
 	
-		//----- 2016/05/03 GDI+のない環境を前提にしない
-	//if(!g_bAvailableGDIplus){
-	//	bUseImage = false;
-	//}else{
-	//	TCHAR szExtension[_MAX_EXT];
-	//	::_tsplitpath(pszFileName,NULL,NULL,NULL,szExtension);
-	//	if(_tcsicmp(szExtension,_T(".bmp"))==0){
-	//		if(bColorMode == FALSE){
-	//			bUseImage = false;
-	//		}
-	//	}
-	//}
-
-	//if(bUseImage){
-		CSize sizeSheet;
-		CBSchDoc* pDoc = GetDocument();
-		sizeSheet=pDoc->GetSheetSize();
+	CSize sizeSheet;
+	CBSchDoc* pDoc = GetDocument();
+	sizeSheet=pDoc->GetSheetSize();
 
 
-		image_x = sizeSheet.cx * nMag /100;		//2016/05/04
-		image_y = sizeSheet.cy * nMag /100;		//2016/05/04
+	image_x = sizeSheet.cx * nMag /100;		//2016/05/04
+	image_y = sizeSheet.cy * nMag /100;		//2016/05/04
 		
 
-		CImage image;
-		image.Create(image_x,image_y,24);
+	CImage image;
+	image.Create(image_x,image_y,24);
 
-		HDC hdc = image.GetDC();
-		CDC* pdc = CDC::FromHandle(hdc);
+	HDC hdc = image.GetDC();
+	CDC* pdc = CDC::FromHandle(hdc);
 
-		CRect rcClip=CRect(0,0,image_x,image_y);
-		pdc->SetWindowOrg(0,0);
+	CRect rcClip=CRect(0,0,image_x,image_y);
+	pdc->SetWindowOrg(0,0);
 
 
 
-		COLORREF colBk=pdc->GetBkColor();
-		COLORREF colbg;
-		if(bColorMode && !bPrintBgWhite){
-			colbg = m_COL.colBG;
-		}else{
-			colbg = RGB(255,255,255);
-		}
+	COLORREF colBk=pdc->GetBkColor();
+	COLORREF colbg;
+	if(bColorMode && !bPrintBgWhite){
+		colbg = m_COL.colBG;
+	}else{
+		colbg = RGB(255,255,255);
+	}
 
-		pdc->FillSolidRect(0,0,image_x,image_y,colbg);
-		//pdc->SetBkColor(colBk);
-		pdc->SetWindowOrg(0,0);
+	pdc->FillSolidRect(0,0,image_x,image_y,colbg);
+	//pdc->SetBkColor(colBk);
+	pdc->SetWindowOrg(0,0);
 
-		DWORD dwMode = (bColorMode ? DRAW_ON : DRAW_OFF);
+	DWORD dwMode = (bColorMode ? DRAW_ON : DRAW_OFF);
 
-		//実際の描画
-		//if(m_bPrintFrame) DrawSheetFrame(pdc,dwMode,m_nPrintVExt,m_nPrintWExt,rcClip);
-		if(m_bPrintFrame) DrawSheetFrame(pdc,dwMode,nMag,100,rcClip);
+	//実際の描画
+	//if(m_bPrintFrame) DrawSheetFrame(pdc,dwMode,m_nPrintVExt,m_nPrintWExt,rcClip);
+	if(m_bPrintFrame) DrawSheetFrame(pdc,dwMode,nMag,100,rcClip);
 
-		//DWORD dwMode = DRAW_OFF;
-		if(!AfxGetApp()->GetProfileInt(_T("Option"),_T("PrintPartNum"),TRUE)){
-			dwMode |= DRAW_INH_PARTNUM;
-		}
-		if(!AfxGetApp()->GetProfileInt(_T("Option"),_T("PrintPartName"),TRUE)){
-			dwMode |= DRAW_INH_PARTNAME;
-		}
-		dwMode |= DRAW_FOR_PRINT;
-		if(g_bDisplayNcPinMark)dwMode|=DRAW_NC_MARK;
-		DrawMainData(pdc,pDoc,dwMode,nMag,100,rcClip);
+	//DWORD dwMode = DRAW_OFF;
+	if(!AfxGetApp()->GetProfileInt(_T("Option"),_T("PrintPartNum"),TRUE)){
+		dwMode |= DRAW_INH_PARTNUM;
+	}
+	if(!AfxGetApp()->GetProfileInt(_T("Option"),_T("PrintPartName"),TRUE)){
+		dwMode |= DRAW_INH_PARTNAME;
+	}
+	dwMode |= DRAW_FOR_PRINT;
+	if(g_bDisplayNcPinMark)dwMode|=DRAW_NC_MARK;
+	DrawMainData(pdc,pDoc,dwMode,nMag,100,rcClip);
 
-		image.Save(pszFileName);
+	image.Save(pszFileName);
 		
-		image.ReleaseDC();
-		return TRUE;
-	//}else{
-
-
-	//	CSize sizeSheet;
-	//	CBSchDoc* pDoc = GetDocument();
-	//	sizeSheet=pDoc->GetSheetSize();
-
-	//	int nBmpXbyte;	//デバイス依存のビットマップの水平方向バイト数
-	//	int nBmpSize;	//デバイス依存のビットマップのサイズ
-	//	int nDibXbyte;	//デバイス独立のビットマップの水平方向バイト数
-	//	int nDibSize;	//デバイス依存のビットマップのサイズ
-
-	//	nBmpXbyte=((sizeSheet.cx+15)/16)*2;
-	//	nBmpSize=nBmpXbyte*sizeSheet.cy;
-	//	nDibXbyte=((sizeSheet.cx+31)/32)*4;
-	//	nDibSize=nDibXbyte*sizeSheet.cy;
-
-
-	//	/////////////////////////////////////
-	//	//BITMAPINFO
-	//	int headersize = sizeof(BITMAPINFOHEADER)+sizeof(RGBQUAD)*2;
-	//	BYTE* pbihBuff = new BYTE[headersize];
-	//	BITMAPINFO* pbih =(BITMAPINFO*) pbihBuff;
-	//	pbih->bmiHeader.biSize=sizeof(BITMAPINFOHEADER);
-	//	pbih->bmiHeader.biWidth =sizeSheet.cx;
-	//	pbih->bmiHeader.biHeight=sizeSheet.cy;
-	//	pbih->bmiHeader.biPlanes=1;
-	//	pbih->bmiHeader.biBitCount=1;
-	//	pbih->bmiHeader.biCompression=0;
-	//	pbih->bmiHeader.biSizeImage=nDibSize;
-	//	pbih->bmiHeader.biXPelsPerMeter=5906;	//150dpi
-	//	pbih->bmiHeader.biYPelsPerMeter=5906;	//150dpi
-	//	pbih->bmiHeader.biClrUsed=0;
-	//	pbih->bmiHeader.biClrImportant=0;
-
-
-	//	//描画用メモリデバイスコンテキストの作成
-	//	CClientDC dc(this);
-	//	CDC dcMem;
-	//	dcMem.CreateCompatibleDC(&dc);
-	//	//ビットマップの作成
-	//	CBitmap bmp;
-	//	CBitmap* pOldBmp;
-	//	//if(!bmp.CreateCompatibleBitmap(&dcMem,sizeSheet.cx,sizeSheet.cy))return FALSE;
-	//	if(!bmp.CreateBitmap(sizeSheet.cx,sizeSheet.cy,1,1,NULL))return FALSE;
-
-	//	//ビットマップビット保存用のバッファ
-	//	int bitBuffSize = nBmpXbyte*sizeSheet.cy;
-	//	BYTE* bitbuff=new BYTE[nDibSize];
-	//	if(!bitbuff) return FALSE;
-
-
-	//	CRect rcClip=CRect(0,0,sizeSheet.cx,sizeSheet.cy);
-
-	//	pOldBmp=dcMem.SelectObject(&bmp);
-	//	dcMem.SetWindowOrg(0,0);
-
-	//	//白で初期化
-	//	COLORREF colBk=dcMem.GetBkColor();
-	//	dcMem.FillSolidRect(0,0,sizeSheet.cx,sizeSheet.cy,RGB(255,255,255));
-	//	dcMem.SetBkColor(colBk);
-	//	dcMem.SetWindowOrg(0,0);
-	//	//実際の描画
-	//	if(m_bPrintFrame) DrawSheetFrame(&dcMem,DRAW_OFF,m_nPrintVExt,m_nPrintWExt,rcClip);
-
-	//	DWORD dwMode = DRAW_OFF;
-	//	if(!AfxGetApp()->GetProfileInt(_T("Option"),_T("PrintPartNum"),TRUE)){
-	//		dwMode |= DRAW_INH_PARTNUM;
-	//	}
-	//	if(!AfxGetApp()->GetProfileInt(_T("Option"),_T("PrintPartName"),TRUE)){
-	//		dwMode |= DRAW_INH_PARTNAME;
-	//	}
-	//	dwMode |= DRAW_FOR_PRINT;
-	//	if(g_bDisplayNcPinMark)dwMode|=DRAW_NC_MARK;
-	//	DrawMainData(&dcMem,pDoc,dwMode,m_nPrintVExt,m_nPrintWExt,rcClip);
-	//	dcMem.SelectObject(pOldBmp);
-
-
-
-	//	//int nGetLine1 = ::GetDIBits(dcMem.m_hDC,(HBITMAP)bmp,0,sizeSheet.cy,NULL,pbih,DIB_RGB_COLORS);
-
-	//	//ビットの取得
-	//	int nGetLine = ::GetDIBits(dcMem.m_hDC,(HBITMAP)bmp,0,sizeSheet.cy,bitbuff,pbih,DIB_RGB_COLORS);
-	//	if(nGetLine==sizeSheet.cy){
-	//		CFile file;
-	//		if(!file.Open(pszFileName,CFile::modeCreate|CFile::modeWrite)) return FALSE;
-
-	//		//////////////////////////////////
-	//		//BITMAPFILEHEADERの出力
-	//		BITMAPFILEHEADER bfh;
-	//		bfh.bfType=0x4d42;
-	//		bfh.bfSize= sizeof(BITMAPFILEHEADER)	//
-	//				   +sizeof(BITMAPINFOHEADER)	//BITMAPINFOHEADERのサイズ
-	//				   +sizeof(RGBQUAD)*2			//
-	//				   +nDibSize;					//
-	//		bfh.bfReserved1=bfh.bfReserved2=0;
-	//		bfh.bfOffBits= sizeof(BITMAPFILEHEADER)	//
-	//					  +sizeof(BITMAPINFOHEADER)	//BITMAPINFOHEADERのサイズ
-	//					  +sizeof(RGBQUAD)*2;		//
-
-	//		try{
-	//			file.Write(&bfh,sizeof(BITMAPFILEHEADER));
-	//		}
-	//		catch(CFileException *e){
-	//			e->Delete();
-	//			return FALSE;
-	//		}
-	//	
-	//		try{
-	//			file.Write(pbih,headersize);
-	//		}
-	//		catch(CFileException *e){
-	//			e->Delete();
-	//			return FALSE;
-	//		}
-
-
-	//		try{
-	//			file.Write(bitbuff,nDibSize);
-	//		}
-	//		catch(CFileException *e){
-	//			e->Delete();
-	//			delete[]bitbuff;
-	//			return FALSE;
-	//		}
-	//	}
-	//	delete[]pbihBuff;
-	//	delete[]bitbuff;
-	//	return TRUE;
-	//}
+	image.ReleaseDC();
+	return TRUE;
 }
 
 BOOL CBSchView::CopyEmf()

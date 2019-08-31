@@ -221,12 +221,10 @@ bool SImageDIB::Load(const TCHAR* fname)
 	if(_tcsicmp(szExtension,_T(".bmp"))==0){
 		return LoadWindowsBmp(fname);
 	}else{
-		if(g_bAvailableGDIplus){
-			if((_tcsicmp(szExtension,_T(".jpg"))==0 || _tcsicmp(szExtension,_T(".jpeg"))==0)){
-				return LoadWithGdiPlus(fname,IMAGETYPE_JPEG);
-			}else if(_tcsicmp(szExtension,_T(".png"))==0){
-				return LoadWithGdiPlus(fname,IMAGETYPE_PNG);
-			}
+		if((_tcsicmp(szExtension,_T(".jpg"))==0 || _tcsicmp(szExtension,_T(".jpeg"))==0)){
+			return LoadWithGdiPlus(fname,IMAGETYPE_JPEG);
+		}else if(_tcsicmp(szExtension,_T(".png"))==0){
+			return LoadWithGdiPlus(fname,IMAGETYPE_PNG);
 		}
 		return false;
 	}

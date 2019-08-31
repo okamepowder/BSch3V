@@ -46,14 +46,49 @@ BEGIN
     "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
     "LANGUAGE 9, 1\r\n"
     "#pragma code_page(1252)\r\n"
-    "#include ""res\\nu3w.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
-    "#include ""afxres.rc""         // ?????????\r\n"
+    "#include ""res\\nu3w.rc2""  // Microsoft Visual C++ 以外のツールで編集されたリソース\r\n"
+    "#include ""afxres.rc""         // 標準のコンポーネント\r\n"
     "#endif\r\n"
     "\0"
 END
 
 #endif    // APSTUDIO_INVOKED
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 0,82,2,0
+ PRODUCTVERSION 0,82,2,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004e4"
+        BEGIN
+            VALUE "FileVersion", "0.82.02"
+            VALUE "InternalName", "NUT3W"
+            VALUE "LegalCopyright", "Copyright (C) 2004-2014 H.Okada(Suigyodo)"
+            VALUE "OriginalFilename", "nut3w.exe"
+            VALUE "ProductName", "NUT3W"
+            VALUE "ProductVersion", "0.82.02"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1252
+    END
+END
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -73,7 +108,7 @@ IDI_SMALL               ICON                    "res\\nu3ws.ico"
 IDD_ABOUTBOX DIALOGEX 0, 0, 211, 49
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "About NUT3W"
-FONT 9, "MS Shell Dlg", 0, 0, 0x1
+FONT 11, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,9,3,20,20
     CTEXT           "NUT3W Version xxxxx",IDC_STATIC_VERSION,40,10,119,8,SS_NOPREFIX
@@ -85,7 +120,7 @@ IDD_NU3W_DIALOG DIALOGEX 0, 0, 299, 233
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "NUT3W Reference number utility for BSch3V"
-FONT 9, "MS Shell Dlg", 0, 0, 0x1
+FONT 11, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     LTEXT           "Input ( If you select multi files, they are regarded as one circuit by NUT3W )",IDC_STATIC,11,4,256,12
     LISTBOX         IDC_LIST_SRC,6,18,241,108,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP,WS_EX_ACCEPTFILES
@@ -176,7 +211,7 @@ END
 LANGUAGE 9, 1
 #pragma code_page(1252)
 #include "res\nu3w.rc2"  // non-Microsoft Visual C++ edited resources
-#include "afxres.rc"         // ?????????
+#include "afxres.rc"         // 標準のコンポーネント
 #endif
 
 /////////////////////////////////////////////////////////////////////////////

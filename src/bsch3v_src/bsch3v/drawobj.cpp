@@ -2468,17 +2468,7 @@ void g_DrawImageObj(
 
 
 		if(pImageDIB->m_pBmpIH->biCompression == BI_JPEG || pImageDIB->m_pBmpIH->biCompression == BI_PNG){
-			if(g_bAvailableGDIplus){
-				g_DrawImageWithGdiPlus(pDC,x,y,dw,dh,pImageDIB->m_pbuff+54,pImageDIB->m_pBmpIH->biSizeImage);
-			}else{
-				CRect rc = CRect(CPoint(x,y),CSize(dw,dh));
-				CPen pen(PS_SOLID,1,RGB(192,192,192));
-				CPen* pPenOld = pDC->SelectObject(&pen);
-				CBrush* pOldBrush = (CBrush*)pDC->SelectStockObject(NULL_BRUSH);
-				pDC->Rectangle(&rc);
-				pDC->SelectObject(pOldBrush);
-				pDC->SelectObject(pPenOld);
-			}
+			g_DrawImageWithGdiPlus(pDC,x,y,dw,dh,pImageDIB->m_pbuff+54,pImageDIB->m_pBmpIH->biSizeImage);
 		}else{
 			::StretchDIBits(pDC->GetSafeHdc() ,x, y, dw, dh,0, 0, w, h, pImageDIB->m_pBitData,pImageDIB->m_pBmpInfo,DIB_RGB_COLORS, SRCCOPY);
 		}

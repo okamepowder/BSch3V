@@ -123,56 +123,6 @@ static void setCharFlags(const TCHAR* src, int length, unsigned int* charFlags)
 }
 
 
-//static void setCharFlags(const TCHAR* src, int length, unsigned int* charFlags)
-//{
-//	int n;
-//
-//	for(n=0;n<length+1;n++){
-//		charFlags[n]=0;
-//	}
-//	n=0;
-//	TCHAR prevchar=src[0];
-//	bool prevIsSjis1st = false;
-//	while(src[n]){
-//		TCHAR b = src[n];
-//		if(b==' '){
-//			charFlags[n] = (unsigned int)SMarkupTextLine::BREAKABLE;
-//		}else
-//		if(prevchar == '-'){
-//			charFlags[n] = (unsigned int)SMarkupTextLine::BREAKABLE;
-//		}else if(g_bJapaneseLangEnv){
-//			if(prevIsSjis1st){
-//				prevIsSjis1st = false;
-//			}else if((b>=0x81 && b<=0x9F)||(b>=0xE0 && b<=0xFC)){
-//				TCHAR szMBchar[2];
-//				szMBchar[0]=src[n];
-//				szMBchar[1]=src[n+1];
-//				const TCHAR* szSJIS_NON_BREAKABLE = _T("％‰μΩ℃°、。，．：；々］〉》」』】〕）｝’”！？"); 
-//				int m =0;
-//				bool sjis_non_breakable = false;
-//				for(int ccnt = 0; ccnt<26; ccnt++){
-//					if(_tcsncmp(szMBchar,szSJIS_NON_BREAKABLE+m,2)==0){
-//						sjis_non_breakable = true;
-//						break;
-//					}
-//					m+=2;
-//				}
-//				if(!sjis_non_breakable){
-//					charFlags[n] = (unsigned int)SMarkupTextLine::BREAKABLE;
-//				}
-//				prevIsSjis1st = true;
-//			}
-//		}
-//		n++;
-//	}
-//}
-//
-//
-
-
-
-
-
 // < で始まるタグの解析を行う
 // 戻り値はサポートタグのときは、   >記号の次の文字。
 //         非サポートタグのときは、 <記号をポイント。 ←この動作がanalyzeAmpEncode()と異なる

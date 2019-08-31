@@ -66,7 +66,6 @@
 #define IDD_SETLAYER                    155
 #define IDS_EXTMENU_TITLE               155
 #define IDS_COL_ZLPIN                   156
-#define IDB_SPLASH                      157
 #define IDS_COL_NC_MARK                 157
 #define IDC_CUR_CC_MOVE                 158
 #define IDS_LAYER_DBAR_TITLE            158

@@ -1,153 +1,218 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
 <HTML>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<META name="GENERATOR" content="IBM WebSphere Studio Homepage Builder Version 11.0.0.0 for Windows">
-<META http-equiv="Content-Style-Type" content="text/css">
-<TITLE>はじめにお読みください</TITLE>
-</HEAD>
-<BODY>
-<div style="border-color: red; padding: 2em; border-width: 2px;border-style: dotted;">(2019/08)<br>本パッケージはオリジナルパッケージ(160504版)をもとに最新のランタイム用(VC2017)に再コンパイルされています。</div>
+  <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <META http-equiv="Content-Style-Type" content="text/css">
 
-<HR>
-  <P><FONT size="+1"><B>BSch3V パッケージ 160504版</B></FONT></P>
-<P align="right">水魚堂&nbsp; &nbsp;岡田 仁史 &nbsp;2016/05/04</P>
-<HR>
-<P><FONT size="-1"><B><U><FONT size="+0">1. 概要</FONT></U></B></FONT></P>
-<BLOCKQUOTE>&nbsp; BSch3V (Basic Schematic 3V) はWindows Vista/7/8/10で(そしてたぶんXPでも)動作するフリーソフトウェアの回路図エディタです。
-操作の見通しが悪くならないように、一般的な回路図作成に必要な基本的な機能に絞ってあります。<BR>
-&nbsp;&nbsp;本パッケージは、BSch3Vとその周辺ユーティリティソフトウェアをまとめたものです。<BR>
-&nbsp;&nbsp;<BR>
-&nbsp;&nbsp;BSch3Vとその周辺ユーティリティソフトウェアは、<FONT color="#ff0000">Version 0.8x から、UNICODEを扱うようになりました。保存ファイルの文字コードはUTF-8になります。</FONT><BR>
-&nbsp;&nbsp;(Version 0.7xまでのシフトJISのファイルはそのまま読み込むことができます)</BLOCKQUOTE>
-<P><B><U>2. パッケージの内容</U></B></P>
-<BLOCKQUOTE>
-<TABLE border="1">
-  <TBODY>
-    <TR>
-      <TD bgcolor="#fff0e1">README.htm</TD>
-      <TD bgcolor="#fff0e1">このファイル</TD>
-    </TR>
-    <TR>
-      <TD bgcolor="#fff0e1">bsch3v.exe<BR>
-      bsch3v_lang.dll (注1)</TD>
-      <TD bgcolor="#fff0e1">BSch3V Ver 0.83.01 回路図エディタ&nbsp;&nbsp;★</TD>
-    </TR>
-    <TR>
-      <TD bgcolor="#fff0e1">lcov.exe<BR>
-      lcov_lang.dll (注1)</TD>
-      <TD bgcolor="#fff0e1">LCoV Ver 0.82.01 部品ライブラリエディタ&nbsp;</TD>
-    </TR>
-    <TR>
-      <TD bgcolor="#fff0e1">pl3w.exe<BR>
-      pl3w_lang.dll (注1)</TD>
-      <TD bgcolor="#fff0e1">PL3W Ver 0.81.10 部品リスト作成ソフトウェア</TD>
-    </TR>
-    <TR>
-      <TD bgcolor="#fff0e1">nl3w.exe<BR>
-      nl3w_lang.dll (注1)<BR>
-      nl3wpads.dll (注2)</TD>
-      <TD bgcolor="#fff0e1">NL3W Ver 0.81.10 ネットリスト作成ソフトウェア</TD>
-    </TR>
-    <TR>
-      <TD bgcolor="#fff0e1">nut3w.exe<BR>
-      nu3w_lang.dll (注1)</TD>
-      <TD bgcolor="#fff0e1">NUT3W Ver 0.82.02 部品番号振り付けソフトウェア&nbsp;★</TD>
-    </TR>
-    <TR>
-      <TD bgcolor="#fff0e1">CE3Search.exe</TD>
-      <TD bgcolor="#fff0e1">CE3Search Ver 0.81.10 BSch3V回路図ファイル用の検索ソフト</TD>
-    </TR>
-    <TR>
-      <TD bgcolor="#fff0e1">BSCH3.INI(注3)</TD>
-      <TD bgcolor="#fff0e1">BSch3V 設定ファイル</TD>
-    </TR>
-    <TR>
-      <TD bgcolor="#fff0e1">LIBフォルダ(注3)(注7)</TD>
-      <TD bgcolor="#fff0e1">部品ライブラリ </TD>
-    </TR>
-    <TR>
-      <TD bgcolor="#fff0e1">SAMPLEフォルダ (注3)(注4)</TD>
-      <TD bgcolor="#fff0e1">サンプル回路</TD>
-    </TR>
-    <TR>
-      <TD bgcolor="#fff0e1">Licenseフォルダ</TD>
-      <TD bgcolor="#fff0e1">ライセンス文書</TD>
-    </TR>
-    <TR>
-      <TD bgcolor="#fff0e1">SRCフォルダ</TD>
-      <TD bgcolor="#fff0e1">プログラムのソースファイル</TD>
-    </TR>
-  </TBODY>
-</TABLE>
-</BLOCKQUOTE>
-<UL>
-  <LI>★印のついているものが、140821版パッケージから更新されたものです
-  <LI>すべてのプログラムのコンパイルオプションが旧パッケージから変更されています。(PentiumIIIでも動作するようにしました)
-  <LI>(注1)実行ファイルとペアになっている「○○_lang.dll」は日本語のメッセージファイルです。exeファイルと同じフォルダに保存してください。<BR>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CE3Search.exeには日本語メッセージファイルは付いていません。
-  <LI>(注2)NL3WでPADSタイプのネットリストを作成するためのアドインです。nl3w.exeと同じフォルダに保存して、NL3Wのアドインで指定してください。
-  <LI>(注3)ランタイム同梱パッケージにのみ
-  <LI>(注4)SAMPLEフォルダの回路図は、回路図エディタおよび周辺プログラムの試用評価のためのものです。回路図に従って組み立てたときの動作を保証するものではありません。
-  <LI>(注7)LOGIC74ライブラリのゲートのデザインを修正したものを ksmakoto さんに提供していただきました。ありがとうございます。
-  <LI>各プログラムの更新履歴は水魚堂ホームページの<A href="https://www.suigyodo.com/online/history/index.htm">ソフトウェアの履歴</A>をご覧ください。
-</UL>
-<P><B><U>3. インストール</U></B>&nbsp;&nbsp;</P>
-<BLOCKQUOTE>
-<P><B>1. 準備 ～ ランタイムライブラリのインストール</B><BR>
-&nbsp; BSch3Vシリーズをお使いになる前に、ランタイムライブラリである「<a href="https://aka.ms/vs/16/release/vc_redist.x86.exe" target="_blank" rel="nofollow noreferrer">Microsoft Visual C++ 2017 再頒布可能パッケージ (x86)</a>」を予めインストールしておく必要があります。<BR>
-&nbsp;&nbsp;<FONT color="#ff0000">Version 0.7xまでのBSch3Vとはビルド環境が変わりました。これまで、Version 0.7xまでをお使いであっても、ランタイムライブラリのインストールが必要になります。</FONT></P>
-<div style="border-color: red; padding:1em; border-width: 2px;border-style: dotted;">static版パッケージの場合はアプリに必要な機能が内蔵されているため、ランタイムライブラリは不要です。</div>
-<P><B>2. BSch3Vパッケージ版のインストール</B><BR>
-&nbsp;&nbsp;BSch3V自体には特にインストーラは準備していません。<BR>
-</P>
-<UL>
-  <LI>初めてBSch3Vをお使いの方や、これまでBSch3Vをお使いになっていなかったPCでお使いになる場合は…<BR>
-  &nbsp;&nbsp;解凍したパッケージ版のフォルダの階層構造そのまままるごと<FONT 
-color=#ff0000><B>ユーザーフォルダの下の</B></FONT>適当なフォルダに移動（またはコピー)してください。ユーザーフォルダ外(&quot;C:\Program files&quot;など)に保存することはお奨めできません。<BR>
-  &nbsp;&nbsp;あとは必要に応じて、exeファイルのショートカットを作ってください。<BR>
-  <LI>お使いのPCでこれまでもBSch3Vをお使いになっていた場合は…<BR>
-  &nbsp;&nbsp;解凍したパッケージ版の中のLIBフォルダ、BSCH3.INI<FONT color="#ff0000">以外</FONT>を、現在お使いになっているBSch3Vのフォルダに移動（またはコピー)してください。<BR>
-</UL>
-<P>&nbsp;&nbsp;ユーザーインターフェースが英語になる場合は、exeファイルと同じフォルダに、一緒に配布された *_lang.dllがあるかどうか確認してください。</P>
-</BLOCKQUOTE>
-<P><B><U>4. 使い方</U></B></P>
-<BLOCKQUOTE><A href="https://www.suigyodo.com/online/manual/index.htm">水魚堂ONLINEのマニュアルページ</A>をご覧ください。</BLOCKQUOTE>
-<P><BR>
-<B><U>5. Version 0.8x以降の固有の注意点</U></B></P>
-<UL>
-  <LI>ファイルの文字コード<BR>
-  BSch3Vシリーズ Version 0.8x以降が読み書きするファイルの文字コードはBOMなしのUTF-8です。<BR>
-  <LI>Version 0.7xまでのファイルの読み込みについて<BR>
-  BSch3V Version 0.7xまでのファイルについては、そのまま読めます。<BR>
-  Qt-BSch3Vで作成したファイルは、シフトJIS以外の文字コードの場合があります。その場合は文字コード変換ソフトなどを使って、いったんシフトJISに変換してください。<BR>
-  <LI>BSch3V Version 0.8x以降で保存したファイルを0.7xまでで読めるようにするには<BR>
-  文字コード変換ソフトでUTF-8をシフトJISに変換すると読み込めます。<BR>
-  ただし、変換したファイルを0.7x以前で読み込もうとすると、「このファイルは新しいバージョンで…」というメッセージが現れます。残念ですが、0.80以降に追加された機能を使っているデータは失われます。<BR>
-  <LI>PL3Wの出力ファイル<BR>
-  Version 0.7xまでは、ローカルエンコーディングのCSVとSLKファイルでした。<BR>
-  Version 0.80.00 では、UTF-8のBOMコード付きのCSVと、XMLファイルです。<BR>
-  <BR>
-  CSVファイルは、先頭にBOMコードが付いていないと Excelがローカルエンコード(シフトJIS)と見做してしまい、PL3Wが出力したデータは文字化けします。<BR>
-  BOMコードを付けることで、ExcelがUTF-8と認識するようにしています。<BR>
-  自作プログラムでPL3Wが出力したCSVを取り扱われる場合は、先頭の3バイトのBOMコード(EF BB BF)を意識するか、文字コード変換ソフトを使ってシフトJISに変換してください。<BR>
-  なお、Excel 2007以降で読み込まれるのであれば、XMLファイル形式の方が読み込み時の情報欠落は少ないはずです。<BR>
-  <LI>旧BSchのデータのコンバータ CE2TO3について<BR> Version 0.7xまでのパッケージに含まれている、CE2TO3 がそのまま使えます。<BR>
-  CE2TO3は、ローカルエンコード(日本語環境ではシフトJIS)のファイルを生成しますが Version 0.8xは、ローカルエンコードのファイルをそのまま読み込むことができます。
-</UL>
-<P><BR>
-<B><U>6. ライセンスとソースファイルについて</U></B></P>
-<BLOCKQUOTE>&nbsp;&nbsp;ライセンスは<B>2条項BSDライセンス</B>です。詳細についてはLicenseフォルダの文書をご覧ください。<BR>
-&nbsp;&nbsp;本プログラムで回路図を作成されるぶんには、無保証という点だけご理解いただければ、使用目的などの制限はありません。<BR>
-<BR>
-&nbsp;&nbsp;添付しているソースファイルは Visual C++ 2012 Update4 Professional Edition ～ 2019 でコンパイルできます。<BR>
-</BLOCKQUOTE>
-<P><B><U>7. プログラムのアップデート</U></B></P>
-<BLOCKQUOTE>&nbsp;&nbsp;プログラムの最新版は、<A href="https://www.suigyodo.com/online">水魚堂オンライン(https://www.suigyodo.com/online)</A>で公開します。<BR>
-&nbsp;&nbsp;ときどきアクセスするようにしてください。</BLOCKQUOTE>
-<HR>
-<P>水魚堂  岡田 仁史<BR>
-URL    : https://www.suigyodo.com/online<BR>
-E-Mail : hitoshi@suigyodo.com</P>
+  <TITLE>はじめにお読みください</TITLE>
+  <STYLE type="text/css">
+.c1 { margin: 0.5em 2em; }
+  </STYLE>
+</HEAD>
+
+<BODY style="line-height: 2em;">
+  <H1>BSch3V パッケージ版</H1>
+  <HR>
+
+  <UL>
+    <LI><A href="#section1">概要</A></LI>
+
+    <LI><A href="#section2">パッケージの内容</A></LI>
+
+    <LI><A href="#install">インストール</A></LI>
+
+    <LI><A href="#useage">使い方</A></LI>
+
+    <LI><A href="#notice">Version 0.8x以降の固有の注意点</A></LI>
+
+    <LI><A href="#license">ライセンス</A></LI>
+  </UL>
+
+  <H3 id="section1"><B><U>1. 概要</U></B></H3>
+
+  <DIV class="c1">
+    &nbsp; Windowsで動作するフリーソフトウェアの回路図エディタです。<BR>
+    &nbsp;&nbsp;本パッケージは、BSch3Vとその周辺ユーティリティソフトウェアをまとめたものです。<BR>
+    &nbsp;&nbsp;<BR>
+    &nbsp;&nbsp;BSch3V (Basic Schematic 3V) は、操作の見通しが悪くならないように、一般的な回路図作成に必要な基本的な機能に絞ってあります。<BR>
+    &nbsp;&nbsp;BSch3Vとその周辺ユーティリティソフトウェアは、<FONT color="#FF0000">Version 0.8x から、UNICODEを扱うようになりました。保存ファイルの文字コードはUTF-8になります。</FONT><BR>
+    &nbsp;&nbsp;(Version 0.7xまでのシフトJISのファイルはそのまま読み込むことができます)
+  </DIV>
+
+  <H4>動作環境</H4>
+
+  <DIV class="c1">
+    32bit版または64bit版の Windows 10, 8.1, 7, Vista, XP
+  </DIV>
+
+  <H3 id="section2"><B><U>2. パッケージの内容</U></B></H3>
+
+  <DIV class="c1">
+    <TABLE border="1">
+      <TBODY>
+        <TR>
+          <TD bgcolor="#FFF0E1">README.htm</TD>
+
+          <TD bgcolor="#FFF0E1">このファイル</TD>
+        </TR>
+
+        <TR>
+          <TD bgcolor="#FFF0E1">bsch3v.exe<BR>
+          bsch3v_lang.dll (注1)</TD>
+
+          <TD bgcolor="#FFF0E1">BSch3V Ver 0.83.01 回路図エディタ&nbsp;&nbsp;★</TD>
+        </TR>
+
+        <TR>
+          <TD bgcolor="#FFF0E1">lcov.exe<BR>
+          lcov_lang.dll (注1)</TD>
+
+          <TD bgcolor="#FFF0E1">LCoV Ver 0.82.01 部品ライブラリエディタ&nbsp;</TD>
+        </TR>
+
+        <TR>
+          <TD bgcolor="#FFF0E1">pl3w.exe<BR>
+          pl3w_lang.dll (注1)</TD>
+
+          <TD bgcolor="#FFF0E1">PL3W Ver 0.81.10 部品リスト作成ソフトウェア</TD>
+        </TR>
+
+        <TR>
+          <TD bgcolor="#FFF0E1">nl3w.exe<BR>
+          nl3w_lang.dll (注1)<BR>
+          nl3wpads.dll (注2)</TD>
+
+          <TD bgcolor="#FFF0E1">NL3W Ver 0.81.10 ネットリスト作成ソフトウェア</TD>
+        </TR>
+
+        <TR>
+          <TD bgcolor="#FFF0E1">nut3w.exe<BR>
+          nu3w_lang.dll (注1)</TD>
+
+          <TD bgcolor="#FFF0E1">NUT3W Ver 0.82.02 部品番号振り付けソフトウェア&nbsp;★</TD>
+        </TR>
+
+        <TR>
+          <TD bgcolor="#FFF0E1">CE3Search.exe</TD>
+
+          <TD bgcolor="#FFF0E1">CE3Search Ver 0.81.10 BSch3V回路図ファイル用の検索ソフト</TD>
+        </TR>
+
+        <TR>
+          <TD bgcolor="#FFF0E1">BSCH3.INI(注3)</TD>
+
+          <TD bgcolor="#FFF0E1">BSch3V 設定ファイル</TD>
+        </TR>
+
+        <TR>
+          <TD bgcolor="#FFF0E1">LIBフォルダー(注3)(注7)</TD>
+
+          <TD bgcolor="#FFF0E1">部品ライブラリ</TD>
+        </TR>
+
+        <TR>
+          <TD bgcolor="#FFF0E1">SAMPLEフォルダー (注3)(注4)</TD>
+
+          <TD bgcolor="#FFF0E1">サンプル回路</TD>
+        </TR>
+
+        <TR>
+          <TD bgcolor="#FFF0E1">Licenseフォルダー</TD>
+
+          <TD bgcolor="#FFF0E1">ライセンス文書</TD>
+        </TR>
+      </TBODY>
+    </TABLE>
+  </DIV>
+
+  <UL>
+    <LI>★印のついているものが、140821版パッケージから更新されたものです</LI>
+
+    <LI>すべてのプログラムのコンパイルオプションが旧パッケージから変更されています。</LI>
+
+    <LI>(注1)実行ファイルとペアになっている「○○_lang.dll」は日本語のメッセージファイルです。exeファイルと同じフォルダーに保存してください。<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CE3Search.exeには日本語メッセージファイルは付いていません。</LI>
+
+    <LI>(注2)NL3WでPADSタイプのネットリストを作成するためのアドインです。nl3w.exeと同じフォルダーに保存して、NL3Wのアドインで指定してください。</LI>
+
+    <LI>(注3)パッケージ版にのみ</LI>
+
+    <LI>(注4)SAMPLEフォルダーの回路図は、回路図エディタおよび周辺プログラムの試用評価のためのものです。回路図に従って組み立てたときの動作を保証するものではありません。</LI>
+
+    <LI>(注7)LOGIC74ライブラリのゲートのデザインを修正したものを ksmakoto さんに提供していただきました。ありがとうございます。</LI>
+
+    <LI>2016年以前の各プログラムの更新履歴は水魚堂ホームページの<A href="https://www.suigyodo.com/online/history/index.htm" target="_blank" rel="nofollow noreferrer">ソフトウェアの履歴</A>をご覧ください。</LI>
+  </UL>
+
+  <H3 id="install"><B><U>3. インストール</U></B></H3>
+
+  <DIV class="c1">
+    <P><B>1. インストール</B><BR>
+    &nbsp;&nbsp;BSch3V自体には特にインストーラは準備していません。<BR></P>
+
+    <UL>
+      <LI>初めてBSch3Vをお使いの方や、これまでBSch3Vをお使いになっていなかったPCでお使いになる場合は…<BR>
+      &nbsp;&nbsp;解凍したパッケージ版のフォルダーの階層構造そのまままるごと<FONT color="#FF0000"><B>ユーザーフォルダーの下の</B></FONT>適当なフォルダーに移動（またはコピー)してください。ユーザーフォルダー外("C:\Program files"など)に保存することはお奨めできません。<BR>
+      &nbsp;&nbsp;あとは必要に応じて、exeファイルのショートカットを作ってください。<BR></LI>
+
+      <LI>お使いのPCでこれまでもBSch3Vをお使いになっていた場合は…<BR>
+      &nbsp;&nbsp;解凍したパッケージ版の中のLIBフォルダー、BSCH3.INI<FONT color="#FF0000">以外</FONT>を、現在お使いになっているBSch3Vのフォルダーに移動（またはコピー)してください。<BR></LI>
+    </UL>
+
+    <P>&nbsp;&nbsp;ユーザーインターフェースが英語になる場合は、exeファイルと同じフォルダーに、一緒に配布された *_lang.dllがあるかどうか確認してください。</P>
+  </DIV>
+
+  <DIV class="c1" style="border-style: dashed;border-color: orange;padding: 1em;background-color: #FFFFE1;">
+    アプリに署名をしていないため、書庫の展開方法によっては、初回実行時に警告が表示される場合があります。
+
+    <P>(例)ダウンロードしたファイルを、エクスプローラーで展開せずに開いて直接中身をコピーし、フォルダー内にペーストした場合など。</P>
+  </DIV>
+
+  <H3 id="useage"><B><U>4. 使い方</U></B></H3>
+
+  <DIV class="c1">
+    <A href="https://www.suigyodo.com/online/manual/index.htm" target="_blank" rel="nofollow noreferrer">水魚堂ONLINEのマニュアルページ</A>を参考にしてください。
+  </DIV>
+
+  <H3 id="notice"><B><U>5. Version 0.8x以降の固有の注意点</U></B></H3>
+
+  <UL>
+    <LI>ファイルの文字コード<BR>
+    BSch3Vシリーズ Version 0.8x以降が読み書きするファイルの文字コードはBOMなしのUTF-8です。<BR></LI>
+
+    <LI>Version 0.7xまでのファイルの読み込みについて<BR>
+    BSch3V Version 0.7xまでのファイルについては、そのまま読めます。<BR>
+    Qt-BSch3Vで作成したファイルは、シフトJIS以外の文字コードの場合があります。その場合は文字コード変換ソフトなどを使って、いったんシフトJISに変換してください。<BR></LI>
+
+    <LI>BSch3V Version 0.8x以降で保存したファイルを0.7xまでで読めるようにするには<BR>
+    文字コード変換ソフトでUTF-8をシフトJISに変換すると読み込めます。<BR>
+    ただし、変換したファイルを0.7x以前で読み込もうとすると、「このファイルは新しいバージョンで…」というメッセージが現れます。残念ですが、0.80以降に追加された機能を使っているデータは失われます。<BR></LI>
+
+    <LI>PL3Wの出力ファイル<BR>
+    Version 0.7xまでは、ローカルエンコーディングのCSVとSLKファイルでした。<BR>
+    Version 0.80.00 では、UTF-8のBOMコード付きのCSVと、XMLファイルです。<BR>
+    <BR>
+    CSVファイルは、先頭にBOMコードが付いていないと Excelがローカルエンコード(シフトJIS)と見做してしまい、PL3Wが出力したデータは文字化けします。<BR>
+    BOMコードを付けることで、ExcelがUTF-8と認識するようにしています。<BR>
+    自作プログラムでPL3Wが出力したCSVを取り扱われる場合は、先頭の3バイトのBOMコード(EF BB BF)を意識するか、文字コード変換ソフトを使ってシフトJISに変換してください。<BR>
+    なお、Excel 2007以降で読み込まれるのであれば、XMLファイル形式の方が読み込み時の情報欠落は少ないはずです。<BR></LI>
+
+    <LI>旧BSchのデータのコンバータ CE2TO3について<BR>
+    Version 0.7xまでのパッケージに含まれている、CE2TO3 がそのまま使えます。<BR>
+    CE2TO3は、ローカルエンコード(日本語環境ではシフトJIS)のファイルを生成しますが Version 0.8xは、ローカルエンコードのファイルをそのまま読み込むことができます。</LI>
+  </UL>
+
+  <H3 id="license"><B><U>6. ライセンス</U></B></H3>
+
+  <DIV class="c1">
+    &nbsp;&nbsp;ライセンスは<B>2条項BSDライセンス</B>です。詳細については<A href="./License">Licenseフォルダー</A>の文書をご覧ください。<BR>
+    &nbsp;&nbsp;本プログラムで回路図を作成されるぶんには、無保証という点だけご理解いただければ、使用目的などの制限はありません。<BR>
+  </DIV>
+
+  <DIV class="c1">
+    BSch3V and utilities are distributed under the 2 clause BSD license.<BR>
+    For more information, see <A href="./License">License folder</A>.
+  </DIV>
 </BODY>
 </HTML>
