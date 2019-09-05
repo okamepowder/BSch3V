@@ -6,6 +6,12 @@
 
 
 $files = array(
+    "/bsch3v_src/bsch3v/BSch.rc",
+    "/ce3search_src/CE3Search/CE3Search.rc",
+    "/lcov_src/lcov/LCoV.rc",
+    "/nl3w_src/nl3w/nlist.rc",
+    "/nut3w_src/nu3w/nu3w.rc",
+    "/pl3w_src/pl3w/nlist.rc",
     "/bsch3v_src/bsch3v_lang/bsch3v_lang.rc",
     "/lcov_src/lcov_lang/lcov_lang.rc",
     "/nl3w_src/nl3w_lang/nl3w_lang.rc",
@@ -15,7 +21,7 @@ $files = array(
 
 foreach($files as $filename) {
     $filename = __DIR__ . $filename;
-    if (file_exists($filename)) {
+    if (@file_exists($filename)) {
         $s = file_get_contents($filename);
         if (substr($s,0,2) == ($s0 = chr(0xFF) . chr(0xFE)))
             $encoding = 'UTF-16LE';

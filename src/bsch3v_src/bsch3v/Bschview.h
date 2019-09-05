@@ -9,7 +9,7 @@
 #ifndef BSCHVIEW_H
 #define BSCHVIEW_H
 
-
+#include <atlimage.h>
 
 
 #define AUTOSCROLL_FRAME	2	//クライアントエリアの内側(AUTOSCROLL_FRAME)ドット
@@ -540,7 +540,9 @@ private:
 	//印刷関連
 	void SetPageSize(CDC* pDC,int nRes);	//印刷時の倍率、サイズを決める
 	int  GetCountPage();		//総ページ数を得る
+	void SaveToImage(CImage& image);
 	BOOL ExportBitmapFile(LPCTSTR pszFileName);	//ビットマップファイル出力
+	BOOL ExportToClipbord();
 	//BOOL ExportBidFile(LPCSTR pszFileName);		//BIDファイル出力
 	BOOL ExportEmf(LPCTSTR pszFileName);
 
@@ -607,6 +609,8 @@ public:
 
 protected:
 	void OnExtMenuN(int n);
+	void ExecExternalTool(const std::wstring& FileName);
+	std::wstring GetAppPath();
 
 // 生成されたメッセージ マップ関数
 protected:
@@ -824,6 +828,12 @@ public:
 	afx_msg void OnUpdateFloatEditWithLcov(CCmdUI *pCmdUI);
 	afx_msg void OnFloatEditWithLcov();
 	afx_msg void OnSetupDispblock();
+	afx_msg void OnToolRunLcov();
+	afx_msg void OnToolRunPl3w();
+	afx_msg void OnToolRunNut3w();
+	afx_msg void OnToolRunNl3w();
+	afx_msg void OnToolRunCe3search();
+	afx_msg void OnFileExpoClipbord();
 };
 
 #ifndef _DEBUG  // BSchView.cpp ファイルがデバッグ環境の時使用されます。

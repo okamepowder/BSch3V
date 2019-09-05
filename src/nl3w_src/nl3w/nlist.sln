@@ -4,8 +4,6 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nlist", "nlist.vcxproj", "{E9E21C62-5BCA-4172-B5B0-680FC59F0873}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nl3w_lang", "..\nl3w_lang\nl3w_lang.vcxproj", "{8B0248A5-5CB4-46C3-AD99-FB9A456B6F8C}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nl3wpads", "..\nl3wpads\nl3wpads.vcxproj", "{1509BAB6-C7ED-4927-BD37-15E312BBA098}"
 EndProject
 Global
@@ -18,10 +16,6 @@ Global
 		{E9E21C62-5BCA-4172-B5B0-680FC59F0873}.Debug|Win32.Build.0 = Debug|Win32
 		{E9E21C62-5BCA-4172-B5B0-680FC59F0873}.Release|Win32.ActiveCfg = Release|Win32
 		{E9E21C62-5BCA-4172-B5B0-680FC59F0873}.Release|Win32.Build.0 = Release|Win32
-		{8B0248A5-5CB4-46C3-AD99-FB9A456B6F8C}.Debug|Win32.ActiveCfg = Debug|Win32
-		{8B0248A5-5CB4-46C3-AD99-FB9A456B6F8C}.Debug|Win32.Build.0 = Debug|Win32
-		{8B0248A5-5CB4-46C3-AD99-FB9A456B6F8C}.Release|Win32.ActiveCfg = Release|Win32
-		{8B0248A5-5CB4-46C3-AD99-FB9A456B6F8C}.Release|Win32.Build.0 = Release|Win32
 		{1509BAB6-C7ED-4927-BD37-15E312BBA098}.Debug|Win32.ActiveCfg = Debug|Win32
 		{1509BAB6-C7ED-4927-BD37-15E312BBA098}.Debug|Win32.Build.0 = Debug|Win32
 		{1509BAB6-C7ED-4927-BD37-15E312BBA098}.Release|Win32.ActiveCfg = Release|Win32

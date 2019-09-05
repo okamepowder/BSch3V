@@ -13,11 +13,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 英語 (米国) resources
+// 日本語 (日本) resources
 
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
-#pragma code_page(1252)
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -43,13 +43,13 @@ BEGIN
     "#define _AFX_NO_TRACKER_RESOURCES\r\n"
     "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
     "\r\n"
-    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)\r\n"
     "#ifdef _WIN32\r\n"
-    "LANGUAGE 9, 1\r\n"
-    "#pragma code_page(1252)\r\n"
+    "LANGUAGE 17, 1\r\n"
+    "#pragma code_page(932)\r\n"
     "#endif //_WIN32\r\n"
     "#include ""res\\nlist.rc2""  // Microsoft Visual C++ 以外のツールで編集されたリソース\r\n"
-    "#include ""afxres.rc""          // 標準のコンポーネント\r\n"
+    "#include ""l.jpn\\afxres.rc""          // 標準のコンポーネント\r\n"
     "#endif\r\n"
     "\0"
 END
@@ -62,8 +62,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,81,10,0
- PRODUCTVERSION 0,81,10,0
+ FILEVERSION 0,81,10,1
+ PRODUCTVERSION 0,81,10,1
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -76,20 +76,20 @@ VS_VERSION_INFO VERSIONINFO
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
-        BLOCK "000004e4"
+        BLOCK "041104e4"
         BEGIN
-            VALUE "FileDescription","Netlist utility for BSch3V"
-            VALUE "FileVersion", "0.81.10"
+            VALUE "FileDescription", "ネットリスト作成"
+            VALUE "FileVersion", "0.81.10.1"
             VALUE "InternalName", "NL3W"
             VALUE "LegalCopyright", "Copyright (C) 2004-2014 H.Okada(Suigyodo)"
             VALUE "OriginalFilename", "nl3w.exe"
             VALUE "ProductName", "NL3W"
-            VALUE "ProductVersion", "0.81.10"
+            VALUE "ProductVersion", "0.81.10.1"
         END
     END
     BLOCK "VarFileInfo"
     BEGIN
-        VALUE "Translation", 0x0, 1252
+        VALUE "Translation", 0x411, 1252
     END
 END
 
@@ -110,53 +110,52 @@ IDI_SMALL               ICON                    "res\\icon1.ico"
 
 IDD_ABOUTBOX DIALOGEX 0, 0, 209, 65
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "About NL3W"
-FONT 11, "MS Shell Dlg", 0, 0, 0x0
+CAPTION "NL3Wのバージョン情報"
+FONT 11, "ＭＳ Ｐゴシック", 0, 0, 0x0
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,10,10,20,20
     CTEXT           "NL3W Version xxxx",IDC_STATIC_VERSION,39,10,119,8,SS_NOPREFIX
     CTEXT           "Copyright (C) 2004-2014 H.Okada(Suigyodo)",IDC_STATIC,32,25,170,8
     DEFPUSHBUTTON   "OK",IDOK,169,5,33,14,WS_GROUP
-    CTEXT           "Netlist utility for BSch3V",IDC_STATIC,20,41,175,8
+    CTEXT           "BSch3Vのためのネットリスト生成ソフト",IDC_STATIC,20,41,175,8
 END
 
-IDD_NLIST_DIALOG DIALOGEX 0, 0, 283, 251
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+IDD_NLIST_DIALOG DIALOGEX 0, 0, 283, 259
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
-CAPTION "NL3W Netlist utility for BSch3V"
-FONT 11, "MS Shell Dlg", 0, 0, 0x0
+CAPTION "NL3W BSch3Vのためのネットリスト生成ソフト"
+FONT 11, "ＭＳ Ｐゴシック", 0, 0, 0x0
 BEGIN
     LISTBOX         IDC_LIST_SRC,6,15,230,90,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP,WS_EX_ACCEPTFILES
-    PUSHBUTTON      "&Ref...",IDC_REFSRC,240,65,40,15
-    PUSHBUTTON      "&Clear",IDC_CLR,240,85,40,14
+    PUSHBUTTON      "参照(&R)...",IDC_REFSRC,240,65,40,15
+    PUSHBUTTON      "クリア(&C)",IDC_CLR,240,85,40,14
     EDITTEXT        IDC_EDIT_DST,6,126,230,15,ES_AUTOHSCROLL
-    PUSHBUTTON      "Re&f...",IDC_REFDST,240,125,40,15
+    PUSHBUTTON      "参照(&F)...",IDC_REFDST,240,125,40,15
     EDITTEXT        IDC_EDIT_RPT,6,159,230,15,ES_AUTOHSCROLL
-    PUSHBUTTON      "Ref(re&p)...",IDC_REFRPT,240,159,40,15
-    CONTROL         "Eliminate signal ""NOCONNECTION""",IDC_CHECK_NC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,177,207,10
-    DEFPUSHBUTTON   "Execute",IDOK,240,15,40,14
-    PUSHBUTTON      "Exit",IDCANCEL,240,35,40,14
-    LTEXT           "Input ( If you select multi .CE3 files, they are regarded as one circuit.)",IDC_STATIC,10,5,241,8
-    LTEXT           "Output",IDC_STATIC,10,115,38,8
-    LTEXT           "Report file",IDC_STATIC,9,147,48,8
-    PUSHBUTTON      "&Add-in...",IDC_BUTTON_SETADDIN,216,222,55,15
-    COMBOBOX        IDC_COMBO_NETTYPE,18,225,132,51,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
-    GROUPBOX        "Format",IDC_STATIC,6,213,273,30
-    CONTROL         "Use pin infomation string as a NetName for a nameless net",IDC_CHECK_SIGNAME,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,192,264,10
+    PUSHBUTTON      "参照(&P)...",IDC_REFRPT,240,159,40,15
+    CONTROL         "信号名 NOCONNECTION をネットリストから除外する。",IDC_CHECK_NC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,183,207,10
+    DEFPUSHBUTTON   "実行",IDOK,240,15,40,14
+    PUSHBUTTON      "終了",IDCANCEL,240,35,40,14
+    LTEXT           "入力ファイル(複数指定すると、それらをまとめたネットリストを作成します)",IDC_STATIC,10,5,263,8
+    LTEXT           "出力ファイル",IDC_STATIC,9,114,225,8
+    LTEXT           "レポートファイル",IDC_STATIC,8,147,225,8
+    PUSHBUTTON      "アドイン(&A)...",IDC_BUTTON_SETADDIN,219,231,55,15
+    COMBOBOX        IDC_COMBO_NETTYPE,12,234,162,51,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "形式",IDC_STATIC,6,222,273,30
+    CONTROL         "信号名が未定義のネット名にピン情報を使う",IDC_CHECK_SIGNAME,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,201,207,10
 END
 
 IDD_DIALOG_SETADDIN DIALOGEX 0, 0, 244, 121
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "SET Add-in"
+CAPTION "アドインの設定"
 FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,192,6,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,192,24,50,14
-    PUSHBUTTON      "Up",IDC_BUTTON_UP,192,48,50,14
-    PUSHBUTTON      "Down",IDC_BUTTON_DOWN,192,66,50,14
-    PUSHBUTTON      "Add",IDC_BUTTON_ADD,192,84,50,14
-    PUSHBUTTON      "Remove",IDC_BUTTON_REMOVE,192,102,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,192,24,50,14
+    PUSHBUTTON      "上へ",IDC_BUTTON_UP,192,48,50,14
+    PUSHBUTTON      "下へ",IDC_BUTTON_DOWN,192,66,50,14
+    PUSHBUTTON      "追加",IDC_BUTTON_ADD,192,84,50,14
+    PUSHBUTTON      "削除",IDC_BUTTON_REMOVE,192,102,50,14
     LISTBOX         IDC_LIST_FILES,3,6,183,111,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
 END
 
@@ -182,7 +181,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 280
         TOPMARGIN, 7
-        BOTTOMMARGIN, 244
+        BOTTOMMARGIN, 252
     END
 
     IDD_DIALOG_SETADDIN, DIALOG
@@ -198,22 +197,33 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_DIALOG_SETADDIN AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // String Table
 //
 
 STRINGTABLE
 BEGIN
-    IDS_ABOUTBOX            "&About NL3W..."
-    IDS_DSTOPENERR          "Open error output file."
-    IDS_SRCOPENERR          "Open error input file."
-    IDS_FINISHED            "Finished"
-    IDS_ADD_ADDIN           "Add add-in file"
-    IDS_ADDIN_INDEX_ERROR   "Missing selected add-in"
-    IDS_NO_NETINFO          "No net info"
+    IDS_ABOUTBOX            "NL3W のバージョン情報(&A)..."
+    IDS_DSTOPENERR          "出力ファイルのオープンに失敗しました"
+    IDS_SRCOPENERR          "入力ファイルのオープンに失敗しました"
+    IDS_FINISHED            "処理が終了しました "
+    IDS_ADD_ADDIN           "アドインファイルの追加"
+    IDS_ADDIN_INDEX_ERROR   "指定されたアドインがみつかりません"
+    IDS_NO_NETINFO          "ネット情報がありません"
     IDS_VERSION             "0.81.10"
 END
 
-#endif    // 英語 (米国) resources
+#endif    // 日本語 (日本) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -228,13 +238,13 @@ END
 #define _AFX_NO_TRACKER_RESOURCES
 #define _AFX_NO_PROPERTY_RESOURCES
 
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 #ifdef _WIN32
-LANGUAGE 9, 1
-#pragma code_page(1252)
+LANGUAGE 17, 1
+#pragma code_page(932)
 #endif //_WIN32
 #include "res\nlist.rc2"  // Microsoft Visual C++ 以外のツールで編集されたリソース
-#include "afxres.rc"          // 標準のコンポーネント
+#include "l.jpn\afxres.rc"          // 標準のコンポーネント
 #endif
 
 /////////////////////////////////////////////////////////////////////////////

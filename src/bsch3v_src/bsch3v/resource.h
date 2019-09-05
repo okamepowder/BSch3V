@@ -386,6 +386,13 @@
 #define ID_FLOAT_EDIT_WITH_LCOV         32896
 #define ID_SETUP_BLOCK                  32897
 #define ID_SETUP_DISPBLOCK              32898
+#define ID_TOOL_EXT_LCOV                32899
+#define ID_TOOL_RUN_PL3W                32900
+#define ID_TOOL_RUN_LCOV                32901
+#define ID_TOOL_RUN_NUT3W               32902
+#define ID_TOOL_RUN_NL3W                32903
+#define ID_TOOL_RUN_CE3SEARCH           32904
+#define ID_FILE_EXPO_CLIPBORD           32905
 #define IDS_LIBSET_VALID_NEXT           61447
 #define IDS_FILEREADERROR               61448
 #define IDS_SETFONT_VALIDNEXT           61449
@@ -404,7 +411,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        196
-#define _APS_NEXT_COMMAND_VALUE         32899
+#define _APS_NEXT_COMMAND_VALUE         32906
 #define _APS_NEXT_CONTROL_VALUE         1110
 #define _APS_NEXT_SYMED_VALUE           119
 #endif

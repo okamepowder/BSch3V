@@ -131,17 +131,17 @@ BOOL CNlistApp::InitInstance()
 	CString strVersion;
 	strVersion.LoadString(IDS_VERSION);
 	HINSTANCE hInstRcOrg = AfxGetResourceHandle();
-	HINSTANCE hInstRc = LoadLibrary( dllPath );
-	if ( hInstRc){				// 言語リソースDLLが見つかった.
-		AfxSetResourceHandle(hInstRc);
-		//言語リソース中のバージョン情報をチェック
-		CString strVersionAddRc;
-		strVersionAddRc.LoadString(IDS_VERSION);
-		//バージョンが一致しなければ、元のリソースハンドルに戻す
-		if(strVersion.Compare(strVersionAddRc)!=0){
-			AfxSetResourceHandle(hInstRcOrg);
-		}
-	}
+	//HINSTANCE hInstRc = LoadLibrary( dllPath );
+	//if ( hInstRc){				// 言語リソースDLLが見つかった.
+	//	AfxSetResourceHandle(hInstRc);
+	//	//言語リソース中のバージョン情報をチェック
+	//	CString strVersionAddRc;
+	//	strVersionAddRc.LoadString(IDS_VERSION);
+	//	//バージョンが一致しなければ、元のリソースハンドルに戻す
+	//	if(strVersion.Compare(strVersionAddRc)!=0){
+	//		AfxSetResourceHandle(hInstRcOrg);
+	//	}
+	//}
 
 
 	//HINSTANCE hInstRc = ::LoadLibrary( "nl3w_lang.dll");

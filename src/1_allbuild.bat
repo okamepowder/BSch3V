@@ -15,13 +15,9 @@ set OPTION= /p:Configuration=Release;Platform="Win32"
 
 MSBuild.exe "%~dp0bsch3v_src\bsch3v\Bsch3V.sln" %OPTION%
 IF %ERRORLEVEL% NEQ 0 goto end
-MSBuild.exe "%~dp0bsch3v_src\bsch3v_lang\bsch3v_lang.sln" %OPTION%
-IF %ERRORLEVEL% NEQ 0 goto end
 MSBuild.exe "%~dp0ce3search_src\CE3Search.sln" %OPTION%
 IF %ERRORLEVEL% NEQ 0 goto end
 MSBuild.exe "%~dp0lcov_src\lcov\LCoV.sln" %OPTION%
-IF %ERRORLEVEL% NEQ 0 goto end
-MSBuild.exe "%~dp0lcov_src\lcov_lang\lcov_lang.sln" %OPTION%
 IF %ERRORLEVEL% NEQ 0 goto end
 MSBuild.exe "%~dp0nl3w_src\nl3w\nlist.sln" %OPTION%
 IF %ERRORLEVEL% NEQ 0 goto end

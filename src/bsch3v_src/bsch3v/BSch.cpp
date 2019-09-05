@@ -229,17 +229,17 @@ BOOL CBSchApp::InitInstance()
 	CString strVersion;
 	strVersion.LoadString(IDS_VERSION);
 	HINSTANCE hInstRcOrg = AfxGetResourceHandle();
-	HINSTANCE hInstRc = LoadLibrary( dllPath );			//Version 0.69 20101016 言語DLLの読み込みパスを実行ファイルのディレクトリに制限
-	if ( hInstRc){				// 言語リソースDLLが見つかった.
-		AfxSetResourceHandle(hInstRc);
-		//言語リソース中のバージョン情報をチェック
-		CString strVersionAddRc;
-		strVersionAddRc.LoadString(IDS_VERSION);
-		//バージョンが一致しなければ、元のリソースハンドルに戻す
-		if(strVersion.Compare(strVersionAddRc)!=0){
-			AfxSetResourceHandle(hInstRcOrg);
-		}
-	}
+	//HINSTANCE hInstRc = LoadLibrary( dllPath );			//Version 0.69 20101016 言語DLLの読み込みパスを実行ファイルのディレクトリに制限
+	//if ( hInstRc){				// 言語リソースDLLが見つかった.
+	//	AfxSetResourceHandle(hInstRc);
+	//	//言語リソース中のバージョン情報をチェック
+	//	CString strVersionAddRc;
+	//	strVersionAddRc.LoadString(IDS_VERSION);
+	//	//バージョンが一致しなければ、元のリソースハンドルに戻す
+	//	if(strVersion.Compare(strVersionAddRc)!=0){
+	//		AfxSetResourceHandle(hInstRcOrg);
+	//	}
+	//}
 
 	//::_tmakepath(g_logPath,drive,dir,_T("bsch3v_log"),_T("txt"));
 	//g_log = _T("BSCH3V_LOG\n");

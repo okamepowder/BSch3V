@@ -13,13 +13,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 英語 (米国) resources
+// 日本語 (日本) resources
 
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-#ifdef _WIN32
-LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
-#pragma code_page(1252)
-#endif //_WIN32
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -45,10 +43,11 @@ BEGIN
     "#define _AFX_NO_TRACKER_RESOURCES\r\n"
     "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
     "\r\n"
-    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
-    "LANGUAGE 9, 1\r\n"
-    "#pragma code_page(1252)\r\n"
-    "#include ""afxres.rc""         // 標準のコンポーネント\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)\r\n"
+    "LANGUAGE 17, 1\r\n"
+    "#pragma code_page(932)\r\n"
+    "#include ""res\\nlist.rc2""  // Microsoft Visual C++ 以外のツールで編集されたリソース\r\n"
+    "#include ""l.jpn\\afxres.rc""          // 標準のコンポーネント\r\n"
     "#endif\r\n"
     "\0"
 END
@@ -61,8 +60,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,81,10,0
- PRODUCTVERSION 0,81,10,0
+ FILEVERSION 0,81,10,1
+ PRODUCTVERSION 0,81,10,1
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -75,20 +74,20 @@ VS_VERSION_INFO VERSIONINFO
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
-        BLOCK "000004e4"
+        BLOCK "041104e4"
         BEGIN
-            VALUE "FileDescription","Partslist utility for BSch3V"
-            VALUE "FileVersion", "0.81.10"
+            VALUE "FileDescription", "部品リスト作成"
+            VALUE "FileVersion", "0.81.10.1"
             VALUE "InternalName", "PL3W"
             VALUE "LegalCopyright", "Copyright (C) 2004-2014 H.Okada(Suigyodo)"
             VALUE "OriginalFilename", "pl3w.exe"
             VALUE "ProductName", "PL3W"
-            VALUE "ProductVersion", "0.81.10"
+            VALUE "ProductVersion", "0.81.10.1"
         END
     END
     BLOCK "VarFileInfo"
     BEGIN
-        VALUE "Translation", 0x0, 1252
+        VALUE "Translation", 0x411, 1252
     END
 END
 
@@ -109,41 +108,41 @@ IDI_ICON3               ICON                    "res\\icon3.ico"
 // Dialog
 //
 
-IDD_ABOUTBOX DIALOGEX 0, 0, 210, 58
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "About PL3W"
-FONT 11, "MS Shell Dlg", 0, 0, 0x0
+IDD_ABOUTBOX DIALOGEX 0, 0, 209, 65
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "PL3Wのバージョン情報"
+FONT 11, "ＭＳ Ｐゴシック", 0, 0, 0x0
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,10,10,20,20
     CTEXT           "PL3W Version xxxx",IDC_STATIC_VERSION,39,10,119,8,SS_NOPREFIX
-    CTEXT           "Copyright (C) 2004-2014 H.Okada(Suigyodo)",IDC_STATIC,35,25,168,8
+    CTEXT           "Copyright (C) 2004-2014 H.Okada(Suigyodo)",IDC_STATIC,40,25,162,8
     DEFPUSHBUTTON   "OK",IDOK,170,5,33,14,WS_GROUP
-    CTEXT           "Partslist utility for BSch3V",IDC_STATIC,20,41,175,8
+    CTEXT           "BSch3Vのための部品リスト生成ソフト",IDC_STATIC,20,41,175,8
 END
 
-IDD_NLIST_DIALOG DIALOGEX 0, 0, 293, 203
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+IDD_NLIST_DIALOG DIALOGEX 0, 0, 289, 206
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
-CAPTION "PL3W Partslist utility for BSch3V"
-FONT 11, "MS Shell Dlg", 0, 0, 0x0
+CAPTION "PL3W BSch3Vのための部品リスト生成ソフト"
+FONT 11, "ＭＳ Ｐゴシック", 0, 0, 0x0
 BEGIN
     LISTBOX         IDC_LIST_SRC,7,15,230,90,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP,WS_EX_ACCEPTFILES
-    PUSHBUTTON      "&Ref...",IDC_REFSRC,240,63,40,15
-    EDITTEXT        IDC_EDIT_DST,7,125,231,15,ES_AUTOHSCROLL
-    PUSHBUTTON      "Re&f...",IDC_REFDST,241,125,40,15
-    CONTROL         "Manufacturer",IDC_CHECK_MFR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,171,60,10
-    CONTROL         "Manufacturer Partnumber",IDC_CHECK_MFRPN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,81,171,114,10
-    CONTROL         "Package",IDC_CHECK_PKG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,183,54,10
-    CONTROL         "Note",IDC_CHECK_NOTE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,81,183,54,10
-    DEFPUSHBUTTON   "Execute",IDOK,240,15,40,15
-    PUSHBUTTON      "Exit",IDCANCEL,240,36,40,13
-    PUSHBUTTON      "&Clear",IDC_CLR,240,84,40,15
-    LTEXT           "Input(If you select multi .CE3 files, they are regarded as one circuit)",IDC_STATIC,9,5,277,8
-    LTEXT           "Output",IDC_STATIC,9,114,38,8
-    GROUPBOX        "Option",IDC_STATIC,7,159,255,39
-    CONTROL         "Component Info",IDC_CHECK_COMPINFO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,150,183,96,10
-    CONTROL         "CSV with BOM code",IDC_RADIO_CSVOUT,"Button",BS_AUTORADIOBUTTON,45,144,83,10
-    CONTROL         "Excel XML",IDC_RADIO_SYLKOUT,"Button",BS_AUTORADIOBUTTON,150,144,87,10
+    PUSHBUTTON      "参照(&R)...",IDC_REFSRC,240,65,40,15
+    EDITTEXT        IDC_EDIT_DST,7,125,230,15,ES_AUTOHSCROLL
+    PUSHBUTTON      "参照(&F)...",IDC_REFDST,240,125,40,15
+    DEFPUSHBUTTON   "実行",IDOK,240,15,40,15
+    PUSHBUTTON      "クリア(&C)",IDC_CLR,240,87,40,15
+    PUSHBUTTON      "終了",IDCANCEL,240,33,40,15
+    LTEXT           "入力ファイル(複数指定すると、それらをまとめた部品リストを作成します)",IDC_STATIC,9,3,273,8
+    LTEXT           "出力ファイル",IDC_STATIC,9,114,69,8
+    GROUPBOX        "追加情報",IDC_STATIC,6,165,255,36
+    CONTROL         "製造者",IDC_CHECK_MFR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,180,39,10
+    CONTROL         "製造者型式",IDC_CHECK_MFRPN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,57,180,48,10
+    CONTROL         "パッケージ",IDC_CHECK_PKG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,111,180,45,10
+    CONTROL         "ノート",IDC_CHECK_NOTE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,159,180,39,10
+    CONTROL         "部品情報",IDC_CHECK_COMPINFO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,201,180,45,10
+    CONTROL         "CSV (BOMコード付き)",IDC_RADIO_CSVOUT,"Button",BS_AUTORADIOBUTTON,27,147,98,10
+    CONTROL         "Excel  XML",IDC_RADIO_SYLKOUT,"Button",BS_AUTORADIOBUTTON,141,147,102,10
 END
 
 
@@ -158,17 +157,17 @@ BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 203
+        RIGHTMARGIN, 202
         TOPMARGIN, 7
-        BOTTOMMARGIN, 51
+        BOTTOMMARGIN, 58
     END
 
     IDD_NLIST_DIALOG, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 286
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 196
+        RIGHTMARGIN, 282
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 199
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -181,14 +180,14 @@ END
 
 STRINGTABLE
 BEGIN
-    IDS_ABOUTBOX            "&About..."
-    IDS_DSTOPENERR          "Open error output file."
-    IDS_SRCOPENERR          "Open error input file."
-    IDS_FINISHED            "Finished"
+    IDS_ABOUTBOX            "PL3W のバージョン情報(&A)..."
+    IDS_DSTOPENERR          "出力ファイルのオープンに失敗しました"
+    IDS_SRCOPENERR          "入力ファイルのオープンに失敗しました"
+    IDS_FINISHED            "処理が終了しました"
     IDS_VERSION             "0.81.10"
 END
 
-#endif    // 英語 (米国) resources
+#endif    // 日本語 (日本) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -203,10 +202,11 @@ END
 #define _AFX_NO_TRACKER_RESOURCES
 #define _AFX_NO_PROPERTY_RESOURCES
 
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-LANGUAGE 9, 1
-#pragma code_page(1252)
-#include "afxres.rc"         // 標準のコンポーネント
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+LANGUAGE 17, 1
+#pragma code_page(932)
+#include "res\nlist.rc2"  // Microsoft Visual C++ 以外のツールで編集されたリソース
+#include "l.jpn\afxres.rc"          // 標準のコンポーネント
 #endif
 
 /////////////////////////////////////////////////////////////////////////////

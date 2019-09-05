@@ -1,6 +1,0 @@
-; lcov_lang.def : DLL のモジュール パラメータを宣言します。
-
-LIBRARY      "lcov_lang"
-
-EXPORTS
-    ; 明示的なエクスポートはここへ記述できます

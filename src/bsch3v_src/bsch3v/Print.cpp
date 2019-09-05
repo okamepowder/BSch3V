@@ -521,10 +521,6 @@ void CBSchView::OnFileExpoBmp()
 	//----- 2016/05/03 pngを優先度高にする 
 	strFilter = _T("PNG file(*.png)|*.PNG|Bitmap file(*.bmp)|*.BMP||");
 
-
-	//一時データがあれば、エクスポートする前にフィックスする
-	ChangeTool(m_nCurrentTool,m_nCurrentTool);
-
 	//現在のファイルの名前を得る
 	CBSchDoc* pDoc = GetDocument();
 	CString rTitle=pDoc->GetTitle();
@@ -541,26 +537,32 @@ void CBSchView::OnFileExpoBmp()
 					this);				//親ウインドウ
 	rCaption.LoadString(IDS_FNAME_EXPO_BMP);//ダイアログボックスのキャプションをリソースからロード
 	dlg.m_ofn.lpstrTitle=rCaption;		//ファイルダイアログクラスにキャプションの設定
-	if(dlg.DoModal()==IDOK){			//ファイルダイアログの実行
-		CString rBmpName=CString(dlg.m_ofn.lpstrFile);		//ファイルダイアログからファイル名を取得して
-		TRACE(_T("\nrBmpName=%s"),(const TCHAR*)rBmpName);
 
-		PrepareDrawFlagForPrint(NULL); // 1997/01/28
-		HCURSOR hCursor;
-		hCursor=AfxGetApp()->LoadStandardCursor(IDC_WAIT);//砂時計カーソル
-		hCursor=::SetCursor(hCursor);
-		if(!ExportBitmapFile(rBmpName)){
-			::SetCursor(hCursor);
-			AfxMessageBox(IDS_EXPO_BMP_ERROR,MB_OK|MB_ICONEXCLAMATION);
-		}else{
-			::SetCursor(hCursor);
-		}
-		PopDrawFlagForPrint();
+	//ファイルダイアログの実行
+	if (dlg.DoModal() != IDOK) {
+		return;
 	}
+
+	//一時データがあれば、エクスポートする前にフィックスする
+	ChangeTool(m_nCurrentTool, m_nCurrentTool);
+
+	CString rBmpName=CString(dlg.m_ofn.lpstrFile);		//ファイルダイアログからファイル名を取得して
+	TRACE(_T("\nrBmpName=%s"),(const TCHAR*)rBmpName);
+
+	PrepareDrawFlagForPrint(NULL); // 1997/01/28
+	HCURSOR hCursor;
+	hCursor=AfxGetApp()->LoadStandardCursor(IDC_WAIT);//砂時計カーソル
+	hCursor=::SetCursor(hCursor);
+	if(!ExportBitmapFile(rBmpName)){
+		::SetCursor(hCursor);
+		AfxMessageBox(IDS_EXPO_BMP_ERROR,MB_OK|MB_ICONEXCLAMATION);
+	}else{
+		::SetCursor(hCursor);
+	}
+	PopDrawFlagForPrint();
 }
 
-
-BOOL CBSchView::ExportBitmapFile(LPCTSTR pszFileName)
+void CBSchView::SaveToImage(CImage& image)
 {
 	BOOL bColorMode = AfxGetApp()->GetProfileInt(_T("Option"),_T("PrintColor"),FALSE);
 	BOOL bPrintBgWhite = AfxGetApp()->GetProfileInt(_T("Option"),_T("PrintBgWhite"),1);
@@ -580,8 +582,6 @@ BOOL CBSchView::ExportBitmapFile(LPCTSTR pszFileName)
 	image_x = sizeSheet.cx * nMag /100;		//2016/05/04
 	image_y = sizeSheet.cy * nMag /100;		//2016/05/04
 		
-
-	CImage image;
 	image.Create(image_x,image_y,24);
 
 	HDC hdc = image.GetDC();
@@ -620,9 +620,46 @@ BOOL CBSchView::ExportBitmapFile(LPCTSTR pszFileName)
 	dwMode |= DRAW_FOR_PRINT;
 	if(g_bDisplayNcPinMark)dwMode|=DRAW_NC_MARK;
 	DrawMainData(pdc,pDoc,dwMode,nMag,100,rcClip);
+}
 
+BOOL CBSchView::ExportBitmapFile(LPCTSTR pszFileName)
+{
+	CImage image;
+	SaveToImage(image);
 	image.Save(pszFileName);
 		
+	image.ReleaseDC();
+	return TRUE;
+}
+
+BOOL CBSchView::ExportToClipbord()
+{
+	//一時データがあれば、エクスポートする前にフィックスする
+	ChangeTool(m_nCurrentTool, m_nCurrentTool);
+
+	CImage image;
+	SaveToImage(image);
+
+	CDC memDC;
+	memDC.CreateCompatibleDC(NULL);
+
+	CBitmap bitmap;
+	bitmap.CreateCompatibleBitmap(GetDC(), image.GetWidth(), image.GetHeight());
+	memDC.SelectObject(&bitmap);
+	image.BitBlt(memDC.GetSafeHdc(), 0, 0, image.GetWidth(), image.GetHeight(), 0, 0, SRCCOPY);
+
+	if (OpenClipboard())
+	{
+		if (EmptyClipboard())
+		{
+			SetClipboardData(CF_BITMAP, bitmap.GetSafeHandle());
+			BOOL isBmpDetach = false;
+		}
+		CloseClipboard();
+	}
+	memDC.DeleteDC();
+	bitmap.Detach();
+
 	image.ReleaseDC();
 	return TRUE;
 }

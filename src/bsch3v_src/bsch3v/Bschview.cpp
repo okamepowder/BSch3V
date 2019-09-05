@@ -11,8 +11,6 @@
 #include <string>
 #include <list>
 #include <imm.h>
-using namespace std;
-
 
 #include "atlpath.h"
 
@@ -306,6 +304,12 @@ ON_UPDATE_COMMAND_UI(ID_BULKATTRIBUTE_DECORATIONLINE, &CBSchView::OnUpdateBulkat
 ON_UPDATE_COMMAND_UI(ID_FLOAT_EDIT_WITH_LCOV, &CBSchView::OnUpdateFloatEditWithLcov)
 ON_COMMAND(ID_FLOAT_EDIT_WITH_LCOV, &CBSchView::OnFloatEditWithLcov)
 ON_COMMAND(ID_SETUP_DISPBLOCK, &CBSchView::OnSetupDispblock)
+ON_COMMAND(ID_TOOL_RUN_LCOV, &CBSchView::OnToolRunLcov)
+ON_COMMAND(ID_TOOL_RUN_PL3W, &CBSchView::OnToolRunPl3w)
+ON_COMMAND(ID_TOOL_RUN_NUT3W, &CBSchView::OnToolRunNut3w)
+ON_COMMAND(ID_TOOL_RUN_NL3W, &CBSchView::OnToolRunNl3w)
+ON_COMMAND(ID_TOOL_RUN_CE3SEARCH, &CBSchView::OnToolRunCe3search)
+ON_COMMAND(ID_FILE_EXPO_CLIPBORD, &CBSchView::OnFileExpoClipbord)
 END_MESSAGE_MAP()
 
 SBSchDrawColor CBSchView::m_COL;
@@ -5098,4 +5102,89 @@ void CBSchView::OnSetupDispblock()
 	IniWriteDisplayBlockNum(m_dispBN);
 	CBSchDoc* pDoc = GetDocument();			//ドキュメントのポインタを得て
 	pDoc->UpdateAllViews(NULL);				// 画面を再描画
+}
+
+std::wstring CBSchView::GetAppPath()
+{
+	std:wstring res;
+	TCHAR fname[MAX_PATH];
+	fname[0] = _T('\0');
+	if (::GetModuleFileName(NULL, fname, MAX_PATH))
+	{
+		std::wstring wText(fname);
+		size_t pos = wText.find_last_of(L"\\/");
+		if (std::wstring::npos != pos)
+		{
+			res = wText.substr(0, pos+1);
+		}
+	}
+	return res;
+}
+
+void CBSchView::ExecExternalTool(const std::wstring& FileName)
+{
+	std::wstring s(FileName);
+	size_t pos = FileName.find_last_of(L"\\/");
+	if (!FileName.empty() && (std::wstring::npos == pos))
+	{ // パスがないので実行ファイルと同じパスとみなす。
+		s = GetAppPath() + s;
+	}
+	if (!s.empty())
+	{
+		wchar_t* args[] = { NULL };
+		STARTUPINFOW sInfo = {};
+		PROCESS_INFORMATION pInfo = {};
+		wchar_t* cmd = (wchar_t*) s.c_str();
+		if (!CreateProcess(
+			s.c_str() // ApplicationName
+			, NULL // CommandLine arguments
+			, NULL
+			, NULL
+			, FALSE
+			, 0
+			, NULL
+			, NULL
+			, &sInfo
+			, &pInfo
+		))
+		{
+			s = L"起動できませんでした\r\n" + s;
+			MessageBox(s.c_str(), L"");
+		}
+	}
+}
+
+void CBSchView::OnToolRunLcov()
+{
+	ExecExternalTool(L"LCoV.exe");
+}
+
+
+void CBSchView::OnToolRunPl3w()
+{
+	ExecExternalTool(L"pl3w.exe");
+}
+
+
+void CBSchView::OnToolRunNut3w()
+{
+	ExecExternalTool(L"nut3w.exe");
+}
+
+
+void CBSchView::OnToolRunNl3w()
+{
+	ExecExternalTool(L"nl3w.exe");
+}
+
+
+void CBSchView::OnToolRunCe3search()
+{
+	ExecExternalTool(L"CE3Search.exe");
+}
+
+
+void CBSchView::OnFileExpoClipbord()
+{
+	ExportToClipbord();
 }

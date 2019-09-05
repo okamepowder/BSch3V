@@ -4,8 +4,6 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nlist", "nlist.vcxproj", "{E9E21C62-5BCA-4172-B5B0-680FC59F0873}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pl3w_lang", "..\pl3w_lang\pl3w_lang.vcxproj", "{F9992C06-BCF0-4835-9EF7-061802E7E819}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -16,10 +14,6 @@ Global
 		{E9E21C62-5BCA-4172-B5B0-680FC59F0873}.Debug|Win32.Build.0 = Debug|Win32
 		{E9E21C62-5BCA-4172-B5B0-680FC59F0873}.Release|Win32.ActiveCfg = Release|Win32
 		{E9E21C62-5BCA-4172-B5B0-680FC59F0873}.Release|Win32.Build.0 = Release|Win32
-		{F9992C06-BCF0-4835-9EF7-061802E7E819}.Debug|Win32.ActiveCfg = Debug|Win32
-		{F9992C06-BCF0-4835-9EF7-061802E7E819}.Debug|Win32.Build.0 = Debug|Win32
-		{F9992C06-BCF0-4835-9EF7-061802E7E819}.Release|Win32.ActiveCfg = Release|Win32
-		{F9992C06-BCF0-4835-9EF7-061802E7E819}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,6 @@
 BSch3V and utilities are distributed under the 2 clause BSD license.
 
+Copyright (C) 2019 okamepowder
 Copyright (c) 1997, H.Okada(Suigyodo) All rights reserved.
 
 Redistribution and use in source and binary forms, with or without 
@@ -27,6 +28,7 @@ POSSIBILITY OF SUCH DAMAGE.
 -----------------------------------------------------------------------------
 BSch3Vとユーティリティソフトウェアは、2条項BSDライセンスの下に配布されます。
 
+Copyright (C) 2019 okamepowder
 Copyright (c) 1997, H.Okada(Suigyodo) All rights reserved.
 
   ソースコード形式かバイナリ形式か、変更するかしないかを問わず、以下の条件を

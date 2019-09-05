@@ -183,6 +183,7 @@
     <ClInclude Include="SheetSizeInfo.h" />
     <ClInclude Include="SrcLB.h" />
     <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="targetver.h" />
     <ClInclude Include="xbschobj.h" />
     <ClInclude Include="xbschsheetinfo.h" />
     <ClInclude Include="xbschstringlist.h" />

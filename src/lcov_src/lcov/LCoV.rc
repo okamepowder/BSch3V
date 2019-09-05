@@ -13,11 +13,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 英語 (米国) resources
+// 日本語 (日本) resources
 
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
-#pragma code_page(1252)
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -43,9 +43,9 @@ BEGIN
     "#define _AFX_NO_TRACKER_RESOURCES\r\n"
     "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
     "\r\n"
-    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
-    "LANGUAGE 9, 1\r\n"
-    "#pragma code_page(1252)\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)\r\n"
+    "LANGUAGE 17, 1\r\n"
+    "#pragma code_page(932)\r\n"
     "#include ""res\\LCoV.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
     "#include ""afxres.rc""         // 標準のコンポーネント\r\n"
     "#endif\r\n"
@@ -60,8 +60,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,82,1,0
- PRODUCTVERSION 0,82,1,0
+ FILEVERSION 0,82,1,1
+ PRODUCTVERSION 0,82,1,1
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -74,19 +74,20 @@ VS_VERSION_INFO VERSIONINFO
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
-        BLOCK "000004e4"
+        BLOCK "041104e4"
         BEGIN
-            VALUE "FileVersion", "0.82.01"
+            VALUE "FileDescription", "部品ライブラリエディタ"
+            VALUE "FileVersion", "0.82.1.1"
             VALUE "InternalName", "LCoV"
             VALUE "LegalCopyright", "Copyright (C) 2004-2014 H.Okada(Suigyodo)"
             VALUE "OriginalFilename", "lcov.exe"
             VALUE "ProductName", "LCoV"
-            VALUE "ProductVersion", "0.82.01"
+            VALUE "ProductVersion", "0.82.1.1"
         END
     END
     BLOCK "VarFileInfo"
     BEGIN
-        VALUE "Translation", 0x0, 1252
+        VALUE "Translation", 0x411, 932
     END
 END
 
@@ -145,69 +146,69 @@ END
 
 IDR_MAINFRAME MENU
 BEGIN
-    POPUP "&File"
+    POPUP "ファイル(&F)"
     BEGIN
-        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
-        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
-        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
-        MENUITEM "Save &as...",                 ID_FILE_SAVE_AS
+        MENUITEM "新規作成(&N)\tCtrl+N",            ID_FILE_NEW
+        MENUITEM "開く(&O)...\tCtrl+O",           ID_FILE_OPEN
+        MENUITEM "保存(&S)\tCtrl+S",              ID_FILE_SAVE
+        MENUITEM "名前を付けて保存(&A)...",             ID_FILE_SAVE_AS
         MENUITEM SEPARATOR
-        MENUITEM "E&xit",                       ID_APP_EXIT
+        MENUITEM "アプリケーションの終了(&X)",             ID_APP_EXIT
     END
-    POPUP "&Edit"
+    POPUP "編集(&E)"
     BEGIN
-        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM "元に戻す(&U)\tCtrl+Z",            ID_EDIT_UNDO
         MENUITEM SEPARATOR
-        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
-        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
-        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
-        MENUITEM "&Delete\tDel",                ID_EDIT_CLEAR
-        MENUITEM "&Mirror\tCtrl+M",             ID_EDIT_MIRROR
-        MENUITEM "&Rotate\tCtrl+R",             ID_EDIT_ROTATE
-        MENUITEM "P&roperty...",                ID_EDIT_PROPERTY
-        MENUITEM "Next pin name\tF11",          ID_EDIT_NEXTPINNAME
-        MENUITEM "Next pin number\tF12",        ID_EDIT_NEXTPINNUM
+        MENUITEM "切り取り(&T)\tCtrl+X",            ID_EDIT_CUT
+        MENUITEM "コピー(&C)\tCtrl+C",             ID_EDIT_COPY
+        MENUITEM "貼り付け(&P)\tCtrl+V",            ID_EDIT_PASTE
+        MENUITEM "削除\tDel",                     ID_EDIT_CLEAR
+        MENUITEM "左右反転(&M)\tCtrl+M",            ID_EDIT_MIRROR
+        MENUITEM "回転(&R)\tCtrl+R",              ID_EDIT_ROTATE
+        MENUITEM "プロパティ(&R)",                   ID_EDIT_PROPERTY
+        MENUITEM "次のピン名\tF11",                  ID_EDIT_NEXTPINNAME
+        MENUITEM "次のピン番号\tF12",                 ID_EDIT_NEXTPINNUM
         MENUITEM SEPARATOR
-        MENUITEM "Cut component",               ID_EDIT_CUT_COMP
-        MENUITEM "Copy component",              ID_EDIT_COPY_COMP
-        MENUITEM "Paste component",             ID_EDIT_PASTE_COMP
+        MENUITEM "部品の切り取り",                     ID_EDIT_CUT_COMP
+        MENUITEM "部品のコピー",                      ID_EDIT_COPY_COMP
+        MENUITEM "部品の貼り付け",                     ID_EDIT_PASTE_COMP
         MENUITEM SEPARATOR
-        MENUITEM "New component...",            ID_EDIT_NEW_COMP
-        MENUITEM "Component property...",       ID_EDIT_PROPERTY_COMP
+        MENUITEM "部品の新規作成",                     ID_EDIT_NEW_COMP
+        MENUITEM "部品のプロパティ",                    ID_EDIT_PROPERTY_COMP
         MENUITEM SEPARATOR
-        MENUITEM "Add alias...",                ID_EDIT_ADD_ALIAS
+        MENUITEM "エイリアスの追加",                    ID_EDIT_ADD_ALIAS
         MENUITEM SEPARATOR
-        MENUITEM "Sort by name",                ID_EDIT_SORT_COMPONENT
+        MENUITEM "部品名で並べ替え",                    ID_EDIT_SORT_COMPONENT
         MENUITEM SEPARATOR
-        MENUITEM "Library property...",         ID_EDIT_PROP_LIB
+        MENUITEM "ライブラリのプロパティ",                 ID_EDIT_PROP_LIB
     END
-    POPUP "&View"
+    POPUP "表示(&V)"
     BEGIN
-        MENUITEM "Zoom &In\tPage up",           ID_VIEW_ZOOMIN
-        MENUITEM "Zoom &Out\tPage down",        ID_VIEW_ZOOMOUT
+        MENUITEM "ズームイン(&I)\tPageUp",           ID_VIEW_ZOOMIN
+        MENUITEM "ズームアウト(&O)\tPageDown",        ID_VIEW_ZOOMOUT
         MENUITEM SEPARATOR
-        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
-        MENUITEM "&Status bar",                 ID_VIEW_STATUS_BAR
-        MENUITEM "&Pin property",               ID_VIEW_PINPROPS_WND
-        MENUITEM "S&wap pin name and pin num(Only on LCoV)", ID_VIEW_SWAPNAMEANDNUM
+        MENUITEM "ツール バー(&T)",                  ID_VIEW_TOOLBAR
+        MENUITEM "ステータス バー(&S)",                ID_VIEW_STATUS_BAR
+        MENUITEM "ピン編集ウィンドウ(&P)",               ID_VIEW_PINPROPS_WND
+        MENUITEM "ピン番号とピン名のLCoVでのみの表示入れ換え(&W)", ID_VIEW_SWAPNAMEANDNUM
     END
-    POPUP "&Tool"
+    POPUP "ツール(&T)"
     BEGIN
-        MENUITEM "&Selector",                   ID_TOOL_SELECT
-        MENUITEM "&Pin",                        ID_TOOL_PIN
-        MENUITEM "&Line",                       ID_TOOL_LINE
-        MENUITEM "&Circle",                     ID_TOOL_CIRCLE
-        MENUITEM "Poly&gon",                    ID_TOOL_POLYGON
-        MENUITEM "&Arc",                        ID_TOOL_ARC
-        MENUITEM "&Text",                       ID_TOOL_TEXT
+        MENUITEM "選択(&S)",                      ID_TOOL_SELECT
+        MENUITEM "ピン(&P)",                      ID_TOOL_PIN
+        MENUITEM "線(&L)",                       ID_TOOL_LINE
+        MENUITEM "円(&C)",                       ID_TOOL_CIRCLE
+        MENUITEM "多角形(&G)",                     ID_TOOL_POLYGON
+        MENUITEM "円弧(&A)",                      ID_TOOL_ARC
+        MENUITEM "文字列(&T)",                     ID_TOOL_TEXT
         MENUITEM SEPARATOR
-        MENUITEM "Edit &node mode\tCtrl+D",     ID_EDIT_NODE_MODE
+        MENUITEM "ノード編集モード(&N)\tCtrl+D",        ID_EDIT_NODE_MODE
         MENUITEM SEPARATOR
-        MENUITEM "Create &BIT-PATTERN",         ID_TOOL_CREATE_BPTN
+        MENUITEM "ビットパターンの作成(&B)",              ID_TOOL_CREATE_BPTN
     END
-    POPUP "&Help"
+    POPUP "ヘルプ(&H)"
     BEGIN
-        MENUITEM "&About LCoV...",              ID_APP_ABOUT
+        MENUITEM "バージョン情報 LCoV(&A)...",         ID_APP_ABOUT
     END
 END
 
@@ -215,27 +216,27 @@ IDR_COMPEDITCONTEXT MENU
 BEGIN
     POPUP "FLOAT"
     BEGIN
-        POPUP "Tool"
+        POPUP "ツール"
         BEGIN
-            MENUITEM "Selector",                    ID_TOOL_SELECT
-            MENUITEM "Pin",                         ID_TOOL_PIN
-            MENUITEM "Line",                        ID_TOOL_LINE
-            MENUITEM "Circle",                      ID_TOOL_CIRCLE
-            MENUITEM "Polygon",                     ID_TOOL_POLYGON
-            MENUITEM "Arc",                         ID_TOOL_ARC
-            MENUITEM "Text",                        ID_TOOL_TEXT
-            MENUITEM "Edit node mode",              ID_EDIT_NODE_MODE
+            MENUITEM "選択",                          ID_TOOL_SELECT
+            MENUITEM "ピン",                          ID_TOOL_PIN
+            MENUITEM "線",                           ID_TOOL_LINE
+            MENUITEM "円",                           ID_TOOL_CIRCLE
+            MENUITEM "多角形",                         ID_TOOL_POLYGON
+            MENUITEM "円弧",                          ID_TOOL_ARC
+            MENUITEM "文字列",                         ID_TOOL_TEXT
+            MENUITEM "ノード編集モード",                    ID_EDIT_NODE_MODE
         END
         MENUITEM SEPARATOR
-        MENUITEM "Cut",                         ID_EDIT_CUT
-        MENUITEM "Copy",                        ID_EDIT_COPY
-        MENUITEM "Paste",                       ID_EDIT_PASTE
+        MENUITEM "切り取り",                        ID_EDIT_CUT
+        MENUITEM "コピー",                         ID_EDIT_COPY
+        MENUITEM "貼り付け",                        ID_EDIT_PASTE
         MENUITEM SEPARATOR
-        MENUITEM "Add Node",                    ID_ADD_NODE
+        MENUITEM "頂点の追加",                       ID_ADD_NODE
         MENUITEM SEPARATOR
-        MENUITEM "Mirror",                      ID_EDIT_MIRROR
-        MENUITEM "Rotate",                      ID_EDIT_ROTATE
-        MENUITEM "Property...",                 ID_EDIT_PROPERTY
+        MENUITEM "左右反転",                        ID_EDIT_MIRROR
+        MENUITEM "回転",                          ID_EDIT_ROTATE
+        MENUITEM "プロパティ...",                    ID_EDIT_PROPERTY
     END
 END
 
@@ -243,14 +244,14 @@ IDR_COMPNAMECONTEXT MENU
 BEGIN
     POPUP "FLOAT"
     BEGIN
-        MENUITEM "Cut component",               ID_EDIT_CUT_COMP
-        MENUITEM "Copy component",              ID_EDIT_COPY_COMP
-        MENUITEM "Paste component",             ID_EDIT_PASTE_COMP
+        MENUITEM "部品の切り取り",                     ID_EDIT_CUT_COMP
+        MENUITEM "部品のコピー",                      ID_EDIT_COPY_COMP
+        MENUITEM "部品の貼り付け",                     ID_EDIT_PASTE_COMP
         MENUITEM SEPARATOR
-        MENUITEM "New component",               ID_EDIT_NEW_COMP
-        MENUITEM "Component property",          ID_EDIT_PROPERTY_COMP
+        MENUITEM "部品の新規作成",                     ID_EDIT_NEW_COMP
+        MENUITEM "部品のプロパティ",                    ID_EDIT_PROPERTY_COMP
         MENUITEM SEPARATOR
-        MENUITEM "Add alias",                   ID_EDIT_ADD_ALIAS
+        MENUITEM "エイリアスの追加",                    ID_EDIT_ADD_ALIAS
     END
 END
 
@@ -291,174 +292,174 @@ END
 // Dialog
 //
 
-IDD_ABOUTBOX DIALOGEX 0, 0, 191, 49
+IDD_ABOUTBOX DIALOGEX 0, 0, 207, 63
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "About LCoV"
+CAPTION "バージョン情報 LCoV"
 FONT 11, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    ICON            IDR_MAINFRAME,IDC_STATIC,6,6,20,20
-    CTEXT           "LCoV Version xxxx",IDC_STATIC_VERSION,30,12,92,8,SS_NOPREFIX
-    CTEXT           "Copyright (C) 2004-2014 H.Okada(Suigyodo)",IDC_STATIC,12,30,156,8
-    DEFPUSHBUTTON   "OK",IDOK,144,6,36,16,WS_GROUP
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    CTEXT           "LCoV Version xxxx",IDC_STATIC_VERSION,40,10,105,8,SS_NOPREFIX
+    CTEXT           "Copyright (C) 2004-2014 H.Okada(Suigyodo)",IDC_STATIC,7,44,193,12
+    DEFPUSHBUTTON   "OK",IDOK,150,7,50,16,WS_GROUP
 END
 
-IDD_DIALOGBAR DIALOGEX 0, 0, 105, 210
+IDD_DIALOGBAR DIALOGEX 0, 0, 105, 231
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
 FONT 11, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
-    PUSHBUTTON      "Button1",IDC_BUTTON_UP,3,3,47,12,BS_ICON | BS_CENTER
-    PUSHBUTTON      "Button2",IDC_BUTTON_DOWN,53,3,49,12,BS_ICON
-    EDITTEXT        IDC_EDIT_NOTE,2,123,100,84,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL | NOT WS_TABSTOP
+    PUSHBUTTON      "Button1",IDC_BUTTON_UP,3,3,48,12,BS_ICON | BS_CENTER
+    PUSHBUTTON      "Button2",IDC_BUTTON_DOWN,56,3,46,12,BS_ICON
+    EDITTEXT        IDC_EDIT_NOTE,3,123,100,104,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL | NOT WS_TABSTOP
 END
 
-IDD_DIALOG_PIN_PROP DIALOGEX 0, 0, 241, 145
+IDD_DIALOG_PIN_PROP DIALOGEX 0, 0, 255, 125
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Pin - property"
+CAPTION "ピンのプロパティ"
 FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    LTEXT           "&Name",IDC_STATIC,6,6,24,12,SS_CENTERIMAGE,WS_EX_RIGHT
-    EDITTEXT        IDC_EDIT_PIN_NAME,36,6,114,15,ES_AUTOHSCROLL
-    GROUPBOX        "Nu&mber",IDC_STATIC,7,29,228,49
-    EDITTEXT        IDC_EDIT_PIN_NUM,18,42,107,15,ES_AUTOHSCROLL
-    LTEXT           "&Block",IDC_STATIC,138,42,33,12,SS_CENTERIMAGE,WS_EX_RIGHT
-    EDITTEXT        IDC_EDIT_BLOCK,174,42,30,15,ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER
-    CONTROL         "",IDC_SPIN_BLOCK,"msctls_updown32",UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS,204,42,10,15
-    CONTROL         "&Hide number",IDC_CHECK_HIDE_NUM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,18,60,111,10
-    CONTROL         "",IDC_RADIO_NORM,"Button",BS_AUTORADIOBUTTON | BS_BITMAP | WS_TABSTOP,18,84,63,12
-    CONTROL         "",IDC_RADIO_CK,"Button",BS_AUTORADIOBUTTON | BS_BITMAP,18,99,63,12
-    CONTROL         "",IDC_RADIO_NEGA,"Button",BS_AUTORADIOBUTTON | BS_BITMAP,93,84,63,12
-    CONTROL         "",IDC_RADIO_NEGACK,"Button",BS_AUTORADIOBUTTON | BS_BITMAP,93,99,63,12
-    CONTROL         "",IDC_RADIO_SMALL,"Button",BS_AUTORADIOBUTTON | BS_BITMAP,168,84,63,12
-    CONTROL         "",IDC_RADIO_ZLENG,"Button",BS_AUTORADIOBUTTON | BS_BITMAP,168,99,63,12
-    DEFPUSHBUTTON   "OK",IDOK,132,123,45,15
-    PUSHBUTTON      "Cancel",IDCANCEL,186,123,45,15
-    PUSHBUTTON      "Show/Hide",IDC_BUTTON_SHOWHIDE_NAME,156,6,54,15
+    LTEXT           "名前(&V)",IDC_STATIC,12,3,33,12,SS_CENTERIMAGE,WS_EX_RIGHT
+    EDITTEXT        IDC_EDIT_PIN_NAME,54,3,132,15,ES_AUTOHSCROLL
+    GROUPBOX        "番号(&M)",IDC_STATIC,6,21,228,45
+    EDITTEXT        IDC_EDIT_PIN_NUM,18,30,99,15,ES_AUTOHSCROLL
+    LTEXT           "ブロック(&B)",IDC_STATIC,141,30,42,9,SS_CENTERIMAGE,WS_EX_RIGHT
+    EDITTEXT        IDC_EDIT_BLOCK,192,30,27,15,ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER
+    CONTROL         "",IDC_SPIN_BLOCK,"msctls_updown32",UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS,219,30,11,15
+    CONTROL         "番号の非表示(&H)",IDC_CHECK_HIDE_NUM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,18,48,111,10
+    CONTROL         "",IDC_RADIO_NORM,"Button",BS_AUTORADIOBUTTON | BS_BITMAP | WS_TABSTOP,18,72,63,12
+    CONTROL         "",IDC_RADIO_CK,"Button",BS_AUTORADIOBUTTON | BS_BITMAP,18,87,63,12
+    CONTROL         "",IDC_RADIO_NEGA,"Button",BS_AUTORADIOBUTTON | BS_BITMAP,93,72,63,12
+    CONTROL         "",IDC_RADIO_NEGACK,"Button",BS_AUTORADIOBUTTON | BS_BITMAP,93,87,63,12
+    CONTROL         "オプション1",IDC_RADIO_SMALL,"Button",BS_AUTORADIOBUTTON | BS_BITMAP,168,72,63,12
+    CONTROL         "オプション1",IDC_RADIO_ZLENG,"Button",BS_AUTORADIOBUTTON | BS_BITMAP,168,87,63,12
+    DEFPUSHBUTTON   "OK",IDOK,135,108,45,12
+    PUSHBUTTON      "キャンセル",IDCANCEL,186,108,45,12
+    PUSHBUTTON      "表示/非表示",IDC_BUTTON_SHOWHIDE_NAME,192,3,60,15
 END
 
-IDD_DLG_PROP_COMP DIALOGEX 0, 0, 264, 239
+IDD_DLG_PROP_COMP DIALOGEX 0, 0, 276, 239
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Property - component"
+CAPTION "部品のプロパティ"
 FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    LTEXT           "&Name",IDC_STATIC,3,9,42,9,SS_CENTERIMAGE,WS_EX_RIGHT
+    LTEXT           "名前(&N)",IDC_STATIC,3,9,42,9,SS_CENTERIMAGE,WS_EX_RIGHT
     EDITTEXT        IDC_EDIT_COMP_NAME,51,9,108,12,ES_UPPERCASE | ES_AUTOHSCROLL
-    LTEXT           "Numbe&r",IDC_STATIC,162,9,42,9,SS_CENTERIMAGE,WS_EX_RIGHT
+    LTEXT           "参照番号(&R)",IDC_STATIC,162,9,42,9,SS_CENTERIMAGE,WS_EX_RIGHT
     EDITTEXT        IDC_EDIT_COMP_REF,207,9,36,12,ES_UPPERCASE | ES_AUTOHSCROLL
-    GROUPBOX        "Size",IDC_STATIC,6,30,60,42
+    GROUPBOX        "サイズ",IDC_STATIC,6,30,60,42
     LTEXT           "&X",IDC_STATIC,13,42,15,9,SS_CENTERIMAGE,WS_EX_RIGHT
     EDITTEXT        IDC_EDIT_COMP_SIZEX,37,39,24,12,ES_AUTOHSCROLL | ES_NUMBER
     LTEXT           "&Y",IDC_STATIC,13,57,15,9,SS_CENTERIMAGE,WS_EX_RIGHT
     EDITTEXT        IDC_EDIT_COMP_SIZEY,37,54,24,12,ES_AUTOHSCROLL | ES_NUMBER
-    GROUPBOX        "Pattern",IDC_STATIC,72,30,72,42
-    CONTROL         "Use &Pattern",IDC_CHECK_USEPTN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,78,42,60,10
-    CONTROL         "No &Bit-pattern",IDC_CHECK_USEPTN2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,78,54,60,10
-    GROUPBOX        "Block",IDC_STATIC,150,30,102,54
-    LTEXT           "&Blocks",IDC_STATIC,180,42,27,9,SS_CENTERIMAGE,WS_EX_RIGHT
-    EDITTEXT        IDC_EDIT_COMP_BLOCK,222,39,24,12,ES_AUTOHSCROLL | ES_NUMBER
-    CONTROL         "&Fixed block Num",IDC_CHECK_FIXEDBLOCKNUM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,156,57,66,10
-    EDITTEXT        IDC_EDIT_COMP_FIXEDBLOCK,222,54,24,12,ES_AUTOHSCROLL | ES_NUMBER
-    CONTROL         "&Shared block",IDC_CHECK_SHARED_BLOCK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,156,72,66,10
-    RTEXT           "Manufacturer",IDC_STATIC,24,99,51,8
+    GROUPBOX        "パターン",IDC_STATIC,72,30,84,42
+    CONTROL         "パターンを使用(&P)",IDC_CHECK_USEPTN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,78,42,78,10
+    CONTROL         "ビットパターンなし(&B)",IDC_CHECK_USEPTN2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,78,54,78,10
+    GROUPBOX        "ブロック",IDC_STATIC,162,30,108,54
+    LTEXT           "ブロック数(&B)",IDC_STATIC,168,42,51,9,SS_CENTERIMAGE,WS_EX_RIGHT
+    EDITTEXT        IDC_EDIT_COMP_BLOCK,240,39,24,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "固定ブロック番号(&F)",IDC_CHECK_FIXEDBLOCKNUM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,168,57,66,10
+    EDITTEXT        IDC_EDIT_COMP_FIXEDBLOCK,240,54,24,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "共有ブロック(&S)",IDC_CHECK_SHARED_BLOCK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,168,72,66,10
+    RTEXT           "製造者",IDC_STATIC,24,99,51,8
     EDITTEXT        IDC_EDIT_MFR,84,96,75,12,ES_AUTOHSCROLL
-    RTEXT           "MfrPartNumber",IDC_STATIC,6,117,71,8
+    RTEXT           "製造者型式",IDC_STATIC,6,117,71,8
     EDITTEXT        IDC_EDIT_MFRPN,84,114,96,12,ES_AUTOHSCROLL
-    RTEXT           "Package",IDC_STATIC,24,135,51,8
+    RTEXT           "パッケージ",IDC_STATIC,24,135,51,8
     EDITTEXT        IDC_EDIT_PKG,84,132,54,12,ES_AUTOHSCROLL
-    LTEXT           "No&te",IDC_STATIC,6,150,45,8
-    EDITTEXT        IDC_EDIT_NOTE,7,161,246,74,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
-    DEFPUSHBUTTON   "OK",IDOK,204,93,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,204,114,50,14
+    LTEXT           "ノート",IDC_STATIC,6,150,45,8
+    EDITTEXT        IDC_EDIT_NOTE,7,161,263,74,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,216,93,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,216,114,50,14
 END
 
-IDD_PTN_PROP DIALOGEX 0, 0, 155, 43
+IDD_PTN_PROP DIALOGEX 0, 0, 172, 47
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Property - pattern"
+CAPTION "パターンのプロパティ"
 FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    LTEXT           "&Width",IDC_STATIC,12,3,39,12,SS_CENTERIMAGE,WS_EX_RIGHT
+    LTEXT           "線幅(&W)",IDC_STATIC,12,3,39,12,SS_CENTERIMAGE,WS_EX_RIGHT
     COMBOBOX        IDC_COMBO_WIDTH,57,3,33,45,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    CONTROL         "&Dot",IDC_CHECK_DASHSTYLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,18,24,39,10
-    CONTROL         "&Fill",IDC_CHECK_FILL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,66,24,39,10
-    DEFPUSHBUTTON   "OK",IDOK,117,6,33,14
-    PUSHBUTTON      "Cancel",IDCANCEL,117,24,33,14
+    CONTROL         "破線(&D)",IDC_CHECK_DASHSTYLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,9,21,81,10
+    CONTROL         "塗りつぶし(&F)",IDC_CHECK_FILL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,9,33,84,10
+    DEFPUSHBUTTON   "OK",IDOK,117,6,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,117,24,50,14
 END
 
-IDD_DIALOG_PROP_LIB DIALOGEX 0, 0, 203, 55
+IDD_DIALOG_PROP_LIB DIALOGEX 0, 0, 220, 55
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Property - library"
+CAPTION "ライブラリのプロパティ"
 FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     EDITTEXT        IDC_EDIT_STRING,3,3,156,48,ES_MULTILINE | ES_AUTOHSCROLL | ES_WANTRETURN
-    DEFPUSHBUTTON   "OK",IDOK,165,6,33,14
-    PUSHBUTTON      "Cancel",IDCANCEL,165,24,33,14
+    DEFPUSHBUTTON   "OK",IDOK,165,6,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,165,24,50,14
 END
 
-IDD_DIALOG_ALIAS DIALOGEX 0, 0, 186, 49
+IDD_DIALOG_ALIAS DIALOGEX 0, 0, 217, 47
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Add alias"
+CAPTION "エイリアスの追加"
 FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    EDITTEXT        IDC_EDIT_NAME,54,6,66,12,ES_AUTOHSCROLL | ES_READONLY | NOT WS_TABSTOP
-    RTEXT           "Alias for",IDC_STATIC,6,6,40,8
-    EDITTEXT        IDC_EDIT_ALIAS,54,24,66,12,ES_AUTOHSCROLL
-    DEFPUSHBUTTON   "OK",IDOK,138,6,33,14
-    PUSHBUTTON      "Cancel",IDCANCEL,138,24,33,14
+    EDITTEXT        IDC_EDIT_NAME,9,6,66,12,ES_AUTOHSCROLL | ES_READONLY | NOT WS_TABSTOP
+    LTEXT           "のエイリアス",IDC_STATIC,81,9,51,8
+    EDITTEXT        IDC_EDIT_ALIAS,9,27,66,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,159,6,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,159,24,50,14
 END
 
-IDD_PTNTEXT DIALOGEX 0, 0, 191, 119
+IDD_PTNTEXT DIALOGEX 0, 0, 232, 119
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Property -text"
+CAPTION "パターンテキストの編集"
 FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    LTEXT           "&Text",IDC_STATIC,12,6,30,12,SS_CENTERIMAGE,WS_EX_RIGHT
-    EDITTEXT        IDC_EDIT_TEXT,48,6,90,14,ES_AUTOHSCROLL
-    CONTROL         "Use common font",IDC_CHECK_COMFONT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,30,73,10
-    PUSHBUTTON      "&Font...",IDC_BUTTON_FONT,96,27,42,15
-    CONTROL         "Upper",IDC_RADIO_VT,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,18,60,42,10
-    CONTROL         "Center",IDC_RADIO_VC,"Button",BS_AUTORADIOBUTTON,72,60,42,10
-    CONTROL         "Lower",IDC_RADIO_VB,"Button",BS_AUTORADIOBUTTON,126,60,36,10
-    CONTROL         "Left",IDC_RADIO_HL,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,18,96,42,10
-    CONTROL         "Center",IDC_RADIO_HC,"Button",BS_AUTORADIOBUTTON,72,96,42,10
-    CONTROL         "Right",IDC_RADIO_HR,"Button",BS_AUTORADIOBUTTON,126,96,42,10
-    DEFPUSHBUTTON   "OK",IDOK,150,6,36,14
-    PUSHBUTTON      "Cancel",IDCANCEL,150,24,36,14
-    GROUPBOX        "Vertical anchor",IDC_STATIC,6,48,168,30
-    GROUPBOX        "Horizontal anchor",IDC_STATIC,6,84,168,30
+    LTEXT           "文字列(&S)",IDC_STATIC,18,6,42,12,SS_CENTERIMAGE,WS_EX_RIGHT
+    EDITTEXT        IDC_EDIT_TEXT,66,6,90,14,ES_AUTOHSCROLL
+    CONTROL         "共通フォントを使う",IDC_CHECK_COMFONT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,30,73,10
+    PUSHBUTTON      "フォント(&F)...",IDC_BUTTON_FONT,96,27,60,15
+    CONTROL         "上",IDC_RADIO_VT,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,18,66,24,10
+    CONTROL         "中",IDC_RADIO_VC,"Button",BS_AUTORADIOBUTTON,66,66,24,10
+    CONTROL         "下",IDC_RADIO_VB,"Button",BS_AUTORADIOBUTTON,108,66,24,10
+    CONTROL         "左",IDC_RADIO_HL,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,18,96,24,10
+    CONTROL         "中",IDC_RADIO_HC,"Button",BS_AUTORADIOBUTTON,66,96,24,10
+    CONTROL         "右",IDC_RADIO_HR,"Button",BS_AUTORADIOBUTTON,108,96,24,10
+    DEFPUSHBUTTON   "OK",IDOK,174,6,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,174,24,50,14
+    GROUPBOX        "アンカーの縦位置",IDC_STATIC,6,54,150,30
+    GROUPBOX        "アンカーの横位置",IDC_STATIC,6,84,150,30
 END
 
 IDD_PINPROPS DIALOGEX 0, 0, 340, 143
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Pin property"
+CAPTION "ピンの編集"
 FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    PUSHBUTTON      "Close",IDCANCEL,282,126,50,14
+    PUSHBUTTON      "閉じる",IDCANCEL,282,126,50,14
     SCROLLBAR       IDC_VSCROLL,324,25,12,83,SBS_VERT
     SCROLLBAR       IDC_HSCROLL,198,108,126,12
 END
 
 IDD_DISPNAMESETTING DIALOGEX 0, 0, 207, 153
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Show/Hide name individually"
+CAPTION "ピン名の個別表示設定"
 FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,150,114,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,150,132,50,14
-    LISTBOX         IDC_LIST_NAMES,12,6,132,138,LBS_SORT | LBS_OWNERDRAWFIXED | LBS_HASSTRINGS | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
-    PUSHBUTTON      "Show All",IDC_BUTTONSHOW_ALL,150,6,50,14
-    PUSHBUTTON      "Hide All",IDC_BUTTONHIDE_ALL,150,24,50,14
+    DEFPUSHBUTTON   "OK",IDOK,144,114,56,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,144,132,56,14
+    LISTBOX         IDC_LIST_NAMES,12,6,126,138,LBS_SORT | LBS_OWNERDRAWFIXED | LBS_HASSTRINGS | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "すべて表示",IDC_BUTTONSHOW_ALL,144,6,56,14
+    PUSHBUTTON      "すべて非表示",IDC_BUTTONHIDE_ALL,144,24,56,14
 END
 
-IDD_LINE_PROP DIALOGEX 0, 0, 156, 59
+IDD_LINE_PROP DIALOGEX 0, 0, 156, 50
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Property - Line"
+CAPTION "線のプロパティ"
 FONT 11, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    LTEXT           "&Width",IDC_STATIC,12,3,39,12,SS_CENTERIMAGE,WS_EX_RIGHT
-    COMBOBOX        IDC_COMBO_WIDTH,57,3,33,45,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    CONTROL         "&Dot",IDC_CHECK_DASHSTYLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,36,24,39,10
-    DEFPUSHBUTTON   "OK",IDOK,117,6,33,14
-    PUSHBUTTON      "Cancel",IDCANCEL,117,24,33,14
-    CONTROL         "&Curve line",IDC_CHECK_CURVELINE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,36,42,39,10
+    LTEXT           "線幅(&W)",IDC_STATIC,6,3,33,12,SS_CENTERIMAGE,WS_EX_RIGHT
+    COMBOBOX        IDC_COMBO_WIDTH,48,3,33,45,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "破線(&D)",IDC_CHECK_DASHSTYLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,21,39,10
+    DEFPUSHBUTTON   "OK",IDOK,108,6,42,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,108,24,42,14
+    CONTROL         "曲線(&C)",IDC_CHECK_CURVELINE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,36,39,10
 END
 
 
@@ -473,29 +474,29 @@ BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 156
+        RIGHTMARGIN, 200
         TOPMARGIN, 7
-        BOTTOMMARGIN, 48
+        BOTTOMMARGIN, 56
     END
 
     IDD_DIALOGBAR, DIALOG
     BEGIN
-        RIGHTMARGIN, 102
-        BOTTOMMARGIN, 207
+        RIGHTMARGIN, 93
+        BOTTOMMARGIN, 188
     END
 
     IDD_DIALOG_PIN_PROP, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 234
+        RIGHTMARGIN, 248
         TOPMARGIN, 7
-        BOTTOMMARGIN, 136
+        BOTTOMMARGIN, 118
     END
 
     IDD_DLG_PROP_COMP, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 257
+        RIGHTMARGIN, 269
         TOPMARGIN, 7
         BOTTOMMARGIN, 232
     END
@@ -503,15 +504,15 @@ BEGIN
     IDD_PTN_PROP, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 148
+        RIGHTMARGIN, 165
         TOPMARGIN, 7
-        BOTTOMMARGIN, 36
+        BOTTOMMARGIN, 40
     END
 
     IDD_DIALOG_PROP_LIB, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 196
+        RIGHTMARGIN, 213
         TOPMARGIN, 7
         BOTTOMMARGIN, 48
     END
@@ -519,15 +520,15 @@ BEGIN
     IDD_DIALOG_ALIAS, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 179
+        RIGHTMARGIN, 210
         TOPMARGIN, 7
-        BOTTOMMARGIN, 42
+        BOTTOMMARGIN, 40
     END
 
     IDD_PTNTEXT, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 184
+        RIGHTMARGIN, 225
         TOPMARGIN, 7
         BOTTOMMARGIN, 112
     END
@@ -553,7 +554,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 149
         TOPMARGIN, 7
-        BOTTOMMARGIN, 52
+        BOTTOMMARGIN, 43
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -574,27 +575,27 @@ IDC_CURSOR_MOVE         CURSOR                  "res\\CUR_MOVE.CUR"
 STRINGTABLE
 BEGIN
     IDR_MAINFRAME           "LCoV"
-    IDS_PARTSIZE_RANGE      "Size must be 1~255."
-    IDS_PART_BLOCKRANGE     "Blocks must be 1~255."
-    IDS_PARTNAME_INVALID    "Invalid component name."
-    IDS_STRING_CREATE_BPTN  "It CREATES BIT-PATTERN and OVERWRITES EXISTING"
-    IDS_STRING_SAVE_CURRENT "Save changes?"
-    IDS_TOOL_SELECT         "Select"
-    IDS_NOTICE_SORT         "You can't undo this command.\nContinue?"
-    IDS_SAVE_ERROR          "Cannnot save the document. Try saving as."
-    IDS_GRID_TITLE_POS      "Loc"
-    IDS_GRID_TITLE_NAME     "Name"
-    IDS_GRID_TITLE_TYPE     "Type"
-    IDS_GRID_TITLE_HIDE     "Hide"
-    IDS_GRID_TITLE_NUM      "Num"
-    IDS_GRID_TITLE_BLOCK    "Block %d"
+    IDS_PARTSIZE_RANGE      "部品サイズの範囲は1～255です"
+    IDS_PART_BLOCKRANGE     "ブロック数の範囲は1～255です"
+    IDS_PARTNAME_INVALID    "有効な部品名ではありません"
+    IDS_STRING_CREATE_BPTN  "ビットパターンを生成して既存のものに上書きします"
+    IDS_STRING_SAVE_CURRENT "現在のドキュメントを保存しますか"
+    IDS_TOOL_SELECT         "選択"
+    IDS_NOTICE_SORT         "部品名でのソートはUNDOできません。\n実行しますか?"
+    IDS_SAVE_ERROR          "ファイルの保存に失敗しました。別名での保存、別のフォルダ、ディスクへの保存をお試しください。"
+    IDS_GRID_TITLE_POS      "位置"
+    IDS_GRID_TITLE_NAME     "名前"
+    IDS_GRID_TITLE_TYPE     "ピン形状"
+    IDS_GRID_TITLE_HIDE     "隠す"
+    IDS_GRID_TITLE_NUM      "番号"
+    IDS_GRID_TITLE_BLOCK    "ブロック %d"
     IDS_VERSION             "0.82.01"
 END
 
 STRINGTABLE
 BEGIN
     AFX_IDS_APP_TITLE       "LCoV"
-    AFX_IDS_IDLEMESSAGE     "Ready"
+    AFX_IDS_IDLEMESSAGE     "レディ"
 END
 
 STRINGTABLE
@@ -603,92 +604,92 @@ BEGIN
     ID_INDICATOR_CAPS       "CAP"
     ID_INDICATOR_NUM        "NUM"
     ID_INDICATOR_SCRL       "SCRL"
-    ID_INDICATOR_OVR        "OVR"
-    ID_INDICATOR_REC        "REC"
+    ID_INDICATOR_OVR        "上書き"
+    ID_INDICATOR_REC        "記録"
 END
 
 STRINGTABLE
 BEGIN
-    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
-    ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
+    ID_APP_ABOUT            "プログラム情報、バージョン、著作権を表示します。\nバージョン情報"
+    ID_APP_EXIT             "アプリケーションを終了し、ファイルの保存を指示\\終了"
 END
 
 STRINGTABLE
 BEGIN
-    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
-    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+    ID_NEXT_PANE            "次のウィンドウに切り替える\n次のペイン"
+    ID_PREV_PANE            "前のウィンドウに切り替える\n前のペイン"
 END
 
 STRINGTABLE
 BEGIN
-    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+    ID_WINDOW_SPLIT         "作業中のウィンドウを分割\n分割"
 END
 
 STRINGTABLE
 BEGIN
-    ID_EDIT_CLEAR           "Erase the selection\nErase"
-    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
-    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
-    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
-    ID_EDIT_FIND            "Find the specified text\nFind"
-    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
-    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
-    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
-    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
-    ID_EDIT_UNDO            "Undo the last action\nUndo"
-    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+    ID_EDIT_CLEAR           "選択範囲を消去\n消去"
+    ID_EDIT_CLEAR_ALL       "すべて消去\nすべて消去"
+    ID_EDIT_COPY            "選択範囲をコピーしてクリップボードに保存\n保存"
+    ID_EDIT_CUT             "選択範囲を切り取ってクリップボードに保存\n切り取り"
+    ID_EDIT_FIND            "指定した文字列の検索\n検索"
+    ID_EDIT_PASTE           "クリップボードの内容を貼り付け\n貼り付け"
+    ID_EDIT_REPEAT          "直前に行った動作を繰り返す\n繰り返し"
+    ID_EDIT_REPLACE         "指定した文字列を他の文字列で置換\n置換"
+    ID_EDIT_SELECT_ALL      "ファイル内のすべてを選択\nすべて選択"
+    ID_EDIT_UNDO            "直前に行った動作を元に戻す\n元に戻す"
+    ID_EDIT_REDO            "直前に行った動作を繰り返す\n繰り返す"
 END
 
 STRINGTABLE
 BEGIN
-    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
-    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+    ID_VIEW_TOOLBAR         "ツール バーの 表示/非表示\nツール バーの表示切り替え"
+    ID_VIEW_STATUS_BAR      "ステータス バーの 表示/非表示\nステータス バーの表示切り替え"
 END
 
 STRINGTABLE
 BEGIN
-    AFX_IDS_SCSIZE          "Change the window size"
-    AFX_IDS_SCMOVE          "Change the window position"
-    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
-    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
-    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
-    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
-    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+    AFX_IDS_SCSIZE          "ウィンドウのサイズを変更"
+    AFX_IDS_SCMOVE          "ウィンドウの位置を変更"
+    AFX_IDS_SCMINIMIZE      "ウィンドウを最小化する"
+    AFX_IDS_SCMAXIMIZE      "ウィンドウを最大化する"
+    AFX_IDS_SCNEXTWINDOW    "次のウィンドウに切り替える"
+    AFX_IDS_SCPREVWINDOW    "前のウィンドウに切り替える"
+    AFX_IDS_SCCLOSE         "作業中のウィンドウを閉じ、変更したファイルの保存を指示"
 END
 
 STRINGTABLE
 BEGIN
-    AFX_IDS_SCRESTORE       "Restore the window to normal size"
-    AFX_IDS_SCTASKLIST      "Activate Task List"
+    AFX_IDS_SCRESTORE       "ウィンドウを通常のサイズに戻す"
+    AFX_IDS_SCTASKLIST      "固定ブロック番号の範囲は1～255です"
 END
 
 STRINGTABLE
 BEGIN
-    ID_TOOL_SELECT          "Selector\nSelector"
-    ID_TOOL_PIN             "Place pin\nPin"
-    ID_TOOL_LINE            "Place line\nLine"
-    ID_TOOL_CIRCLE          "Place ellipse\nCircle"
-    ID_TOOL_POLYGON         "Place polygon\nPolygon"
-    ID_TOOL_ARC             "Place arc\nArc"
+    ID_TOOL_SELECT          "選択ツール\n選択"
+    ID_TOOL_PIN             "ピンの配置\nピン"
+    ID_TOOL_LINE            "線の配置\n線"
+    ID_TOOL_CIRCLE          "円, 楕円の配置\n円"
+    ID_TOOL_POLYGON         "多角形の配置\n多角形"
+    ID_TOOL_ARC             "円弧の配置\n円弧"
 END
 
 STRINGTABLE
 BEGIN
-    ID_EDIT_NODE_MODE       "Edit node mode\nEdit node"
+    ID_EDIT_NODE_MODE       "オブジェクトの変形\n変形"
 END
 
 STRINGTABLE
 BEGIN
-    ID_TOOL_TEXT            "Place text\nText"
+    ID_TOOL_TEXT            "文字列の配置\n文字列"
 END
 
 STRINGTABLE
 BEGIN
-    IDS_LATERVERSION        "This file was created by the later version. \nSome data may have been lost."
+    IDS_LATERVERSION        "このファイルはより新しいバージョンで作成されています\n上書き保存するといくつかのデータが失われるかもしれません"
     IDS_PART_FIXEDBLOCKRANGE "Fixed Block Number must be 1~255."
 END
 
-#endif    // 英語 (米国) resources
+#endif    // 日本語 (日本) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -703,10 +704,10 @@ END
 #define _AFX_NO_TRACKER_RESOURCES
 #define _AFX_NO_PROPERTY_RESOURCES
 
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-LANGUAGE 9, 1
-#pragma code_page(1252)
-#include "res\LCoV.rc2"  // Microsoft Visual C++ 以外のツールで編集されたリソース
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+LANGUAGE 17, 1
+#pragma code_page(932)
+#include "res\LCoV.rc2"  // non-Microsoft Visual C++ edited resources
 #include "afxres.rc"         // 標準のコンポーネント
 #endif
 

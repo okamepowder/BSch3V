@@ -144,6 +144,7 @@
     <ClInclude Include="SheetSizeInfo.h" />
     <ClInclude Include="snut.h" />
     <ClInclude Include="STDAFX.H" />
+    <ClInclude Include="targetver.h" />
     <ClInclude Include="xbschobj.h" />
     <ClInclude Include="xbschsheetinfo.h" />
     <ClInclude Include="xbschstringlist.h" />
