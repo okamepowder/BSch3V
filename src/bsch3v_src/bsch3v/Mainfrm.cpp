@@ -14,6 +14,8 @@
 #include ".\mainfrm.h"
 #include "Global.h"
 
+//#include "Bschview.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -24,7 +26,7 @@ static char THIS_FILE[] = __FILE__;
 #define COPYDATA_CHECKOPENFILE 1
 
 
-
+class CBSchView;
 
 
 
@@ -150,6 +152,33 @@ void CMainFrame::OnDestroy()
 	RemoveProp(GetSafeHwnd(), _T("BSch3V-Suigyodo"));
 }
 
+
+int CMainFrame::CreateDBarLayer(UINT idd)
+{
+	if (!m_dbarLayer.Create(this, idd,
+		WS_CHILD | CBRS_RIGHT, idd))
+	{
+		TRACE0("Failed to create layer dialogbar\n");
+		return -1;      // 作成に失敗
+	}
+
+	m_dbarLayer.EnableDocking(CBRS_ALIGN_LEFT | CBRS_ALIGN_RIGHT);
+	CString strTitle;
+	strTitle.LoadString(IDS_LAYER_DBAR_TITLE);
+	m_dbarLayer.SetWindowText(strTitle);
+
+	HBITMAP hBmp;
+	CStatic* pStatic;
+	hBmp = (HBITMAP)::LoadImage(AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDB_EDIT), IMAGE_BITMAP, 0, 0, LR_LOADTRANSPARENT | LR_LOADMAP3DCOLORS);
+	pStatic = (CStatic*)m_dbarLayer.GetDlgItem(IDC_STATIC_EDIT);
+	pStatic->SetBitmap(hBmp);
+
+	hBmp = (HBITMAP)::LoadImage(AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDB_VIEW), IMAGE_BITMAP, 0, 0, LR_LOADTRANSPARENT | LR_LOADMAP3DCOLORS);
+	pStatic = (CStatic*)m_dbarLayer.GetDlgItem(IDC_STATIC_VIEW);
+	pStatic->SetBitmap(hBmp);
+	return 0;
+}
+
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	
@@ -163,38 +192,53 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	AfxGetApp()->m_pMainWnd = this;
 
 
-	DWORD dwVisible;
+	//DWORD dwVisible;
+
+	UINT idd;
+	if (AfxGetApp()->GetProfileInt(_T("Option"), _T("DisplayLayerNameOnDlgBar"), TRUE)) {
+		idd = IDD_DBAR_LAYER_S;	//文字列欄付きダイアログバー
+	}
+	else {
+		idd = IDD_DBAR_LAYER;
+	}
+
+	CreateDBarLayer(idd);
+	//if(!m_dbarLayer.Create(	this,IDD_DBAR_LAYER,
+	//						WS_CHILD|CBRS_RIGHT,IDD_DBAR_LAYER))
+	//{
+	//	TRACE0("Failed to create layer dialogbar\n");
+	//	return -1;      // 作成に失敗
+	//}
+
+	//m_dbarLayer.EnableDocking(CBRS_ALIGN_LEFT | CBRS_ALIGN_RIGHT);
+	//CString strTitle;
+	//strTitle.LoadString(IDS_LAYER_DBAR_TITLE);
+	//m_dbarLayer.SetWindowText(strTitle);
+
+	//HBITMAP hBmp;
+	//CStatic *pStatic;
+	//hBmp=(HBITMAP)::LoadImage(AfxGetApp()->m_hInstance,MAKEINTRESOURCE (IDB_EDIT),IMAGE_BITMAP,0,0,LR_LOADTRANSPARENT|LR_LOADMAP3DCOLORS);
+	//pStatic = (CStatic*)m_dbarLayer.GetDlgItem(IDC_STATIC_EDIT);
+	//pStatic->SetBitmap(hBmp);
+
+	//hBmp=(HBITMAP)::LoadImage(AfxGetApp()->m_hInstance,MAKEINTRESOURCE (IDB_VIEW),IMAGE_BITMAP,0,0,LR_LOADTRANSPARENT|LR_LOADMAP3DCOLORS);
+	//pStatic = (CStatic*)m_dbarLayer.GetDlgItem(IDC_STATIC_VIEW);
+	//pStatic->SetBitmap(hBmp);
+
+
 
 	BOOL bVisible;
 	//レイヤーダイアログバーの表示・非表示の情報をレジストリから得る 2007/03/27
-	if(AfxGetApp()->GetProfileInt(_T("Option"),_T("DisplayLayerDlgBar"),FALSE)){
-		bVisible=TRUE;//WS_VISIBLE;
-	}else{
-		bVisible=FALSE;
+	if (AfxGetApp()->GetProfileInt(_T("Option"), _T("DisplayLayerDlgBar"), FALSE)) {
+		bVisible = TRUE;//WS_VISIBLE;
+	} else {
+		bVisible = FALSE;
 	}
-	if(!m_dbarLayer.Create(	this,IDD_DBAR_LAYER,
-							WS_CHILD|CBRS_RIGHT,IDD_DBAR_LAYER))
-	{
-		TRACE0("Failed to create layer dialogbar\n");
-		return -1;      // 作成に失敗
-	}
-	m_dbarLayer.EnableDocking(CBRS_ALIGN_LEFT|CBRS_ALIGN_RIGHT);
-	CString strTitle;
-	strTitle.LoadString(IDS_LAYER_DBAR_TITLE);
-	m_dbarLayer.SetWindowText(strTitle);
-	ShowControlBar(&m_dbarLayer,bVisible,FALSE);
-
-	HBITMAP hBmp;
-	CStatic *pStatic;
-	hBmp=(HBITMAP)::LoadImage(AfxGetApp()->m_hInstance,MAKEINTRESOURCE (IDB_EDIT),IMAGE_BITMAP,0,0,LR_LOADTRANSPARENT|LR_LOADMAP3DCOLORS);
-	pStatic = (CStatic*)m_dbarLayer.GetDlgItem(IDC_STATIC_EDIT);
-	pStatic->SetBitmap(hBmp);
-
-	hBmp=(HBITMAP)::LoadImage(AfxGetApp()->m_hInstance,MAKEINTRESOURCE (IDB_VIEW),IMAGE_BITMAP,0,0,LR_LOADTRANSPARENT|LR_LOADMAP3DCOLORS);
-	pStatic = (CStatic*)m_dbarLayer.GetDlgItem(IDC_STATIC_VIEW);
-	pStatic->SetBitmap(hBmp);
+	ShowControlBar(&m_dbarLayer, bVisible, FALSE);
 
 
+
+	DWORD dwVisible;
 	//ツールバーの表示・非表示の情報をレジストリから得る 1997/01/25
 	if(AfxGetApp()->GetProfileInt(_T("Option"),_T("DisplayToolBar"),TRUE)){
 		dwVisible=WS_VISIBLE;
@@ -413,7 +457,10 @@ void CMainFrame::OnViewLayerbox()
 	// TODO : ここにコマンド ハンドラ コードを追加します。
 	BOOL bDisplay=((m_dbarLayer.GetStyle()&WS_VISIBLE)==0);
 	AfxGetApp()->WriteProfileInt(_T("Option"),_T("DisplayLayerDlgBar"),bDisplay);
-	OnBarCheck(IDD_DBAR_LAYER);
+
+	ShowControlBar(&m_dbarLayer, bDisplay, FALSE);
+
+//	OnBarCheck(IDD_DBAR_LAYER);
 }
 
 void CMainFrame::OnUpdateViewLayerbox(CCmdUI *pCmdUI)

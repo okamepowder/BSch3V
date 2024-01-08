@@ -147,6 +147,7 @@ protected:
 	bool m_bSelectForDrag;
 	unsigned m_visibleLayer;
 	int m_editLayer;
+	wstring m_strLayerName[SHEET_LAYERS];
 
 	unsigned m_selectedTypeFlag;
 	void updateSelectedTypeFlag();
@@ -503,7 +504,8 @@ public:
 	void setVisibleLayer(unsigned int n){m_visibleLayer=n&0xff;}
 	int editLayer(){return m_editLayer;}
 	void setEditLayer(int n){if(n>=0&&n<8)m_editLayer=n;}
-
+	const TCHAR* layerName(int i) { return m_strLayerName[i].c_str(); }
+	void setLayerName(int i, const TCHAR* lpcsz) { m_strLayerName[i] = lpcsz; setDirty(true); }
 
 
 

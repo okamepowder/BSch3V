@@ -25,16 +25,27 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 
 IDB_EDIT                BITMAP                  "res\\editmark.bmp"
+
 IDB_VIEW                BITMAP                  "res\\viewmark.bmp"
+
 IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
 IDB_SPLASH              BITMAP                  "res\\SPLASH.BMP"
+
 IDB_IMAGE_PTN           BITMAP                  "res\\imageptn.bmp"
+
 IDB_IMAGE_SEL_PTN       BITMAP                  "res\\imageSelect.bmp"
+
 IDB_TOOLBUTTONS         BITMAP                  "res\\Toolbar.bmp"
+
 IDB_OBJFILTER           BITMAP                  "res\\OBJFILTER.bmp"
+
 IDB_BITMAP_LINEENDSTYLE BITMAP                  "res\\LineEndStyle.bmp"
+
 IDB_BITMAP_DECOLINESTYLE BITMAP                  "res\\DecoLineStyle.bmp"
+
 IDB_BITMAP_SORTMARK     BITMAP                  "res\\bitmap_sortmark.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -67,8 +78,8 @@ BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,10,10,20,20
     CTEXT           "BSch3V Version xxxxx",IDC_STATIC_VERSION,35,15,120,8,SS_NOPREFIX
     DEFPUSHBUTTON   "OK",IDOK,164,10,32,14,WS_GROUP
-    CTEXT           "Copyright (C) 1997-2016  H.Okada(Suigyodo)",IDC_STATIC,12,42,184,8
-    PUSHBUTTON      "http://www.suigyodo.com/online/e",IDC_BUTTON_SUIGYODO,30,54,150,14,WS_GROUP
+    CTEXT           "Copyright (C) 1997-2024  H.Okada(Suigyodo)",IDC_STATIC,12,42,184,8
+    PUSHBUTTON      "https://www.suigyodo.com/online/e",IDC_BUTTON_SUIGYODO,30,54,150,14,WS_GROUP
     CTEXT           "hitoshi@suigyodo.com",IDC_STATIC,12,72,184,8
 END
 
@@ -224,33 +235,51 @@ BEGIN
     LTEXT           "% ",IDC_STATIC,210,114,18,8
 END
 
-IDD_SETLAYER DIALOGEX 0, 0, 193, 165
+IDD_SETLAYER DIALOGEX 0, 0, 219, 200
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_STATICEDGE
 CAPTION "Setup layer"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,140,7,46,14
-    PUSHBUTTON      "Cancel",IDCANCEL,140,24,46,14
-    CHECKBOX        "Layer 0",IDC_D0,17,20,45,10
-    CHECKBOX        "Layer 1",IDC_D1,17,35,45,10
-    CHECKBOX        "Layer 2",IDC_D2,17,50,45,10
-    CHECKBOX        "Layer 3",IDC_D3,17,65,45,10
-    CHECKBOX        "Layer 4",IDC_D4,17,80,45,10
-    CHECKBOX        "Layer 5",IDC_D5,17,95,45,10
-    CHECKBOX        "Layer 6",IDC_D6,17,110,45,10
-    CHECKBOX        "Layer 7",IDC_D7,17,125,45,10
-    GROUPBOX        "Display",IDC_STATIC,10,5,60,133
-    CHECKBOX        "Layer 0",IDC_E0,80,20,45,10
-    CHECKBOX        "Layer 1",IDC_E1,80,35,45,10
-    CHECKBOX        "Layer 2",IDC_E2,80,50,45,10
-    CHECKBOX        "Layer 3",IDC_E3,80,65,45,10
-    CHECKBOX        "Layer 4",IDC_E4,80,80,45,10
-    CHECKBOX        "Layer 5",IDC_E5,80,95,45,10
-    CHECKBOX        "Layer 6",IDC_E6,80,110,45,10
-    CHECKBOX        "Layer 7",IDC_E7,80,125,45,10
-    GROUPBOX        "Active",IDC_STATIC,75,5,60,133
-    CHECKBOX        "Darken non active layer",IDC_CHECK_EDIT_HIGHLIGHT,20,145,120,10
+    DEFPUSHBUTTON   "OK",IDOK,130,180,38,14
+    PUSHBUTTON      "Cancel",IDCANCEL,174,180,38,14
+    CHECKBOX        "",IDC_E0,66,18,18,10
+    CHECKBOX        "",IDC_E1,66,36,18,10
+    CHECKBOX        "",IDC_E2,66,54,18,10
+    CHECKBOX        "",IDC_E3,66,72,18,10
+    CHECKBOX        "",IDC_E4,66,90,18,10
+    CHECKBOX        "",IDC_E5,66,108,18,10
+    CHECKBOX        "",IDC_E6,66,126,18,10
+    CHECKBOX        "",IDC_E7,66,144,18,10
+    CHECKBOX        "",IDC_D0,96,18,18,10
+    CHECKBOX        "",IDC_D1,96,36,18,10
+    CHECKBOX        "",IDC_D2,96,54,18,10
+    CHECKBOX        "",IDC_D3,96,72,18,10
+    CHECKBOX        "",IDC_D4,96,90,18,10
+    CHECKBOX        "",IDC_D5,96,108,18,10
+    CHECKBOX        "",IDC_D6,96,126,18,10
+    CHECKBOX        "",IDC_D7,96,144,18,10
+    EDITTEXT        IDC_N0,125,16,84,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_N1,125,34,84,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_N2,125,52,84,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_N3,125,70,84,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_N4,125,88,84,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_N5,125,106,84,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_N6,125,124,84,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_N7,125,142,84,14,ES_AUTOHSCROLL
+    CHECKBOX        "Display name on LayerBox (take effect after restarted)",IDC_CHECK_DIPLAY_NAME_ON_BAR,12,168,204,10
+    CHECKBOX        "Darken non active layer",IDC_CHECK_EDIT_HIGHLIGHT,12,182,106,10
+    LTEXT           "Layer 0",IDC_STATIC,24,18,25,8
+    LTEXT           "Layer 1",IDC_STATIC,24,36,25,8
+    LTEXT           "Layer 2",IDC_STATIC,24,54,25,8
+    LTEXT           "Layer 3",IDC_STATIC,24,72,25,8
+    LTEXT           "Layer 4",IDC_STATIC,24,90,25,8
+    LTEXT           "Layer 5",IDC_STATIC,24,108,25,8
+    LTEXT           "Layer 6",IDC_STATIC,24,126,25,8
+    LTEXT           "Layer 7",IDC_STATIC,24,144,25,8
+    LTEXT           "Display",IDC_STATIC,90,6,24,8
+    LTEXT           "Active",IDC_STATIC,60,6,21,8
+    LTEXT           "Name",IDC_STATIC,132,6,19,8
 END
 
 IDD_SETSHEETSIZE DIALOGEX 0, 0, 154, 129
@@ -309,7 +338,7 @@ STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSM
 CAPTION "Setup color"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    LISTBOX         IDC_LIST,6,3,147,78,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST,7,7,147,78,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
     LTEXT           "",IDC_STATIC_COL,162,6,51,15,0,WS_EX_STATICEDGE
     PUSHBUTTON      "&Set",IDC_CHANGE_COL,162,24,51,15
     DEFPUSHBUTTON   "OK",IDOK,162,66,51,14
@@ -343,28 +372,60 @@ BEGIN
     GROUPBOX        "Find from",IDC_STATIC,3,42,210,99
 END
 
-IDD_DBAR_LAYER DIALOGEX 0, 0, 35, 146
+IDD_DBAR_LAYER_S DIALOGEX 0, 0, 116, 164
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
 FONT 8, "MS Shell Dlg", 400, 0, 0x80
 BEGIN
     CONTROL         "",IDC_D0,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,19,9,9
-    CONTROL         "",IDC_D1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,35,9,9
-    CONTROL         "",IDC_D2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,51,9,9
-    CONTROL         "",IDC_D3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,67,9,9
-    CONTROL         "",IDC_D4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,83,9,9
-    CONTROL         "",IDC_D5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,99,9,9
-    CONTROL         "",IDC_D6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,115,9,9
-    CONTROL         "",IDC_D7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,131,9,9
+    CONTROL         "",IDC_D1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,37,9,9
+    CONTROL         "",IDC_D2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,55,9,9
+    CONTROL         "",IDC_D3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,73,9,9
+    CONTROL         "",IDC_D4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,91,9,9
+    CONTROL         "",IDC_D5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,109,9,9
+    CONTROL         "",IDC_D6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,127,9,9
+    CONTROL         "",IDC_D7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,145,9,9
     CONTROL         "0",IDC_E0,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,18,12,12
-    CONTROL         "1",IDC_E1,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,34,12,12
-    CONTROL         "2",IDC_E2,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,50,12,12
-    CONTROL         "3",IDC_E3,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,66,12,12
-    CONTROL         "4",IDC_E4,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,82,12,12
-    CONTROL         "5",IDC_E5,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,98,12,12
-    CONTROL         "6",IDC_E6,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,114,12,12
-    CONTROL         "7",IDC_E7,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,130,12,12
+    CONTROL         "1",IDC_E1,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,36,12,12
+    CONTROL         "2",IDC_E2,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,54,12,12
+    CONTROL         "3",IDC_E3,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,72,12,12
+    CONTROL         "4",IDC_E4,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,90,12,12
+    CONTROL         "5",IDC_E5,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,108,12,12
+    CONTROL         "6",IDC_E6,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,126,12,12
+    CONTROL         "7",IDC_E7,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,144,12,12
     CONTROL         "",IDC_STATIC_VIEW,"Static",SS_BITMAP,20,3,15,13
     CONTROL         "",IDC_STATIC_EDIT,"Static",SS_BITMAP,3,3,10,10
+    EDITTEXT        IDC_N0,42,18,66,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_N1,42,36,66,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_N2,42,54,66,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_N3,42,72,66,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_N4,42,90,66,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_N5,42,108,66,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_N6,42,126,66,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_N7,42,144,66,14,ES_AUTOHSCROLL | ES_READONLY
+END
+
+IDD_DBAR_LAYER DIALOGEX 0, 0, 38, 164
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x80
+BEGIN
+    CONTROL         "",IDC_D0,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,19,9,9
+    CONTROL         "",IDC_D1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,37,9,9
+    CONTROL         "",IDC_D2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,55,9,9
+    CONTROL         "",IDC_D3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,73,9,9
+    CONTROL         "",IDC_D4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,91,9,9
+    CONTROL         "",IDC_D5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,109,9,9
+    CONTROL         "",IDC_D6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,127,9,9
+    CONTROL         "",IDC_D7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,145,9,9
+    CONTROL         "0",IDC_E0,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,18,12,12
+    CONTROL         "1",IDC_E1,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,36,12,12
+    CONTROL         "2",IDC_E2,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,54,12,12
+    CONTROL         "3",IDC_E3,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,72,12,12
+    CONTROL         "4",IDC_E4,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,90,12,12
+    CONTROL         "5",IDC_E5,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,108,12,12
+    CONTROL         "6",IDC_E6,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,126,12,12
+    CONTROL         "7",IDC_E7,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,144,12,12
+    CONTROL         "",IDC_STATIC_VIEW,"Static",SS_BITMAP,20,3,15,13
+    CONTROL         "",IDC_STATIC_EDIT,"Static",SS_BITMAP,3,3,15,13
 END
 
 IDD_ATRIB_MARKER_LINE DIALOGEX 0, 0, 220, 58
@@ -609,13 +670,13 @@ BEGIN
 
     IDD_SETLAYER, DIALOG
     BEGIN
-        RIGHTMARGIN, 186
+        RIGHTMARGIN, 212
         VERTGUIDE, 13
         VERTGUIDE, 62
         VERTGUIDE, 77
         VERTGUIDE, 151
         TOPMARGIN, 7
-        BOTTOMMARGIN, 158
+        BOTTOMMARGIN, 193
     END
 
     IDD_SETFONT, DIALOG
@@ -642,10 +703,16 @@ BEGIN
         BOTTOMMARGIN, 136
     END
 
+    IDD_DBAR_LAYER_S, DIALOG
+    BEGIN
+        RIGHTMARGIN, 108
+        BOTTOMMARGIN, 151
+    END
+
     IDD_DBAR_LAYER, DIALOG
     BEGIN
-        RIGHTMARGIN, 27
-        BOTTOMMARGIN, 133
+        RIGHTMARGIN, 30
+        BOTTOMMARGIN, 151
     END
 
     IDD_ATRIB_MARKER_LINE, DIALOG
@@ -776,11 +843,17 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\BSch.ico"
+
 IDR_BSCHTYPE            ICON                    "res\\BSchDoc.ico"
+
 IDI_TAG_SQ              ICON                    "res\\tag_sq.ico"
+
 IDI_TAG_L               ICON                    "res\\tag_l.ico"
+
 IDI_TAG_LR              ICON                    "res\\tag_lr.ico"
+
 IDI_TAG_R               ICON                    "res\\tag_r.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -1002,6 +1075,22 @@ BEGIN
         MENUITEM "Edit with LCoV",              ID_FLOAT_EDIT_WITH_LCOV
         MENUITEM SEPARATOR
         MENUITEM "&Edit Points",                ID_EDIT_POINTS
+        POPUP "Bulk Attribute"
+        BEGIN
+            MENUITEM "Replace Component Info",      ID_BULKATTRIBUTE_REPLACECOMPONENTINFO
+            MENUITEM "Hide Number/Value of component", ID_BULKATTRIBUTE_HIDENUMBERS
+            MENUITEM "Decoration line",             ID_BULKATTRIBUTE_DECORATIONLINE
+            MENUITEM "Markerline",                  ID_BULKATTRIBUTE_MARKERLINE
+            MENUITEM "Tag Frame",                   ID_BULKATTRIBUTE_TAGFRAME
+            MENUITEM "Comment Font",                ID_BULKATTRIBUTE_COMMENTFONT
+            MENUITEM SEPARATOR
+            MENUITEM "Convert Tag to Label",        ID_CONVERT_T2L
+            MENUITEM "Convert Tag to Comment",      ID_CONVERT_T2C
+            MENUITEM "Convert Label to Tag",        ID_CONVERT_L2T
+            MENUITEM "Convert Label to Comment",    ID_CONVERT_L2C
+            MENUITEM "Convert Commnet to Tag",      ID_CONVERT_C2T
+            MENUITEM "Convert Comment to Label",    ID_CONVERT_C2L
+        END
         POPUP "Order"
         BEGIN
             MENUITEM "BringToFront",                ID_ORDER_BRINGTOFRONT
@@ -1062,11 +1151,43 @@ END
 //
 
 IDC_CUR_NORMAL          CURSOR                  "res\\cur_norm.cur"
+
 IDC_CUR_MOVE            CURSOR                  "res\\cur_move.cur"
+
 IDC_CUR_PLACE           CURSOR                  "res\\cur_plac.cur"
+
 IDC_CUR_CC_MOVE         CURSOR                  "res\\cursor1.cur"
+
 IDC_CUR_SCRL            CURSOR                  "RES\\scrollha.cur"
+
 IDC_CURSOR_NULL         CURSOR                  "res\\cur00001.cur"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_SETCOLOR AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETLAYER AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DBAR_LAYER AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DBAR_LAYER_S AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -1313,7 +1434,7 @@ STRINGTABLE
 BEGIN
     IDS_UNREG_FILETYPE      "Unregistered file type information."
     IDS_REG_FILETYPE        "Registered file type information."
-    IDS_URL                 "http://www.suigyodo.com/online/e"
+    IDS_URL                 "https://www.suigyodo.com/online/e"
     IDS_DISCARD_CHANGES_COMMENT "Discard changes of the text?"
     IDS_COL_QUICKPROPVIEW   "Quick Attribute View"
     IDS_COL_TEMPFRAME_FOCUSED "Sel Obj Frame"
@@ -1322,7 +1443,7 @@ BEGIN
     IDS_INVALID_IMAGE_MAGNIFICATION "Invalid magnification"
     IDS_INVALID_MARKSIZE    "Invalid mark size"
     IDS_LATERVERSION        "This file was created by the later version. \nSome data may have been lost."
-    IDS_VERSION             "0.83.01"
+    IDS_VERSION             "0.84.00"
     IDS_DISCARD_AND_RELOAD  "Current document is changed.\nIf you reload it, all of changes will be discarded.\nDiscard changes to current document?"
     IDS_MSGLINE_SPACE_CHANGE_DIR "Space key: Change direction    "
     IDS_MSGLINE_WIRE_ESC    "ESC key: Cancel    "

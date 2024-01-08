@@ -66,6 +66,8 @@ public:
 	//DIBÇÃÉtÉ@ÉCÉãÇ©ÇÁÇÃì«Ç›çûÇ›
 	bool Load(const TCHAR* fname);
 
+	bool LoadWindowsClipboardDIB(byte* buff, int clipBoardDataSize);
+
 	bool Load(SReadCE3& rce3);
 	bool Save(SWriteCE3& wce3);
 
@@ -78,6 +80,9 @@ public:
 
 protected:
 	bool checkDIB();
+
+
+	
 
 	bool LoadWindowsBmp(const TCHAR* fname);
 	bool LoadWithGdiPlus(const TCHAR* fname,int imagetype);

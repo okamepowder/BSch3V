@@ -65,7 +65,9 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\nl.ico"
+
 IDI_SMALL               ICON                    "res\\icon1.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -79,7 +81,7 @@ FONT 9, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,10,10,20,20
     CTEXT           "NL3W Version xxxx",IDC_STATIC_VERSION,39,10,119,8,SS_NOPREFIX
-    CTEXT           "Copyright (C) 2004-2014 H.Okada(Suigyodo)",IDC_STATIC,32,25,170,8
+    CTEXT           "Copyright (C) 2004-2023 H.Okada(Suigyodo)",IDC_STATIC,32,25,170,8
     DEFPUSHBUTTON   "OK",IDOK,169,5,33,14,WS_GROUP
     CTEXT           "Netlist utility for BSch3V",IDC_STATIC,20,41,175,8
 END
@@ -162,6 +164,17 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_ABOUTBOX AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // String Table
 //
 
@@ -174,7 +187,7 @@ BEGIN
     IDS_ADD_ADDIN           "Add add-in file"
     IDS_ADDIN_INDEX_ERROR   "Missing selected add-in"
     IDS_NO_NETINFO          "No net info"
-    IDS_VERSION             "0.81.10"
+    IDS_VERSION             "0.84.00"
 END
 
 #endif    // âpåÍ (ïƒçë) resources

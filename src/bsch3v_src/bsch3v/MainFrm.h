@@ -48,10 +48,12 @@ public:
 protected:  // コントロール バー用メンバ
 	CStatusBar  m_wndStatusBar;
 	CToolBar    m_wndToolBar;
+public:
 	CDialogBar  m_dbarLayer;
 
 protected:
 	void addExtensionMenu();
+	int CreateDBarLayer(UINT idd);
 
 public:
 	int m_extensionMenuCount;				//2005/10/15

@@ -245,6 +245,23 @@ void CBSchView::OnFilePrint()
 	((CBSchApp*)AfxGetApp())->IniWritePrinterSetup();
 }
 
+void CBSchView::OnFileEmfDirect()	//2024/01/07
+{
+	//現在のファイルの名前を得る
+	CBSchDoc* pDoc = GetDocument();
+	CString rPathName = pDoc->GetPathName();
+	TCHAR drive[_MAX_DRIVE];
+	TCHAR fname[_MAX_FNAME];
+	TCHAR dir[_MAX_DIR];
+	TCHAR emfPath[_MAX_PATH];
+	::_tsplitpath(rPathName, drive, dir, fname, NULL);
+	::_tmakepath(emfPath, drive, dir, fname,_T(".emf"));
+
+	PrepareDrawFlagForPrint(NULL);
+
+	ExportEmf(emfPath);
+}
+
 void CBSchView::OnFilePrintPreview() 
 {
 	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
@@ -803,7 +820,13 @@ BOOL CBSchView::CopyEmf()
 	CMetaFileDC mDC;
 	CClientDC cDC(this);
 	if(!mDC.CreateEnhanced(&cDC,NULL,NULL,NULL)) return FALSE;
+
+
+
 	mDC.SetAttribDC(cDC.m_hDC);
+
+
+
 
 
 	int nPrintVExt=2;	//20111022
@@ -829,7 +852,21 @@ BOOL CBSchView::CopyEmf()
 	
 
 	dwMode |= DRAW_FOR_PRINT;
+
+
+//	CPen penNew;
+//	LOGBRUSH lb;
+//	lb.lbStyle = BS_SOLID;
+//	lb.lbColor = RGB(0,0,0);
+//	lb.lbHatch = 0;
+//	penNew.CreatePen(PS_GEOMETRIC | PS_SOLID | PS_ENDCAP_ROUND | PS_JOIN_ROUND, 1, &lb);
+//	CPen* ppenOld = mDC.SelectObject(&penNew);
+
+
 	DrawListData(&mDC,pTmpData,dwMode,nPrintVExt,nPrintWExt,rc,nDrawAllBit);	//一時データのリストの描画
+
+//	mDC.SelectObject(ppenOld);
+
 
 	HENHMETAFILE    hmeta = mDC.CloseEnhanced();
 
@@ -846,6 +883,9 @@ BOOL CBSchView::CopyEmf()
 BOOL CBSchView::ExportEmf(LPCTSTR pszFileName)
 {
 	CSize sizeSheet;
+
+	preparePrintVars();
+
 	CBSchDoc* pDoc = GetDocument();
 	sizeSheet=pDoc->GetSheetSize();
 	
@@ -891,6 +931,12 @@ BOOL CBSchView::ExportEmf(LPCTSTR pszFileName)
 	}
 	dwMode |= DRAW_FOR_PRINT;
 	DrawMainData(&mDC,pDoc,dwMode,nPrintVExt,nPrintWExt,rc);
+
+	if (m_bPrintFooter) {
+		mDC.SelectClipRgn(NULL);
+		g_DrawComment(&mDC, &m_cmntFooter, dwMode, nPrintVExt, nPrintWExt);
+	}
+
 	HENHMETAFILE hemf=mDC.CloseEnhanced();
 	::DeleteEnhMetaFile(hemf);
 

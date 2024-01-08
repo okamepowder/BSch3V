@@ -14,7 +14,9 @@
 #include <string>
 #include <list>
 #include <Shlobj.h>
+#include <locale.h>
 using namespace std;
+
 
 
 #include "MainFrm.h"
@@ -54,6 +56,42 @@ BEGIN_MESSAGE_MAP(CBSchApp, CWinApp)
 	// 標準の印刷セットアップ コマンド
 	ON_COMMAND(ID_FILE_PRINT_SETUP, CWinApp::OnFilePrintSetup)
 END_MESSAGE_MAP()
+
+
+class BSchCommandLineInfo : public CCommandLineInfo
+{
+public:
+	BSchCommandLineInfo();
+	~BSchCommandLineInfo() {}
+
+	void ParseParam( const TCHAR* pszParam, BOOL bFlag,BOOL bLast);
+
+	enum {exOptionNone,exOptionEmfOut
+	} m_nExShellCommand;
+
+};
+
+BSchCommandLineInfo::BSchCommandLineInfo()
+{
+	m_nExShellCommand = exOptionNone;
+}
+
+
+void BSchCommandLineInfo::ParseParam(const TCHAR* pszParam, BOOL bFlag, BOOL bLast)
+{
+	if (bFlag) {
+		if (_tcscmp(pszParam, _T("emf")) == 0) {
+			m_nExShellCommand = exOptionEmfOut;
+			return;
+		}
+		else {
+			m_nExShellCommand = exOptionNone;
+		}
+	}
+	CCommandLineInfo::ParseParam(pszParam, bFlag, bLast);
+}
+
+
 
 /////////////////////////////////////////////////////////////////////////////
 // CBSchApp クラスの構築
@@ -308,7 +346,7 @@ BOOL CBSchApp::InitInstance()
 
 
 	// DDE、file open など標準のシェル コマンドのコマンドラインを解析します。
-	CCommandLineInfo cmdInfo;
+	BSchCommandLineInfo cmdInfo;
 	ParseCommandLine(cmdInfo);
 
 	if(cmdInfo.m_nShellCommand == CCommandLineInfo::AppRegister){
@@ -332,6 +370,20 @@ BOOL CBSchApp::InitInstance()
 	if(cmdInfo.m_nShellCommand == CCommandLineInfo::AppUnregister){
 		UnregisterShellFileTypes();
 		AfxMessageBox(IDS_UNREG_FILETYPE,MB_OK|MB_ICONINFORMATION);
+		return FALSE;
+	}
+
+	//コマンドラインからEMF出力する機能の追加 　0.84.00 2024/01/07
+	if (cmdInfo.m_nExShellCommand == BSchCommandLineInfo::exOptionEmfOut) {
+		m_nCmdShow = SW_HIDE;
+		ASSERT(m_pCmdInfo == NULL);
+		if (OpenDocumentFile(cmdInfo.m_strFileName))
+		{
+			m_pCmdInfo = &cmdInfo;
+			ENSURE_VALID(m_pMainWnd);
+			m_pMainWnd->SendMessage(WM_COMMAND, ID_FILE_EXPORTEMFDIRECT);
+			m_pCmdInfo = NULL;
+		}
 		return FALSE;
 	}
 
@@ -738,10 +790,14 @@ void CBSchApp::editWidthLCoV(LPCTSTR name, SCompInfo* pInfo, SCompLib& tempLib)
 
     BOOL resProc = CreateProcess(NULL, cmdline, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);
 	if(!resProc) return;
+
+//	WaitForSingleObject(pi.hProcess, INFINITE);
 	
-	while(WAIT_TIMEOUT==WaitForSingleObject(pi.hProcess,1)){
+	while(WAIT_TIMEOUT==WaitForSingleObject(pi.hProcess,100)){
+		// 0.83.05 Windows10 Build 2004 以降の MS-IME でのフリーズ対策 2021/04/28
 		MSG msg;
-		if(GetMessage(&msg,NULL,0,0)){
+		//PeekMessage(&msg, NULL, 0, 0, PM_REMOVE | PM_QS_INPUT);
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE|PM_QS_PAINT | PM_QS_INPUT)) {
 			if(msg.message == WM_PAINT){				//	メッセージが WM_PAINT なら
 				TranslateMessage(&msg);
 				DispatchMessage(&msg);
@@ -756,4 +812,7 @@ void CBSchApp::editWidthLCoV(LPCTSTR name, SCompInfo* pInfo, SCompLib& tempLib)
 	tempLib.deleteContent();
 	tempLib.readLibraryFile(path);
 	DeleteFile(path);	
+
+	//AfxGetMainWnd()->SetForegroundWindow();
+
 }

@@ -63,9 +63,13 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\LCoV.ico"
+
 IDI_ICON_DOWN           ICON                    "res\\icon1.ico"
+
 IDI_ICON_UP             ICON                    "res\\icon2.ico"
+
 IDI_ICON_DIVIDEMARK     ICON                    "res\\divideMark.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -73,14 +77,23 @@ IDI_ICON_DIVIDEMARK     ICON                    "res\\divideMark.ico"
 //
 
 IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
 IDB_BMP_PIN_SMALL       BITMAP                  "res\\pin_small.bmp"
+
 IDB_BMP_PIN_NEGA        BITMAP                  "res\\pin_nega.bmp"
+
 IDB_BMP_PIN_NEGACK      BITMAP                  "res\\pin_negack.bmp"
+
 IDB_BMP_PIN_NORM        BITMAP                  "res\\pin_norm.bmp"
+
 IDB_BMP_PIN_CK          BITMAP                  "res\\pin_ck.bmp"
+
 IDB_BMP_PIN_ZLENG       BITMAP                  "res\\pin_zleng.bmp"
+
 IDB_BMP_CHK             BITMAP                  "res\\bitmap1.bmp"
+
 IDB_BITMAP_PINTYPELIST  BITMAP                  "res\\bmp00001.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -263,7 +276,7 @@ FONT 9, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,6,6,20,20
     CTEXT           "LCoV Version xxxx",IDC_STATIC_VERSION,30,12,92,8,SS_NOPREFIX
-    CTEXT           "Copyright (C) 2004-2014 H.Okada(Suigyodo)",IDC_STATIC,12,30,156,8
+    CTEXT           "Copyright (C) 2004-2023 H.Okada(Suigyodo)",IDC_STATIC,12,30,156,8
     DEFPUSHBUTTON   "OK",IDOK,144,6,36,16,WS_GROUP
 END
 
@@ -531,6 +544,18 @@ END
 
 IDC_CURSOR_MOVE         CURSOR                  "res\\CUR_MOVE.CUR"
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_ABOUTBOX AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // String Table
@@ -553,7 +578,7 @@ BEGIN
     IDS_GRID_TITLE_HIDE     "Hide"
     IDS_GRID_TITLE_NUM      "Num"
     IDS_GRID_TITLE_BLOCK    "Block %d"
-    IDS_VERSION             "0.82.01"
+    IDS_VERSION             "0.84.00"
 END
 
 STRINGTABLE

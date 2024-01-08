@@ -59,6 +59,9 @@ public:
 	int editLayer(){return xbschdocsch.editLayer();}
 	void setEditLayer(int n){xbschdocsch.setEditLayer(n);}
 	void setNcPinFlag(){xbschdocsch.setNcPinFlag();}
+	const TCHAR* layerName(int i) { return xbschdocsch.layerName(i); }
+	void setLayerName(int i, const TCHAR* lpcsz) { xbschdocsch.setLayerName(i, lpcsz); }
+
 
 public:
 	void setTotalPages(int n){xbschdocsch.setTotalPages(n);}
@@ -71,6 +74,7 @@ public:
 	const TCHAR* projectName(){return xbschdocsch.projectName();}
 	int dataVersion(){return xbschdocsch.dataVersion();}
 	int initPos(){return xbschdocsch.initPos();}
+
 
 
 

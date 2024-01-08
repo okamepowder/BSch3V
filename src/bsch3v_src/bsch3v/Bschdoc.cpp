@@ -48,6 +48,9 @@ BEGIN_MESSAGE_MAP(CBSchDoc, CDocument)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
+
+void g_SetDBarLayer_LayerName(void);  //BSchView.cpp
+
 /////////////////////////////////////////////////////////////////////////////
 // CBSchDoc クラスの構築/消滅
 
@@ -589,6 +592,55 @@ void CBSchDoc::MoveLayer(int nLayer)
 BOOL CBSchDoc::OnSaveDocument(LPCTSTR lpszPathName) 
 {
 	// TODO: この位置に固有の処理を追加するか、または基本クラスを呼び出してください
+
+	////////////////////////////////
+	// 2021/09/25 バックアップの作成   0.83.06
+
+	if (g_backupLevel > 0) {
+		if (g_backupLevel > MAX_BACKUP_LEVEL) g_backupLevel = MAX_BACKUP_LEVEL;
+		TCHAR path_a[_MAX_PATH];
+		TCHAR path_b[_MAX_PATH];
+		TCHAR ext[_MAX_EXT];
+		TCHAR drive[_MAX_DRIVE];
+		TCHAR fname[_MAX_FNAME];
+		TCHAR dir[_MAX_DIR];
+		::_tsplitpath(lpszPathName, drive, dir, fname, NULL);
+
+		int i;
+		for (i = 1; i <= g_backupLevel; i++) {
+			_stprintf(ext, _T("ce3$%d"), i);
+			::_tmakepath(path_a, drive, dir, fname,ext);
+			FILE* pf = _tfopen(path_a, _T("rt"));
+			if (pf) {
+				fclose(pf);
+			}
+			else {
+				break;	//指定したバックアップの拡張子が存在しない
+			}
+		}
+
+		if (i > g_backupLevel) {
+			_tremove(path_a);
+			i = g_backupLevel;
+		}
+
+		while (i >= 1) {
+			int j = i - 1;
+			if (j == 0) {	//CE3$1にリネームするのは、CE3$0ではなく、おおもとのCE3ファイルだ。
+				_tcscpy(path_b, lpszPathName);
+			}
+			else {
+				_stprintf(ext, _T("ce3$%d"), j);
+				::_tmakepath(path_b, drive, dir, fname, ext);
+			}
+			_trename(path_b, path_a);	//CE3$(n-1) を CE3$(n) にリネームする。
+			_tcscpy(path_a, path_b);
+			i--;
+		}
+
+
+	}
+
 	int result = xbschdocsch.writeFile(lpszPathName);
 	if(result==0){
 		SetModifiedFlag(FALSE);
@@ -611,6 +663,8 @@ BOOL CBSchDoc::ReloadFile()
 	return result;
 }
 
+
+
 BOOL CBSchDoc::OnOpenDocument(LPCTSTR lpszPathName) 
 {
 	CWnd* pWndOpened=((CMainFrame*)AfxGetMainWnd())->CheckOpened(lpszPathName);
@@ -627,6 +681,7 @@ BOOL CBSchDoc::OnOpenDocument(LPCTSTR lpszPathName)
 	int result = xbschdocsch.readFile(lpszPathName);
 	if(result==0){
 		SetModifiedFlag(FALSE);
+		g_SetDBarLayer_LayerName();
 		if(g_bDisplayNcPinMark) setNcPinFlag();
 		if(xbschdocsch.createdNewerVersion()){
 			AfxMessageBox(IDS_LATERVERSION,MB_ICONEXCLAMATION,MB_OK);

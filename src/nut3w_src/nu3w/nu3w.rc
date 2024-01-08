@@ -63,7 +63,9 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\nu3w.ico"
+
 IDI_SMALL               ICON                    "res\\nu3ws.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -77,7 +79,7 @@ FONT 9, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,9,3,20,20
     CTEXT           "NUT3W Version xxxxx",IDC_STATIC_VERSION,40,10,119,8,SS_NOPREFIX
-    CTEXT           "Copyright (C) 2004-2014 H.Okada(Suigyodo)",IDC_STATIC,21,30,168,8
+    CTEXT           "Copyright (C) 2004-2023 H.Okada(Suigyodo)",IDC_STATIC,21,30,168,8
     DEFPUSHBUTTON   "OK",IDOK,165,7,39,16,WS_GROUP
 END
 
@@ -144,6 +146,17 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_ABOUTBOX AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // String Table
 //
 
@@ -154,7 +167,7 @@ BEGIN
     IDS_INIT_RANGE_ERR      "Range of Init val is 1~%d"
     IDS_STEP_RANGE_ERR      "Range of Step val is 1~%d"
     IDS_LATERVERSION        "This file was created by the later version of BSch3V. \nSome data may be lost if you don't select the cancel. \nContinue?"
-    IDS_VERSION             "0.82.02"
+    IDS_VERSION             "0.84.00"
 END
 
 #endif    // âpåÍ (ïƒçë) resources

@@ -81,37 +81,72 @@ bool SXBSchDocSch::paste(const SPoint& pt)
 {
 	if(!canPaste()) return false;
 	::OpenClipboard(AfxGetMainWnd()->m_hWnd);		//Open clip board.
+
 	HGLOBAL hGMem=::GetClipboardData(CF_UNICODETEXT);		//Get memory handle.
-	if(hGMem==NULL){
-		::CloseClipboard();						//Close clip board.
-		return false;
+	if (hGMem != NULL) {
+		TCHAR* pgBuff = (TCHAR*)::GlobalLock(hGMem);	//Lock global memory.
+		wstring cbbuff = wstring(pgBuff);				//Initialize string with global memory.
+		::GlobalUnlock(hGMem);						//Unock global memory.
+		::CloseClipboard();							//Close clip board.
+
+
+		SReadCE3 rce3;
+		rce3.Attach(cbbuff.c_str());
+
+		wstring str(_T(""));
+
+		rce3.ReadRecord(str);
+		if (str != _T("+BSCH3_DATA_V.1.0")) return false;
+
+		readCe3(rce3, &m_listTemp, &pt, NULL);
+		if (!m_listTemp.size()) return false;
+
+		moveToLayer(m_editLayer);
+
+		updateSelectedTypeFlag();
+		setupRcTempArea();
+
+		m_bTempNewPlace = true;
+		m_bFindCommandActive = false;
+
+		return true;
 	}
-	TCHAR* pgBuff=(TCHAR*)::GlobalLock(hGMem);	//Lock global memory.
-	wstring cbbuff=wstring(pgBuff);				//Initialize string with global memory.
-	::GlobalUnlock(hGMem);						//Unock global memory.
-	::CloseClipboard();							//Close clip board.
+
+	//2020/07/01 DIB‚Ì“\‚è•t‚¯
+	hGMem = ::GetClipboardData(CF_DIB);
+
+	if (hGMem != NULL) {	
+		byte* pgBuff = (byte*)::GlobalLock(hGMem);
+		int clipboardDataSize = ::GlobalSize(hGMem);
+
+		SXBSchImageObj* pImageObj = new SXBSchImageObj;
+		pImageObj->setLayer(m_editLayer);
+
+		pImageObj->setP1(pt);
+		if (!pImageObj->LoadClipboardDIB(pgBuff,clipboardDataSize)) {
+			delete pImageObj;
+			pImageObj = NULL;
+		}
+		::GlobalUnlock(hGMem);
+		::CloseClipboard();
+
+		if(!pImageObj) return false;
+
+		m_listTemp.push_back(pImageObj);
+
+		updateSelectedTypeFlag();
+		setupRcTempArea();
+
+		m_bTempNewPlace = true;
+		m_bFindCommandActive = false;
+		return true;
+	}
+	else {
+		::CloseClipboard();						//Close clip board.
+	}
 
 
-	SReadCE3 rce3;
-	rce3.Attach(cbbuff.c_str());
-
-	wstring str(_T(""));
-
-	rce3.ReadRecord(str);
-	if(str != _T("+BSCH3_DATA_V.1.0")) return false;
-
-	readCe3(rce3,&m_listTemp,&pt,NULL);
-	if(!m_listTemp.size()) return false;
-
-	moveToLayer(m_editLayer);
-
-	updateSelectedTypeFlag();
-	setupRcTempArea();
-
-	m_bTempNewPlace = true;
-	m_bFindCommandActive = false;
-	
-	return true;
+	return false;
 }
 
 //Check clip board data.
@@ -121,7 +156,9 @@ bool SXBSchDocSch::canPaste()
 	static const TCHAR* pcszID= _T("+BSCH3_DATA_V.1.0");
 	int nIdLength = _tcslen(pcszID);
 	bool retVal = false;
-	if(::IsClipboardFormatAvailable(CF_UNICODETEXT)){
+	if (::IsClipboardFormatAvailable(CF_DIB)) {
+		retVal = true;
+	}else if(::IsClipboardFormatAvailable(CF_UNICODETEXT)){
 		::OpenClipboard(AfxGetMainWnd()->m_hWnd);		//Open clip board.
 		HGLOBAL hGMem=::GetClipboardData(CF_UNICODETEXT);		//Get memory handle.
 		if(hGMem!=NULL){

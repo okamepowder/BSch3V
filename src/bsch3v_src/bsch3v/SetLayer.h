@@ -18,6 +18,8 @@ public:
 	WORD	m_wShow;
 	int		m_nEdit;
 	BOOL	m_fEditHigh;
+	BOOL	m_fDisplayNameOnDlgBar;
+	CString m_strName[8];
 // ダイアログ データ
 	//{{AFX_DATA(CSetLayer)
 	enum { IDD = IDD_SETLAYER };
@@ -62,4 +64,6 @@ protected:
 	WORD GetBit(int nLayer);
 	void OnDCheck(int n);
 	void OnECheck(int n);
+public:
+	afx_msg void OnClickedCheckDiplayNameOnBar();
 };

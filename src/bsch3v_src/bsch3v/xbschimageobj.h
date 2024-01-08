@@ -44,6 +44,7 @@ public:
 	const SImageData* ImageData(){return m_pImageData;}
 
 	bool LoadDIB(const TCHAR* fname);
+	bool LoadClipboardDIB(byte* buff, int clipBoardDataSize);
 
 public:
 	bool keepOrder(){return true;}

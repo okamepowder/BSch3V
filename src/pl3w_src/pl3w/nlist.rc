@@ -16,10 +16,8 @@
 // âpåÍ (ïƒçë) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-#ifdef _WIN32
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
-#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -64,9 +62,13 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\plst.ico"
+
 IDI_SMALL               ICON                    "res\\small.ico"
+
 IDI_ICON2               ICON                    "res\\icon2.ico"
+
 IDI_ICON3               ICON                    "res\\icon3.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -80,7 +82,7 @@ FONT 9, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,10,10,20,20
     CTEXT           "PL3W Version xxxx",IDC_STATIC_VERSION,39,10,119,8,SS_NOPREFIX
-    CTEXT           "Copyright (C) 2004-2014 H.Okada(Suigyodo)",IDC_STATIC,35,25,168,8
+    CTEXT           "Copyright (C) 2004-2023 H.Okada(Suigyodo)",IDC_STATIC,35,25,168,8
     DEFPUSHBUTTON   "OK",IDOK,170,5,33,14,WS_GROUP
     CTEXT           "Partslist utility for BSch3V",IDC_STATIC,20,41,175,8
 END
@@ -117,7 +119,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
@@ -140,16 +142,27 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_ABOUTBOX AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // String Table
 //
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_ABOUTBOX            "&About..."
     IDS_DSTOPENERR          "Open error output file."
     IDS_SRCOPENERR          "Open error input file."
     IDS_FINISHED            "Finished"
-    IDS_VERSION             "0.81.10"
+    IDS_VERSION             "0.84.00"
 END
 
 #endif    // âpåÍ (ïƒçë) resources

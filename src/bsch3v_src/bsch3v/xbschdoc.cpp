@@ -1141,6 +1141,9 @@ void SXBSchDoc::init()
 	m_nOldestOpCount = 0;
 	m_visibleLayer =0xFF;
 	m_editLayer = 0;
+	for (int i = 0; i < SHEET_LAYERS; i++) {
+		m_strLayerName[i] = _T("");
+	}
 	m_strFind =_T("");
 	m_bFindMatchWhole = true;
 	m_bCaseSeinsitive = true;
@@ -1324,6 +1327,9 @@ int SXBSchDoc::readFile(const TCHAR* fname)
 		m_version = sheetInfo.dataVersion();
 		m_initPos = sheetInfo.initPos();
 
+		for (int i = 0; i < SHEET_LAYERS; i++) {
+			m_strLayerName[i] = sheetInfo.layerName(i);
+		}
 
 		m_nOldestOpCount = m_nOpCount;
 		m_bDirty = false;
@@ -1357,6 +1363,9 @@ int SXBSchDoc::writeFile(FILE* fp)
 	sheetInfo.setHeight( m_sizeSheet.h() );
 	sheetInfo.setEditLayer(m_editLayer);
 	sheetInfo.setVisbleLayer(m_visibleLayer);
+	for (int i = 0; i < SHEET_LAYERS; i++) {
+		sheetInfo.setLayerName(i, m_strLayerName[i].c_str());
+	}
 	sheetInfo.setTotalPages(m_totalPages);
 	sheetInfo.setPage(m_page);
 	sheetInfo.setProjectName(m_strProject.c_str());

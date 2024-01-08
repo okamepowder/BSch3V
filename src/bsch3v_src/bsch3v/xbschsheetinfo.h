@@ -19,6 +19,8 @@
 #include "xbsch.h"
 #include "xbschobj.h"
 
+#define SHEET_LAYERS	8	//レイヤーの数
+
 class SXBSchSheetInfo:public SXBSchObj
 {
 public:
@@ -36,12 +38,16 @@ public:
 	bool writeStream(SCsvOStream* pStrm,const QPoint* pptOffset);
 */
 
+
+
 protected:
 	int m_totalPages;
 	int m_page;
 	wstring m_strProject;
 	int m_version;
 	int m_initPos;
+	wstring m_strLayerName[SHEET_LAYERS];
+
 
 public:
 	enum {
@@ -64,6 +70,10 @@ public:
 	int dataVersion(){return m_version;}
 	int initPos(){return m_initPos;}
 
+	void setLayerName(int i,const TCHAR* psz) { m_strLayerName[i] = psz; }
+	const TCHAR* layerName(int i) { return m_strLayerName[i].c_str(); }
+
+
 
 	bool readCe3(SReadCE3&,const SPoint* ,SXBSchDoc*);
 	bool writeCe3(SWriteCE3& ,const SPoint* );
@@ -72,7 +82,7 @@ public:
 	unsigned id(){return ID_SHEETINFO;}
 	unsigned objectFilterValue(){return 0;} 
 public:
-	static const int m_nConstDataVersion = 83;	//シートデータのバージョン
+	static const int m_nConstDataVersion = 84;	//シートデータのバージョン
 
 	void setWidth(int w) {m_p1.setX(w);}
 	void setHeight(int h){m_p1.setY(h);}

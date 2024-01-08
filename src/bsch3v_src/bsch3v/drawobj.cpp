@@ -719,8 +719,18 @@ void g_DrawPtnPolygon(
 //	int width = (buff[1]*nVExt)/nWExt;
 //	int style = buff[2];
 
+
+	LOGBRUSH lb;
+	lb.lbStyle = BS_SOLID;
+	lb.lbColor = col;
+	lb.lbHatch = 0;
+//	penNew.CreatePen(PS_GEOMETRIC | PS_SOLID | PS_ENDCAP_ROUND | PS_JOIN_ROUND, nWidth, &lb);
+
+
 	if(style == 0){
-		newPen.CreatePen(PS_SOLID,width,col);
+		//newPen.CreatePen(PS_SOLID,width,col);
+		newPen.CreatePen(PS_GEOMETRIC | PS_SOLID | PS_ENDCAP_ROUND | PS_JOIN_ROUND, width, &lb);
+
 	}else /*if(style == 1)*/{
 		if(width>1){
 			//if(::g_bIsWin9x){
@@ -737,10 +747,11 @@ void g_DrawPtnPolygon(
 				LOGBRUSH logBrush;
 				logBrush.lbStyle = BS_SOLID;
 				logBrush.lbColor = col;
-				newPen.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND, width, &logBrush,2,adwPenStyle);
+				newPen.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND| PS_JOIN_ROUND, width, &logBrush,2,adwPenStyle);
 			}
 		}else{
-			newPen.CreatePen(PS_DOT,width,col);
+			//newPen.CreatePen(PS_DOT,width,col);
+			newPen.CreatePen(PS_GEOMETRIC | PS_DOT | PS_ENDCAP_ROUND | PS_JOIN_ROUND, width, &lb);
 		}
 	}
 
@@ -1151,7 +1162,14 @@ void g_DrawDash(
 		CBrush* pbrushOld;
 		brushNew.CreateSolidBrush(col);
 		pbrushOld = (CBrush*)pDC->SelectObject(&brushNew);
-		penNew.CreatePen(PS_SOLID,nWidth,col);
+
+		LOGBRUSH lb;
+		lb.lbStyle = BS_SOLID;
+		lb.lbColor = col;
+		lb.lbHatch = 0;
+		penNew.CreatePen(PS_GEOMETRIC | PS_SOLID | PS_ENDCAP_ROUND | PS_JOIN_ROUND, nWidth, &lb);
+
+		//penNew.CreatePen(PS_SOLID,nWidth,col);
 		ppenOld=pDC->SelectObject(&penNew);
 		pDC->SetPolyFillMode(WINDING);
 
@@ -1440,8 +1458,8 @@ void g_DrawJunc(
 	}
 	
 	//描画サイズと描画位置の設定
-	noff=(2*nVExt)/nWExt;			//PatBlt()の左上へのオフセット
-	nh=noff*2+1;					//PatBlt()の正方形の一辺のサイズ
+	noff = (g_JunctionDrawSize * nVExt) / nWExt;	//描画の左上へのオフセット
+	nh = noff * 2 + 1;							//描画の円を囲む正方形の一辺のサイズ
 	x=(pJunc->p1().x()*nVExt)/nWExt-noff;	//描画座標
 	y=(pJunc->p1().y()*nVExt)/nWExt-noff;	//描画座標
 

@@ -188,7 +188,9 @@ BEGIN_MESSAGE_MAP(CBSchView, CScrollView)
 	//}}AFX_MSG_MAP
 	// 標準印刷コマンド
 //	ON_COMMAND(ID_FILE_PRINT, CScrollView::OnFilePrint)
-	ON_COMMAND(ID_FILE_PRINT_DIRECT, CScrollView::OnFilePrint)
+//	ON_COMMAND(ID_FILE_PRINT_DIRECT, CScrollView::OnFilePrint)
+ON_COMMAND(ID_FILE_PRINT_DIRECT, OnFilePrint)
+ON_COMMAND(ID_FILE_EXPORTEMFDIRECT, OnFileEmfDirect)
 //	ON_COMMAND(ID_FILE_PRINT_PREVIEW, CScrollView::OnFilePrintPreview)
 ON_UPDATE_COMMAND_UI(ID_MENU_CROSS_CURSOR, OnUpdateMenuCrossCursor)
 ON_COMMAND(IDM_EXTMENU_0, OnExtMenu_0)
@@ -410,6 +412,7 @@ CBSchView::CBSchView()
 	//m_bUsePreview=FALSE;
 	//m_fShiftKeyDown=FALSE;	//1998/07/18
 	m_fEditHighLight=FALSE;
+	
 
 	m_nWHEEL_DELTA = 0;
 
@@ -718,6 +721,14 @@ TRACE(_T("CBSchView::OnInitialUpdate()\n"));
 	g_bDisplayNcPinMark=IniReadDisplayNcPinMark();//NCピンマークの表示情報をレジストリから得る
 	g_bDisplayHiddenPinNum=IniReadDisplayHiddenPinNum();//非表示ピン番号の表示情報をレジストリから得る 0.63.01
 	m_bClickClickLineMode = IniReadClickClickLineMode();//レジストリからクリッククリックラインモードの情報を得る
+	g_JunctionDrawSize = IniReadJunctionSize();	//レジストリからジャンクションの描画サイズを得る
+	IniWriteJunctionSize(g_JunctionDrawSize); 	//UIで設定しない項目なので、すぐに書き戻す。新しいBSCH3.INIに項目ができる。
+
+	g_backupLevel= IniReadBackupLevel();		//レジストリからバックアップのレベルを得る
+	IniWriteBackupLevel(g_backupLevel);			//すぐに書き戻す
+
+
+	
 	m_pointUpdateCenter=CPoint(0,0);	//1997/01/26
 	CBSchDoc* pDoc = GetDocument();
 	if(g_bDisplayNcPinMark) pDoc->setNcPinFlag();//コマンドラインから読み込んだファイルに対する処理
@@ -1652,6 +1663,38 @@ void CBSchView::IniWriteClickClickLineMode(BOOL bClickClick)
 {
 	AfxGetApp()->WriteProfileInt(_T("Option"),_T("ClickClickLineMode"),bClickClick);
 }
+
+//Get drawsize of JUNCTION from the registry
+unsigned CBSchView::IniReadJunctionSize()
+{
+	unsigned n = AfxGetApp()->GetProfileInt(_T("Option"), _T("JunctionSize"), 2);
+	if (n < 1)n = 1;
+	else if (n > 4)n = 4;
+	return n;
+}
+
+//Set drawsize of JUNCTION to the registry
+void CBSchView::IniWriteJunctionSize(unsigned junctionSize)
+{
+	AfxGetApp()->WriteProfileInt(_T("Option"), _T("JunctionSize"), junctionSize);
+}
+
+
+//Get backup level from the registry
+unsigned CBSchView::IniReadBackupLevel()
+{
+	unsigned n = AfxGetApp()->GetProfileInt(_T("Option"), _T("BackupLevel"), 0);
+	if (n > MAX_BACKUP_LEVEL) n = MAX_BACKUP_LEVEL;
+	return n;
+}
+
+//Set backup level to the registry
+void CBSchView::IniWriteBackupLevel(unsigned n)
+{
+	AfxGetApp()->WriteProfileInt(_T("Option"), _T("BackupLevel"), n
+	);
+}
+
 
 
 
@@ -3034,11 +3077,24 @@ void CBSchView::OnEditSetuplayer()
 	dlg.m_nEdit = pDoc->editLayer();
 	dlg.m_wShow	= pDoc->visibleLayer();
 	dlg.m_fEditHigh = m_fEditHighLight;
+	dlg.m_fDisplayNameOnDlgBar = (AfxGetApp()->GetProfileInt(_T("Option"), _T("DisplayLayerNameOnDlgBar"), TRUE) ? TRUE : FALSE);
+
+	for (int i = 0; i < 8; i++) {
+		dlg.m_strName[i] = pDoc->layerName(i);
+	}
+
 	if(dlg.DoModal()==IDOK){
 		pDoc->setEditLayer(dlg.m_nEdit);
 		pDoc->setVisibleLayer(dlg.m_wShow);
 		m_fEditHighLight = dlg.m_fEditHigh;
+		for (int i = 0; i < 8; i++) {
+			pDoc->setLayerName(i, dlg.m_strName[i]);
+		}
+		SetDBarLayer_LayerName();
 		AfxGetApp()->WriteProfileInt(_T("Option"),_T("HighLightEditLayer"),m_fEditHighLight);
+
+		AfxGetApp()->WriteProfileInt(_T("Option"), _T("DisplayLayerNameOnDlgBar"), dlg.m_fDisplayNameOnDlgBar);
+
 		pDoc->UpdateAllViews(NULL);
 	}
 }
@@ -3581,7 +3637,7 @@ BOOL CBSchView::DoAttributeDialogTag(SXBSchTag* pObj)
 //アトリビュート変更用のダイアログを起動
 BOOL CBSchView::DoAttributeDialogComponent(SXBSchComponent* pObj)
 {
-	CPartAtrb dlg;
+	CPartAtrb dlg(this);	//0.83.05
 	if(pObj->compInfoIndex()==NULL) return FALSE;
 	dlg.m_nBlock   =pObj->block()+1;
 //    dlg.m_nBlockMax=m_pPartIndex->GetBlock();
@@ -4124,6 +4180,37 @@ void CBSchView::OnUpdateEditEmfCopy(CCmdUI *pCmdUI)
 	// TODO : ここにコマンド更新 UI ハンドラ コードを追加します。
 	pCmdUI->Enable(MenuItemTest_Copy());
 }
+
+
+void CBSchView::SetDBarLayer_LayerName(void)
+{
+	CMainFrame* pfrm = (CMainFrame*)AfxGetMainWnd();
+
+
+	CBSchDoc* pDoc = GetDocument();
+
+	for (int i = 0; i < 8; i++) {
+		CEdit* pEdit = (CEdit*)(pfrm->m_dbarLayer.GetDlgItem(IDC_N0 + i));
+		if(pEdit!=NULL){
+			pEdit->SetWindowText(pDoc->layerName(i));
+		}
+		else {
+			break;
+		}
+	}
+}
+
+
+void g_SetDBarLayer_LayerName(void)
+{
+	if (!g_pViewWindow)return;
+	((CBSchView*)g_pViewWindow)->SetDBarLayer_LayerName();
+}
+
+
+
+
+
 
 int CBSchView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
