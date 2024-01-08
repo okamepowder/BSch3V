@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CC30CACE-C721-4D2E-A80E-89D4A272F199}</ProjectGuid>
+    <RootNamespace>LCoV</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>11.0.51106.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>Debug\</OutDir>
+    <IntDir>Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>Release\</OutDir>
+    <IntDir>Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AddAlias.cpp" />
+    <ClCompile Include="Bschfont.cpp" />
+    <ClCompile Include="ce3io.cpp" />
+    <ClCompile Include="CompEditDoc.cpp" />
+    <ClCompile Include="CompEditElm.cpp" />
+    <ClCompile Include="CompEditView.cpp" />
+    <ClCompile Include="complib.cpp" />
+    <ClCompile Include="CompProperty.cpp" />
+    <ClCompile Include="coord.cpp" />
+    <ClCompile Include="coord2.cpp" />
+    <ClCompile Include="DlgPinNameShowHide.cpp" />
+    <ClCompile Include="DrawComp.cpp" />
+    <ClCompile Include="EditForGrid.cpp" />
+    <ClCompile Include="LBCompName.cpp" />
+    <ClCompile Include="LCoV.cpp" />
+    <ClCompile Include="LCoVDoc.cpp" />
+    <ClCompile Include="LCoVFunc.cpp" />
+    <ClCompile Include="LinePropertyDlg.cpp" />
+    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="Pattern.cpp" />
+    <ClCompile Include="PinProperty.cpp" />
+    <ClCompile Include="PinPropGrid.cpp" />
+    <ClCompile Include="PinProps.cpp" />
+    <ClCompile Include="PropLib.cpp" />
+    <ClCompile Include="PtnProperty.cpp" />
+    <ClCompile Include="PtnTextDlg.cpp" />
+    <ClCompile Include="SBezier.cpp" />
+    <ClCompile Include="SPtnObj.cpp" />
+    <ClCompile Include="SPtnObjArc.cpp" />
+    <ClCompile Include="SPtnObjCircle.cpp" />
+    <ClCompile Include="SPtnObjLine.cpp" />
+    <ClCompile Include="SPtnObjPolygon.cpp" />
+    <ClCompile Include="SPtnObjText.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AddAlias.h" />
+    <ClInclude Include="Bschfont.h" />
+    <ClInclude Include="ce3io.h" />
+    <ClInclude Include="CompEditDoc.h" />
+    <ClInclude Include="CompEditElm.h" />
+    <ClInclude Include="CompEditView.h" />
+    <ClInclude Include="complib.h" />
+    <ClInclude Include="CompProperty.h" />
+    <ClInclude Include="coord.h" />
+    <ClInclude Include="coord2.h" />
+    <ClInclude Include="DlgPinNameShowHide.h" />
+    <ClInclude Include="draw.h" />
+    <ClInclude Include="EditDetEnter.h" />
+    <ClInclude Include="EditForGrid.h" />
+    <ClInclude Include="LBCompName.h" />
+    <ClInclude Include="LCoV.h" />
+    <ClInclude Include="LCoVDoc.h" />
+    <ClInclude Include="LCoVFunc.h" />
+    <ClInclude Include="LinePropertyDlg.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="Pattern.h" />
+    <ClInclude Include="PinProperty.h" />
+    <ClInclude Include="PinPropGrid.h" />
+    <ClInclude Include="PinProps.h" />
+    <ClInclude Include="pintype.h" />
+    <ClInclude Include="PropLib.h" />
+    <ClInclude Include="PtnProperty.h" />
+    <ClInclude Include="PtnTextDlg.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="SBezier.h" />
+    <ClInclude Include="SPtnObj.h" />
+    <ClInclude Include="SPtnObjArc.h" />
+    <ClInclude Include="SPtnObjCircle.h" />
+    <ClInclude Include="SPtnObjLine.h" />
+    <ClInclude Include="SPtnObjPolygon.h" />
+    <ClInclude Include="SPtnObjText.h" />
+    <ClInclude Include="stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\bitmap1.bmp" />
+    <Image Include="res\bmp00001.bmp" />
+    <Image Include="res\divideMark.ico" />
+    <Image Include="res\ico00001.ico" />
+    <Image Include="res\icon1.ico" />
+    <Image Include="res\icon2.ico" />
+    <Image Include="res\LCoV.ico" />
+    <Image Include="res\pin_ck.bmp" />
+    <Image Include="res\pin_nega.bmp" />
+    <Image Include="res\pin_negack.bmp" />
+    <Image Include="res\pin_norm.bmp" />
+    <Image Include="res\pin_small.bmp" />
+    <Image Include="res\pin_zleng.bmp" />
+    <Image Include="res\Toolbar.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\Cur_move.cur" />
+    <None Include="res\LCoV.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="LCoV.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="res\LCoV.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="LCoV.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

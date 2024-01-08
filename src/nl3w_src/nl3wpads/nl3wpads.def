@@ -1,0 +1,3 @@
+LIBRARY	"nl3wpads"
+EXPORTS typeName
+EXPORTS fnWriteNetList

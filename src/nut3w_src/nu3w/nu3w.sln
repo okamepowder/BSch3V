@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nu3w", "nu3w.vcxproj", "{784B1B49-E082-471C-A4D4-0BA8404BAA36}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nu3w_lang", "..\nu3w_lang\nu3w_lang.vcxproj", "{D9D34FB4-0D5B-4508-AE82-08086D6FCA15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{784B1B49-E082-471C-A4D4-0BA8404BAA36}.Debug|Win32.ActiveCfg = Debug|Win32
+		{784B1B49-E082-471C-A4D4-0BA8404BAA36}.Debug|Win32.Build.0 = Debug|Win32
+		{784B1B49-E082-471C-A4D4-0BA8404BAA36}.Release|Win32.ActiveCfg = Release|Win32
+		{784B1B49-E082-471C-A4D4-0BA8404BAA36}.Release|Win32.Build.0 = Release|Win32
+		{D9D34FB4-0D5B-4508-AE82-08086D6FCA15}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D9D34FB4-0D5B-4508-AE82-08086D6FCA15}.Debug|Win32.Build.0 = Debug|Win32
+		{D9D34FB4-0D5B-4508-AE82-08086D6FCA15}.Release|Win32.ActiveCfg = Release|Win32
+		{D9D34FB4-0D5B-4508-AE82-08086D6FCA15}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
