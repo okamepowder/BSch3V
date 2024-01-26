@@ -20,7 +20,7 @@ using namespace std;
 BOOL g_bDisplayPartFrame;	//部品枠の表示   1997/01/01 CBSchViewから移動
 BOOL g_bDisplayNcPinMark;	//NCピンのマークの表示
 BOOL g_bDisplayHiddenPinNum;	//非表示ピン番号の表示 0.63.01
-
+unsigned g_JunctionDrawSize;	//0.83.02
 
 CWnd* g_pViewWindow;
 
@@ -37,6 +37,9 @@ wstring g_docTimeStamp;
 wstring g_docDate;
 wstring g_printTime;
 
+//////////////////////////////////////////////////////////////////////
+//バックアップのレベル
+unsigned g_backupLevel;
 
 
 //////////////////////////////////////////////////////////////////////

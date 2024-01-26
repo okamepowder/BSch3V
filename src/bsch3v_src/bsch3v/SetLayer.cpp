@@ -61,6 +61,7 @@ BEGIN_MESSAGE_MAP(CSetLayer, CDialog)
 	ON_BN_CLICKED(IDC_E7, OnE7)
 	ON_BN_CLICKED(IDC_CHECK_EDIT_HIGHLIGHT, OnCheckEditHighlight)
 	//}}AFX_MSG_MAP
+	ON_BN_CLICKED(IDC_CHECK_DIPLAY_NAME_ON_BAR, &CSetLayer::OnClickedCheckDiplayNameOnBar)
 END_MESSAGE_MAP()
 
 
@@ -97,6 +98,7 @@ BOOL CSetLayer::OnInitDialog()
 	}
 	//IDC_D0～IDC_D7は連続した値になるようにリソースエディタで設定してある
 	//IDC_E0～IDC_E7は連続した値になるようにリソースエディタで設定してある
+	//IDC_N0～IDC_N7は連続した値になるようにリソースエディタで設定してある
 	CButton* pButton;
 	nID=IDC_D0;
 	wBit=1;
@@ -114,6 +116,19 @@ BOOL CSetLayer::OnInitDialog()
 	}
 	pButton=(CButton*)GetDlgItem(IDC_CHECK_EDIT_HIGHLIGHT);
 	pButton->SetCheck(m_fEditHigh!=FALSE);
+
+	pButton = (CButton*)GetDlgItem(IDC_CHECK_DIPLAY_NAME_ON_BAR);
+	pButton->SetCheck(m_fDisplayNameOnDlgBar);
+
+
+	CEdit* pEdit;
+	nID = IDC_N0;
+	for (int i = 0; i < 8; i++) {
+		pEdit = (CEdit*)GetDlgItem(nID);
+		pEdit->SetWindowText(m_strName[i]);
+		nID++;
+	}
+
 
 	return TRUE;  // コントロールにフォーカスを設定しないとき、戻り値は TRUE となります
 	              // 例外: OCX プロパティ ページの戻り値は FALSE となります
@@ -244,6 +259,7 @@ void CSetLayer::OnOK()
 
 	//IDC_D0～IDC_D7は連続した値になるようにリソースエディタで設定してある
 	//IDC_E0～IDC_E7は連続した値になるようにリソースエディタで設定してある
+	//IDC_N0～IDC_N7は連続した値になるようにリソースエディタで設定してある
 	int n;
 	CButton* pButton;
 	WORD wBit=1;
@@ -263,6 +279,19 @@ void CSetLayer::OnOK()
 	pButton=(CButton*)GetDlgItem(IDC_CHECK_EDIT_HIGHLIGHT);
 	m_fEditHigh=pButton->GetCheck();
 
+	pButton = (CButton*)GetDlgItem(IDC_CHECK_DIPLAY_NAME_ON_BAR);
+	m_fDisplayNameOnDlgBar = pButton->GetCheck();
+
+
+	CEdit* pEdit;
+	int nID = IDC_N0;
+	for (int i = 0; i < 8; i++) {
+		pEdit = (CEdit*)GetDlgItem(nID);
+		pEdit->GetWindowText(m_strName[i]);
+		nID++;
+	}
+
+
 
 	CDialog::OnOK();
 }
@@ -272,4 +301,12 @@ void CSetLayer::OnCheckEditHighlight()
 	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	CButton* pButton=(CButton*)GetDlgItem(IDC_CHECK_EDIT_HIGHLIGHT);
 	pButton->SetCheck(pButton->GetCheck()==FALSE);
+}
+
+
+void CSetLayer::OnClickedCheckDiplayNameOnBar()
+{
+	// TODO: ここにコントロール通知ハンドラー コードを追加します。
+	CButton* pButton = (CButton*)GetDlgItem(IDC_CHECK_DIPLAY_NAME_ON_BAR);
+	pButton->SetCheck(pButton->GetCheck() == FALSE);
 }

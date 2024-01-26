@@ -30,6 +30,11 @@ SXBSchSheetInfo::SXBSchSheetInfo()
 	m_strProject = _T("");
 	m_version = 0;
 	m_initPos = INITPOS_LT;
+
+	for(int i=0;i< SHEET_LAYERS;i++){
+		m_strLayerName[i] = _T("");
+	}
+
 }
 	
 void SXBSchSheetInfo::setInitPos(int n)
@@ -70,7 +75,22 @@ bool SXBSchSheetInfo::readCe3(SReadCE3& rce3,const SPoint*,SXBSchDoc*)
 				if(str[n]==':') break;
 			}
 			if(0<n && n<l){	// : で分けられたレコードである
-				wstring var = str.substr(0,n);				//先頭から:の手前まで
+				wstring var;
+
+				//0.84.0 レイヤー名の読み取り
+				if (n >= 3) {
+					var = str.substr(0, 2);
+					if (var == _T("LN")) {
+						int index = _tstoi(str.substr(2, n - 2).c_str());
+						if (index >= 0 && index <= SHEET_LAYERS) {
+							m_strLayerName[index] = str.substr(n + 1).c_str();
+							continue;
+						}
+					}
+				}
+
+
+				var = str.substr(0,n);				//先頭から:の手前まで
 				if(var==_T("PROJ")){
 					m_strProject = str.substr(n+1);
 				}else{
@@ -164,10 +184,17 @@ bool SXBSchSheetInfo::readStream(SCsvIStream* pStrm,const SPoint*)
 
 bool SXBSchSheetInfo::writeCe3(SWriteCE3& wce3,const SPoint* )
 {
+	TCHAR str[32];
 	//char sz[32];
 	wce3.WriteRecord(_T("+SHEETINFO"));
 	wce3.WriteRecordInt(_T("EL"),m_Layer);
 	wce3.WriteRecordInt(_T("VL"),m_Selection);
+	//0.84.00 レイヤー名の保存
+	for (int i = 0; i < SHEET_LAYERS; i++) {
+		wsprintf(str,_T("LN%d"), i);
+		wce3.WriteRecordString(str, m_strLayerName[i]);
+	}
+
 	wce3.WriteRecordInt(_T("W"),m_p1.x());
 	//sprintf(sz,"W:%d",m_p1.x());
 	//wce3.WriteRecord(sz);

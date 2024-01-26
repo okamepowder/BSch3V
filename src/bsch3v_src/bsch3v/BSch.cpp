@@ -59,6 +59,42 @@ BEGIN_MESSAGE_MAP(CBSchApp, CWinApp)
 	ON_COMMAND(ID_FILE_PRINT_SETUP, CWinApp::OnFilePrintSetup)
 END_MESSAGE_MAP()
 
+
+class BSchCommandLineInfo : public CCommandLineInfo
+{
+public:
+	BSchCommandLineInfo();
+	~BSchCommandLineInfo() {}
+
+	void ParseParam( const TCHAR* pszParam, BOOL bFlag,BOOL bLast);
+
+	enum {exOptionNone,exOptionEmfOut
+	} m_nExShellCommand;
+
+};
+
+BSchCommandLineInfo::BSchCommandLineInfo()
+{
+	m_nExShellCommand = exOptionNone;
+}
+
+
+void BSchCommandLineInfo::ParseParam(const TCHAR* pszParam, BOOL bFlag, BOOL bLast)
+{
+	if (bFlag) {
+		if (_tcscmp(pszParam, _T("emf")) == 0) {
+			m_nExShellCommand = exOptionEmfOut;
+			return;
+		}
+		else {
+			m_nExShellCommand = exOptionNone;
+		}
+	}
+	CCommandLineInfo::ParseParam(pszParam, bFlag, bLast);
+}
+
+
+
 /////////////////////////////////////////////////////////////////////////////
 // CBSchApp クラスの構築
 
@@ -187,7 +223,7 @@ CBSchApp theApp;
 BOOL CBSchApp::InitInstance()
 {
 	_tsetlocale(LC_ALL, _T(""));
-
+	// 廃止: スプラッシュ
 	// 標準的な初期化処理
 	// もしこれらの機能を使用せず、実行ファイルのサイズを小さく
 	// したければ以下の特定の初期化ルーチンの中から不必要なもの
@@ -229,17 +265,7 @@ BOOL CBSchApp::InitInstance()
 	CString strVersion;
 	strVersion.LoadString(IDS_VERSION);
 	HINSTANCE hInstRcOrg = AfxGetResourceHandle();
-	//HINSTANCE hInstRc = LoadLibrary( dllPath );			//Version 0.69 20101016 言語DLLの読み込みパスを実行ファイルのディレクトリに制限
-	//if ( hInstRc){				// 言語リソースDLLが見つかった.
-	//	AfxSetResourceHandle(hInstRc);
-	//	//言語リソース中のバージョン情報をチェック
-	//	CString strVersionAddRc;
-	//	strVersionAddRc.LoadString(IDS_VERSION);
-	//	//バージョンが一致しなければ、元のリソースハンドルに戻す
-	//	if(strVersion.Compare(strVersionAddRc)!=0){
-	//		AfxSetResourceHandle(hInstRcOrg);
-	//	}
-	//}
+	// 廃止: 言語リソース
 
 	//::_tmakepath(g_logPath,drive,dir,_T("bsch3v_log"),_T("txt"));
 	//g_log = _T("BSCH3V_LOG\n");
@@ -290,7 +316,7 @@ BOOL CBSchApp::InitInstance()
 
 
 	// DDE、file open など標準のシェル コマンドのコマンドラインを解析します。
-	CCommandLineInfo cmdInfo;
+	BSchCommandLineInfo cmdInfo;
 	ParseCommandLine(cmdInfo);
 
 	if(cmdInfo.m_nShellCommand == CCommandLineInfo::AppRegister){
@@ -314,6 +340,20 @@ BOOL CBSchApp::InitInstance()
 	if(cmdInfo.m_nShellCommand == CCommandLineInfo::AppUnregister){
 		UnregisterShellFileTypes();
 		AfxMessageBox(IDS_UNREG_FILETYPE,MB_OK|MB_ICONINFORMATION);
+		return FALSE;
+	}
+
+	//コマンドラインからEMF出力する機能の追加 　0.84.00 2024/01/07
+	if (cmdInfo.m_nExShellCommand == BSchCommandLineInfo::exOptionEmfOut) {
+		m_nCmdShow = SW_HIDE;
+		ASSERT(m_pCmdInfo == NULL);
+		if (OpenDocumentFile(cmdInfo.m_strFileName))
+		{
+			m_pCmdInfo = &cmdInfo;
+			ENSURE_VALID(m_pMainWnd);
+			m_pMainWnd->SendMessage(WM_COMMAND, ID_FILE_EXPORTEMFDIRECT);
+			m_pCmdInfo = NULL;
+		}
 		return FALSE;
 	}
 
@@ -639,7 +679,7 @@ BOOL CAboutDlg::OnInitDialog()
 	CString msg;
 	CString strVersion;
 	strVersion.LoadString(IDS_VERSION);
-	msg = "BSch3V Version ";
+	msg = "回路図作成アプリ Version ";
 	msg += strVersion;
 	SetDlgItemText(IDC_STATIC_VERSION,msg);
 
@@ -704,7 +744,7 @@ void CBSchApp::editWidthLCoV(LPCTSTR name, SCompInfo* pInfo, SCompLib& tempLib)
     BOOL resProc = CreateProcess(NULL, cmdline, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);
 	if(!resProc) return;
 	
-	while(WAIT_TIMEOUT==WaitForSingleObject(pi.hProcess,1)){
+	while(WAIT_TIMEOUT==WaitForSingleObject(pi.hProcess,100)){
 		MSG msg;
 		if(GetMessage(&msg,NULL,0,0)){
 			if(msg.message == WM_PAINT){				//	メッセージが WM_PAINT なら

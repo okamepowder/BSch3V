@@ -207,8 +207,63 @@ bool SImageDIB::LoadWindowsBmp(const TCHAR* fname)
 	return true;
 }
 
+//クリップボードからのロード
+bool  SImageDIB::LoadWindowsClipboardDIB(byte* buff, int clipBoardDataSize)
+{
+	BITMAPINFOHEADER* pBitmapInfoHeader = (BITMAPINFOHEADER*)buff;	//クリップボードのCF_DIBの先頭は、BITMAPINFOHEADER
+	int headerSize =sizeof(BITMAPINFOHEADER);
+	int bytesPerLine;
+	int imageSize;
+	int buffSize;
 
+	//ヘッダー部分のチェック
+	if (pBitmapInfoHeader->biSize != sizeof(BITMAPINFOHEADER)) return false;
+	if (pBitmapInfoHeader->biPlanes != 1) return false;
+	if (pBitmapInfoHeader->biBitCount <16) return false;	//16ビットカラー以上をサポート
+	if (pBitmapInfoHeader->biWidth < 1) return false;		//幅、高さゼロ以下は不正
+	if (pBitmapInfoHeader->biHeight < 1) return false;
+	switch (pBitmapInfoHeader->biCompression) {
+	case BI_RGB:
+		break;
+	case BI_BITFIELDS:
+		headerSize += 4;	//ヘッダー末尾にRGBQUAD領域がくっついて4バイト増える。
+		break;
+	default:
+		return false;		//とりあえず非圧縮だけサポート
+	}
 
+	{
+		int bytesPerPixel = (pBitmapInfoHeader->biBitCount + 7) / 8;	//1ピクセルあたりのバイト数
+		bytesPerLine = ((bytesPerPixel * pBitmapInfoHeader->biWidth + 3) / 4) * 4;	//1ラインのバイト数は4バイトアライン
+	}
+	imageSize = bytesPerLine * pBitmapInfoHeader->biHeight;
+	
+	int dibDataSize = headerSize + imageSize;
+	if (dibDataSize > clipBoardDataSize)return false;	//ヘッダーとイメージデータの合計サイズがクリップボードのデータサイズより大きいのはおかしい。
+	buffSize = dibDataSize + sizeof(BITMAPFILEHEADER);
+	if (buffSize > MAX_IMAGEBUFF_SIZE) return false;
+
+	m_pbuff = new byte[(unsigned)buffSize];
+
+	for (int i = 0; i < sizeof(BITMAPFILEHEADER); i++) m_pbuff[i] = 0;
+
+	m_pBmpFH = (BITMAPFILEHEADER*)m_pbuff;
+	m_pBmpIH = (BITMAPINFOHEADER*)(m_pbuff + sizeof(BITMAPFILEHEADER));
+	m_pBmpInfo = (BITMAPINFO*)m_pBmpIH;
+	m_pBitData = m_pbuff + sizeof(BITMAPFILEHEADER) + headerSize;
+
+	m_pBmpFH->bfSize = buffSize;
+	m_pBmpFH->bfType = 0x4D42;
+	m_pBmpFH->bfOffBits = sizeof(BITMAPFILEHEADER) + headerSize;
+
+	byte* pSrc = buff;
+	byte* pDst = (byte*)m_pBmpIH;
+	for (int i = 0; i < dibDataSize; i++) {
+		*pDst++ = *pSrc++;
+	}
+	return true;
+
+}
 
 //DIBファイルからの読み込み
 bool SImageDIB::Load(const TCHAR* fname)

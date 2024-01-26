@@ -61,6 +61,8 @@ protected:
 	//SCompIndex* m_pTempPartIndex;
 	SCompLib m_tempLib;		//LCoVで編集するときに使う。このダイアログクラスが消滅するまで実体を失わないようにクラス変数として宣言するよ。
 
+	UINT m_timerID;
+
 public:
 	afx_msg void OnBnClickedReplaceCompindex();
 	afx_msg void OnBnClickedEditCompindex();
@@ -78,6 +80,7 @@ public:
 
 	BOOL m_bHideNum;
 	BOOL m_bHideVal;
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };
 
 #endif

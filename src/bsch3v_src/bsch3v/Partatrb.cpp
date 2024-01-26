@@ -87,6 +87,7 @@ BEGIN_MESSAGE_MAP(CPartAtrb, CDialog)
 	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDC_REPLACE_COMPINDEX, OnBnClickedReplaceCompindex)
 	ON_BN_CLICKED(IDC_EDIT_COMPINDEX, OnBnClickedEditCompindex)
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -489,5 +490,21 @@ void CPartAtrb::OnBnClickedEditCompindex()
 	}
 
 	m_modifiedCompInfo = TRUE;
-	
+
+}
+
+//Windows10 ビルド2004以降のIMEでのブリーズ対策を行う過程で、
+//LCoVを閉じたときに、BSch3Vのウィンドウがほかのウィンドウに隠れる問題が発生した。
+//対症療法として、LCOVを閉じたときにタイマーを起動して、タイマーイベントでウィンドウを
+//前に持ってくるように試みた。
+//期待通りには動作したが、ウィンドウがちらつく問題があった。
+
+void CPartAtrb::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: ここにメッセージ ハンドラー コードを追加するか、既定の処理を呼び出します。
+	//if (nIDEvent == m_timerID){
+	//	KillTimer(nIDEvent);
+	//	SetWindowPos(&wndTop, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+	//}
+	CDialog::OnTimer(nIDEvent);
 }

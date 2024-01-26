@@ -25,8 +25,8 @@ LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,83,1,2
- PRODUCTVERSION 0,83,1,2
+ FILEVERSION 0,84,0,0
+ PRODUCTVERSION 0,84,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -41,12 +41,12 @@ BEGIN
     BEGIN
         BLOCK "041104e4"
         BEGIN
-            VALUE "FileVersion", "0.83.1.2"
+            VALUE "FileVersion", "0.84.0.0"
             VALUE "InternalName", "Bsch3V.exe"
-            VALUE "LegalCopyright", "Copyright (C) 1997-2016 H.Okada(Suigyodo), Copyright (C) 2019 okamepowder"
+            VALUE "LegalCopyright", "Copyright (C) 1997-2024 H.Okada(Suigyodo), Copyright (C) 2019 okamepowder"
             VALUE "OriginalFilename", "Bsch3V.exe"
             VALUE "ProductName", "BSch3V"
-            VALUE "ProductVersion", "0.83.1.2"
+            VALUE "ProductVersion", "0.84.0.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -55,20 +55,32 @@ BEGIN
     END
 END
 
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Bitmap
 //
 
 IDB_EDIT                BITMAP                  "res\\editmark.bmp"
+
 IDB_VIEW                BITMAP                  "res\\viewmark.bmp"
+
 IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
 IDB_IMAGE_PTN           BITMAP                  "res\\imageptn.bmp"
+
 IDB_IMAGE_SEL_PTN       BITMAP                  "res\\imageSelect.bmp"
+
+IDB_TOOLBUTTONS         BITMAP                  "res\\Toolbar.bmp"
+
 IDB_OBJFILTER           BITMAP                  "res\\OBJFILTER.bmp"
+
 IDB_BITMAP_LINEENDSTYLE BITMAP                  "res\\LineEndStyle.bmp"
+
 IDB_BITMAP_DECOLINESTYLE BITMAP                  "res\\DecoLineStyle.bmp"
+
 IDB_BITMAP_SORTMARK     BITMAP                  "res\\bitmap_sortmark.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -93,18 +105,20 @@ BEGIN
     PUSHBUTTON      "キャンセル",IDCANCEL,147,24,45,14
 END
 
-IDD_ABOUTBOX DIALOGEX 0, 0, 211, 96
+IDD_ABOUTBOX DIALOGEX 0, 0, 226, 120
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "バージョン情報(BSch3V)"
+CAPTION "このアプリについて"
 FONT 11, "MS Shell Dlg", 400, 0, 0x0
 BEGIN
-    ICON            IDR_MAINFRAME,IDC_STATIC,10,10,20,20
-    CTEXT           "BSch3V Version xxxxx",IDC_STATIC_VERSION,35,15,120,8,SS_NOPREFIX
-    DEFPUSHBUTTON   "OK",IDOK,168,10,32,14,WS_GROUP
-    CTEXT           "Copyright (C) 1997-2016  H.Okada(Suigyodo)",IDC_STATIC,13,52,184,8
-    PUSHBUTTON      "https://www.suigyodo.com/online",IDC_BUTTON_SUIGYODO,30,64,150,14,WS_GROUP
-    CTEXT           "hitoshi@suigyodo.com",IDC_STATIC,14,81,184,8
-    LTEXT           "Copyright (C) 2019 okamepowder",IDC_STATIC,13,36,185,8
+    CTEXT           "回路図作成アプリ Version xxxxx",IDC_STATIC_VERSION,12,17,120,8,SS_NOPREFIX
+    DEFPUSHBUTTON   "OK",IDOK,168,13,32,14,WS_GROUP
+    CTEXT           "Copyright (C) 1997-2024  H.Okada(Suigyodo)",IDC_STATIC,12,83,201,8
+    PUSHBUTTON      "https://www.suigyodo.com/online",IDC_BUTTON_SUIGYODO,37,93,150,14,NOT WS_VISIBLE | WS_GROUP
+    LTEXT           "Bsch3V",IDC_STATIC,15,73,29,8
+    LTEXT           "Copyright (C) 2019 okamepowder",IDC_STATIC,29,33,134,8
+    LTEXT           "2019年 Froked from Bsch3V",IDC_STATIC,15,63,188,8
+    CTEXT           "https://www.suigyodo.com/online",IDC_STATIC,12,96,201,8
+    LTEXT           "Copyright (C) H.Okada(Suigyodo)",IDC_STATIC,29,45,140,8
 END
 
 IDD_SETLIB_DLG DIALOGEX 0, 0, 239, 152
@@ -258,33 +272,51 @@ BEGIN
     LTEXT           "%  (30...300%)",IDC_STATIC,210,117,18,8
 END
 
-IDD_SETLAYER DIALOGEX 0, 0, 193, 165
+IDD_SETLAYER DIALOGEX 0, 0, 203, 180
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_STATICEDGE
 CAPTION "レイヤーの設定"
 FONT 11, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,140,7,46,14
-    PUSHBUTTON      "キャンセル",IDCANCEL,140,24,46,14
-    CHECKBOX        "レイヤー0",IDC_D0,17,20,45,10
-    CHECKBOX        "レイヤー1",IDC_D1,17,35,45,10
-    CHECKBOX        "レイヤー2",IDC_D2,17,50,45,10
-    CHECKBOX        "レイヤー3",IDC_D3,17,65,45,10
-    CHECKBOX        "レイヤー4",IDC_D4,17,80,45,10
-    CHECKBOX        "レイヤー5",IDC_D5,17,95,45,10
-    CHECKBOX        "レイヤー6",IDC_D6,17,110,45,10
-    CHECKBOX        "レイヤー7",IDC_D7,17,125,45,10
-    GROUPBOX        "表示",IDC_STATIC,10,5,60,133
-    CHECKBOX        "レイヤー0",IDC_E0,80,20,45,10
-    CHECKBOX        "レイヤー1",IDC_E1,80,35,45,10
-    CHECKBOX        "レイヤー2",IDC_E2,80,50,45,10
-    CHECKBOX        "レイヤー3",IDC_E3,80,65,45,10
-    CHECKBOX        "レイヤー4",IDC_E4,80,80,45,10
-    CHECKBOX        "レイヤー5",IDC_E5,80,95,45,10
-    CHECKBOX        "レイヤー6",IDC_E6,80,110,45,10
-    CHECKBOX        "レイヤー7",IDC_E7,80,125,45,10
-    GROUPBOX        "編集",IDC_STATIC,75,5,60,133
-    CHECKBOX        "編集レイヤーだけをハイライト表示",IDC_CHECK_EDIT_HIGHLIGHT,20,145,120,10
+    DEFPUSHBUTTON   "OK",IDOK,122,160,36,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,159,160,36,14
+    CHECKBOX        "",IDC_D0,94,20,15,10
+    CHECKBOX        "",IDC_D1,94,35,15,10
+    CHECKBOX        "",IDC_D2,94,50,15,10
+    CHECKBOX        "",IDC_D3,94,65,15,10
+    CHECKBOX        "",IDC_D4,94,80,15,10
+    CHECKBOX        "",IDC_D5,94,95,15,10
+    CHECKBOX        "",IDC_D6,94,110,15,10
+    CHECKBOX        "",IDC_D7,94,125,15,10
+    CHECKBOX        "",IDC_E0,65,20,15,10
+    CHECKBOX        "",IDC_E1,65,35,15,10
+    CHECKBOX        "",IDC_E2,65,50,15,10
+    CHECKBOX        "",IDC_E3,65,65,15,10
+    CHECKBOX        "",IDC_E4,65,80,15,10
+    CHECKBOX        "",IDC_E5,65,95,15,10
+    CHECKBOX        "",IDC_E6,65,110,15,10
+    CHECKBOX        "",IDC_E7,65,125,15,10
+    CHECKBOX        "編集レイヤーだけをハイライト表示",IDC_CHECK_EDIT_HIGHLIGHT,9,162,111,10
+    CHECKBOX        "レイヤー設定ボックスに名前を表示(リスタート後に有効)",IDC_CHECK_DIPLAY_NAME_ON_BAR,9,144,177,10
+    LTEXT           "レイヤー0",IDC_STATIC,21,20,27,8
+    LTEXT           "レイヤー1",IDC_STATIC,21,35,27,8
+    LTEXT           "レイヤー2",IDC_STATIC,21,50,27,8
+    LTEXT           "レイヤー3",IDC_STATIC,21,65,27,8
+    LTEXT           "レイヤー4",IDC_STATIC,21,80,27,8
+    LTEXT           "レイヤー5",IDC_STATIC,21,95,27,8
+    LTEXT           "レイヤー6",IDC_STATIC,21,110,27,8
+    LTEXT           "レイヤー7",IDC_STATIC,21,125,27,8
+    EDITTEXT        IDC_N0,117,18,71,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_N1,117,33,71,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_N2,117,48,71,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_N3,117,63,71,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_N4,117,78,71,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_N5,117,93,71,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_N6,117,108,71,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_N7,117,123,71,14,ES_AUTOHSCROLL
+    LTEXT           "編集",IDC_STATIC,63,6,15,8
+    LTEXT           "表示",IDC_STATIC,90,6,15,8
+    LTEXT           "レイヤー名",IDC_STATIC,126,6,30,8
 END
 
 IDD_SETSHEETSIZE DIALOGEX 0, 0, 154, 129
@@ -557,6 +589,38 @@ BEGIN
     PUSHBUTTON      "キャンセル",IDCANCEL,198,66,50,14
 END
 
+IDD_DBAR_LAYER_S DIALOGEX 0, 0, 87, 162
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 9, "MS Shell Dlg", 400, 0, 0x80
+BEGIN
+    CONTROL         "",IDC_D0,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,18,9,9
+    CONTROL         "",IDC_D1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,36,9,9
+    CONTROL         "",IDC_D2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,54,9,9
+    CONTROL         "",IDC_D3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,72,9,9
+    CONTROL         "",IDC_D4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,90,9,9
+    CONTROL         "",IDC_D5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,108,9,9
+    CONTROL         "",IDC_D6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,126,9,9
+    CONTROL         "",IDC_D7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,144,9,9
+    CONTROL         "0",IDC_E0,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,17,12,12
+    CONTROL         "1",IDC_E1,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,35,12,12
+    CONTROL         "2",IDC_E2,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,53,12,12
+    CONTROL         "3",IDC_E3,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,71,12,12
+    CONTROL         "4",IDC_E4,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,89,12,12
+    CONTROL         "5",IDC_E5,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,107,12,12
+    CONTROL         "6",IDC_E6,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,125,12,12
+    CONTROL         "7",IDC_E7,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,3,143,12,12
+    CONTROL         "",IDC_STATIC_VIEW,"Static",SS_BITMAP,20,3,15,13
+    CONTROL         "",IDC_STATIC_EDIT,"Static",SS_BITMAP,3,3,10,10
+    EDITTEXT        IDC_N0,36,18,45,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_N1,36,36,45,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_N2,36,54,45,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_N3,36,72,45,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_N4,36,90,45,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_N5,36,108,45,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_N6,36,126,45,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_N7,36,144,45,14,ES_AUTOHSCROLL | ES_READONLY
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -575,9 +639,9 @@ BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
         LEFTMARGIN, 10
-        RIGHTMARGIN, 174
+        RIGHTMARGIN, 213
         TOPMARGIN, 7
-        BOTTOMMARGIN, 86
+        BOTTOMMARGIN, 110
     END
 
     IDD_SETLIB_DLG, DIALOG
@@ -637,7 +701,7 @@ BEGIN
 
     IDD_SETLAYER, DIALOG
     BEGIN
-        RIGHTMARGIN, 186
+        RIGHTMARGIN, 195
         VERTGUIDE, 13
         VERTGUIDE, 62
         VERTGUIDE, 77
@@ -758,6 +822,11 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 80
     END
+
+    IDD_DBAR_LAYER_S, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 147
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -808,11 +877,17 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\BSch.ico"
+
 IDR_BSCHTYPE            ICON                    "res\\BSchDoc.ico"
+
 IDI_TAG_SQ              ICON                    "res\\tag_sq.ico"
+
 IDI_TAG_L               ICON                    "res\\tag_l.ico"
+
 IDI_TAG_LR              ICON                    "res\\tag_lr.ico"
+
 IDI_TAG_R               ICON                    "res\\tag_r.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -865,7 +940,7 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "イメージファイル出力(&B)...",           ID_FILE_EXPO_BMP
         MENUITEM "メタファイル出力(&M)...",             ID_FILE_EXPO_EMF
-        MENUITEM "イメージをクリップボードにコピー",            ID_FILE_EXPO_CLIPBORD
+        MENUITEM "イメージをクリップボードにコピー(BMP)",       ID_FILE_EXPO_CLIPBORD
         MENUITEM SEPARATOR
         MENUITEM "最近使ったファイル",                   ID_FILE_MRU_FILE1
         MENUITEM SEPARATOR
@@ -1002,7 +1077,7 @@ BEGIN
     END
     POPUP "ヘルプ(&H)"
     BEGIN
-        MENUITEM "バージョン情報(BSch3V) (&A)...",     ID_APP_ABOUT
+        MENUITEM "このアプリについて (&A)...",           ID_APP_ABOUT
     END
 END
 
@@ -1044,6 +1119,22 @@ BEGIN
         MENUITEM "LCoVで編集",                     ID_FLOAT_EDIT_WITH_LCOV
         MENUITEM SEPARATOR
         MENUITEM "制御点の移動(&E)",                  ID_EDIT_POINTS
+        POPUP "まとめて変更"
+        BEGIN
+            MENUITEM "部品情報の置換",                     ID_BULKATTRIBUTE_REPLACECOMPONENTINFO
+            MENUITEM "パーツの番号と名前の非表示設定",             ID_BULKATTRIBUTE_HIDENUMBERS
+            MENUITEM "装飾線",                         ID_BULKATTRIBUTE_DECORATIONLINE
+            MENUITEM "マーカーライン",                     ID_BULKATTRIBUTE_MARKERLINE
+            MENUITEM "タグの枠",                        ID_BULKATTRIBUTE_TAGFRAME
+            MENUITEM "コメントのフォント",                   ID_BULKATTRIBUTE_COMMENTFONT
+            MENUITEM SEPARATOR
+            MENUITEM "タグ→ラベル",                      ID_CONVERT_T2L
+            MENUITEM "タグ→コメント",                     ID_CONVERT_T2C
+            MENUITEM "ラベル→タグ",                      ID_CONVERT_L2T
+            MENUITEM "ラベル→コメント",                    ID_CONVERT_L2C
+            MENUITEM "コメント→タグ",                     ID_CONVERT_C2T
+            MENUITEM "コメント→ラベル",                    ID_CONVERT_C2L
+        END
         MENUITEM SEPARATOR
         POPUP "レイヤーの移動(&L)"
         BEGIN
@@ -1104,23 +1195,34 @@ END
 //
 
 IDC_CUR_NORMAL          CURSOR                  "res\\cur_norm.cur"
+
 IDC_CUR_MOVE            CURSOR                  "res\\cur_move.cur"
+
 IDC_CUR_PLACE           CURSOR                  "res\\cur_plac.cur"
+
 IDC_CUR_CC_MOVE         CURSOR                  "res\\cursor1.cur"
+
 IDC_CUR_SCRL            CURSOR                  "RES\\scrollha.cur"
+
 IDC_CURSOR_NULL         CURSOR                  "res\\cur00001.cur"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // AFX_DIALOG_LAYOUT
 //
 
-IDD_ABOUTBOX AFX_DIALOG_LAYOUT
+IDD_SETLAYER AFX_DIALOG_LAYOUT
 BEGIN
     0
 END
 
-IDD_SETLIB_DLG AFX_DIALOG_LAYOUT
+IDD_DBAR_LAYER_S AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_ABOUTBOX AFX_DIALOG_LAYOUT
 BEGIN
     0
 END
@@ -1374,7 +1476,7 @@ STRINGTABLE
 BEGIN
     IDS_UNREG_FILETYPE      "ファイルタイプ情報をアンレジストしました"
     IDS_REG_FILETYPE        "ファイルタイプ情報をレジストしました"
-    IDS_URL                 "http://www.suigyodo.com/online"
+    IDS_URL                 "https://www.suigyodo.com/online"
     IDS_DISCARD_CHANGES_COMMENT "テキストの変更を破棄しますか?"
     IDS_COL_QUICKPROPVIEW   "アトリビュートプレビュー"
     IDS_COL_TEMPFRAME_FOCUSED "選択図面要素枠"
@@ -1383,7 +1485,7 @@ BEGIN
     IDS_INVALID_IMAGE_MAGNIFICATION "倍率の設定が有効範囲外です"
     IDS_INVALID_MARKSIZE    "端点サイズの設定が有効範囲外です"
     IDS_LATERVERSION        "このファイルはより新しいバージョンで作成されています\n上書き保存するといくつかのデータが失われるかもしれません"
-    IDS_VERSION             "0.83.01"
+    IDS_VERSION             "0.84.00"
     IDS_DISCARD_AND_RELOAD  "このドキュメントは変更されています\n再読み込みをすると変更は破棄されます\n現在のドキュメントへの変更を破棄しますか?"
     IDS_MSGLINE_SPACE_CHANGE_DIR "スペースキー: 水平垂直の順を入れ替え    "
     IDS_MSGLINE_WIRE_ESC    "ESCキー: 中断    "

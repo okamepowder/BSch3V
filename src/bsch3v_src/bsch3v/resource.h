@@ -131,6 +131,7 @@
 #define IDD_FIND2_OPTION                193
 #define IDB_BITMAP_SORTMARK             194
 #define IDD_DIALOG_DISPBLOCK            195
+#define IDD_DBAR_LAYER_S                196
 #define IDC_EDIT_PARTNUM                1001
 #define IDC_SPIN_PARTBLOCK              1002
 #define IDC_EDIT_PARTBLOCK              1003
@@ -166,6 +167,8 @@
 #define IDC_CHECK_EDIT_HIGHLIGHT        1024
 #define IDC_CHECK_RES_AUTO              1025
 #define IDC_CHECK_PAGEFIT               1025
+#define IDC_CHECK_EDIT_HIGHLIGHT2       1025
+#define IDC_CHECK_DIPLAY_NAME_ON_BAR    1025
 #define IDC_EDIT_RES                    1026
 #define IDC_CHECK_PARTNAME              1027
 #define IDC_BUTTON_FONT                 1027
@@ -290,10 +293,25 @@
 #define IDC_CHECK_FOOTER                1106
 #define IDC_EDIT1                       1107
 #define IDC_EDIT_FOOTER                 1107
+#define IDC_N0                          1107
 #define IDC_RADIO_NOTDISPLAY            1108
+#define IDC_EDIT2                       1108
+#define IDC_N1                          1108
 #define IDC_RADIO_NUM                   1109
 #define IDC_STATIC_BLOCK_STATUS         1109
+#define IDC_EDIT3                       1109
+#define IDC_N2                          1109
 #define IDC_RADIO_ALP                   1110
+#define IDC_EDIT4                       1110
+#define IDC_N3                          1110
+#define IDC_EDIT5                       1111
+#define IDC_N4                          1111
+#define IDC_EDIT6                       1112
+#define IDC_N5                          1112
+#define IDC_EDIT7                       1113
+#define IDC_N6                          1113
+#define IDC_EDIT8                       1114
+#define IDC_N7                          1114
 #define ID_TOOL_WIRE                    32772
 #define ID_TOOL_BUS                     32773
 #define ID_TOOL_DASH                    32774
@@ -386,13 +404,15 @@
 #define ID_FLOAT_EDIT_WITH_LCOV         32896
 #define ID_SETUP_BLOCK                  32897
 #define ID_SETUP_DISPBLOCK              32898
-#define ID_TOOL_EXT_LCOV                32899
-#define ID_TOOL_RUN_PL3W                32900
-#define ID_TOOL_RUN_LCOV                32901
-#define ID_TOOL_RUN_NUT3W               32902
-#define ID_TOOL_RUN_NL3W                32903
-#define ID_TOOL_RUN_CE3SEARCH           32904
-#define ID_FILE_EXPO_CLIPBORD           32905
+#define ID_32899						32899
+#define ID_FILE_EXPORTEMFDIRECT         32899
+#define ID_TOOL_EXT_LCOV                35000
+#define ID_TOOL_RUN_PL3W                35001
+#define ID_TOOL_RUN_LCOV                35002
+#define ID_TOOL_RUN_NUT3W               35003
+#define ID_TOOL_RUN_NL3W                35004
+#define ID_TOOL_RUN_CE3SEARCH           35005
+#define ID_FILE_EXPO_CLIPBORD           35006
 #define IDS_LIBSET_VALID_NEXT           61447
 #define IDS_FILEREADERROR               61448
 #define IDS_SETFONT_VALIDNEXT           61449
@@ -410,8 +430,8 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        196
-#define _APS_NEXT_COMMAND_VALUE         32906
+#define _APS_NEXT_RESOURCE_VALUE        198
+#define _APS_NEXT_COMMAND_VALUE         32900
 #define _APS_NEXT_CONTROL_VALUE         1110
 #define _APS_NEXT_SYMED_VALUE           119
 #endif

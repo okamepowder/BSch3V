@@ -47,7 +47,21 @@ bool SXBSchImageObj::LoadDIB(const TCHAR* fname)
 	return true;
 }
 
+bool SXBSchImageObj::LoadClipboardDIB(byte* buff, int clipBoardDataSize)
+{
+	DeleteImageData();
 
+	SImageDIB* pImage = new SImageDIB;
+	if (!pImage->LoadWindowsClipboardDIB(buff, clipBoardDataSize)) {
+		delete pImage;
+		return false;
+	}
+
+	m_pImageData = pImage;
+
+	m_pImageData->m_refCount++;
+	return true;
+}
 
 
 int	SXBSchImageObj::ImageWidth()

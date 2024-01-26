@@ -245,6 +245,23 @@ void CBSchView::OnFilePrint()
 	((CBSchApp*)AfxGetApp())->IniWritePrinterSetup();
 }
 
+void CBSchView::OnFileEmfDirect()	//2024/01/07
+{
+	//現在のファイルの名前を得る
+	CBSchDoc* pDoc = GetDocument();
+	CString rPathName = pDoc->GetPathName();
+	TCHAR drive[_MAX_DRIVE];
+	TCHAR fname[_MAX_FNAME];
+	TCHAR dir[_MAX_DIR];
+	TCHAR emfPath[_MAX_PATH];
+	::_tsplitpath(rPathName, drive, dir, fname, NULL);
+	::_tmakepath(emfPath, drive, dir, fname,_T(".emf"));
+
+	PrepareDrawFlagForPrint(NULL);
+
+	ExportEmf(emfPath);
+}
+
 void CBSchView::OnFilePrintPreview() 
 {
 	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
@@ -521,6 +538,7 @@ void CBSchView::OnFileExpoBmp()
 	//----- 2016/05/03 pngを優先度高にする 
 	strFilter = _T("PNG file(*.png)|*.PNG|Bitmap file(*.bmp)|*.BMP||");
 
+
 	//現在のファイルの名前を得る
 	CBSchDoc* pDoc = GetDocument();
 	CString rTitle=pDoc->GetTitle();
@@ -539,6 +557,7 @@ void CBSchView::OnFileExpoBmp()
 	dlg.m_ofn.lpstrTitle=rCaption;		//ファイルダイアログクラスにキャプションの設定
 
 	//ファイルダイアログの実行
+
 	if (dlg.DoModal() != IDOK) {
 		return;
 	}
@@ -634,6 +653,7 @@ BOOL CBSchView::ExportBitmapFile(LPCTSTR pszFileName)
 
 BOOL CBSchView::ExportToClipbord()
 {
+	// Todo : EMF
 	//一時データがあれば、エクスポートする前にフィックスする
 	ChangeTool(m_nCurrentTool, m_nCurrentTool);
 
@@ -730,6 +750,9 @@ BOOL CBSchView::CopyEmf()
 BOOL CBSchView::ExportEmf(LPCTSTR pszFileName)
 {
 	CSize sizeSheet;
+
+	preparePrintVars();
+
 	CBSchDoc* pDoc = GetDocument();
 	sizeSheet=pDoc->GetSheetSize();
 	
@@ -775,6 +798,12 @@ BOOL CBSchView::ExportEmf(LPCTSTR pszFileName)
 	}
 	dwMode |= DRAW_FOR_PRINT;
 	DrawMainData(&mDC,pDoc,dwMode,nPrintVExt,nPrintWExt,rc);
+
+	if (m_bPrintFooter) {
+		mDC.SelectClipRgn(NULL);
+		g_DrawComment(&mDC, &m_cmntFooter, dwMode, nPrintVExt, nPrintWExt);
+	}
+
 	HENHMETAFILE hemf=mDC.CloseEnhanced();
 	::DeleteEnhMetaFile(hemf);
 

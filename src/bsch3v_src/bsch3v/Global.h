@@ -16,6 +16,7 @@ using namespace std;
 extern BOOL g_bDisplayPartFrame;
 extern BOOL g_bDisplayNcPinMark;
 extern BOOL g_bDisplayHiddenPinNum;	//0.63.01
+extern unsigned g_JunctionDrawSize;	//0.83.02
 
 extern CWnd* g_pViewWindow;
 
@@ -31,7 +32,11 @@ extern wstring g_docTimeStamp;
 extern wstring g_docDate;
 extern wstring g_printTime;
 
+//////////////////////////////////////////////////////////////////////
+//バックアップのレベル
+extern unsigned g_backupLevel;
 
+#define MAX_BACKUP_LEVEL 5
 
 
 //////////////////////////////////////////////////////////////////////

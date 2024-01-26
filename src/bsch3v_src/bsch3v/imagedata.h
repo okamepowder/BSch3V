@@ -66,6 +66,8 @@ public:
 	//DIB‚Ìƒtƒ@ƒCƒ‹‚©‚ç‚Ì“Ç‚İ‚İ
 	bool Load(const TCHAR* fname);
 
+	bool LoadWindowsClipboardDIB(byte* buff, int clipBoardDataSize);
+
 	bool Load(SReadCE3& rce3);
 	bool Save(SWriteCE3& wce3);
 

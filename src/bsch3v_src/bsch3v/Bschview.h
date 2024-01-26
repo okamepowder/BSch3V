@@ -237,7 +237,8 @@ private:
 
 	//BOOL m_bUsePreview;
 
-	BOOL m_fEditHighLight;
+	BOOL m_fEditHighLight;				//TRUEのとき、アクティブレイヤーだけをハイライト
+
 	////////////////////////////////////////////////////
 	//ツール選択・操作・表示の状態に関わるもの
 	int m_nCurrentTool;		//現在選択しているツール
@@ -309,6 +310,9 @@ private:
 //		FOCUSED_TO_VAL = 2
 //	};
 
+
+public:
+	void SetDBarLayer_LayerName(void);
 	
 public:
 	////////////////////////////////////////////////////
@@ -438,9 +442,13 @@ private:
 	void IniReadPrintMargin(int& left,int& upper,int& right,int& lower);//レジストリから印刷マージンの読み込み
 	void IniWritePrintMargin(int left,int upper,int right,int lower);//レジストリに印刷マージンの書き込み
 
-	BOOL CBSchView::IniReadClickClickLineMode();	//レジストリからクリッククリックラインモードの情報を得る
-	void CBSchView::IniWriteClickClickLineMode(BOOL bClickClick);	//レジストリにクリッククリックラインモードの情報を書き込む
+	BOOL IniReadClickClickLineMode();	//レジストリからクリッククリックラインモードの情報を得る
+	void IniWriteClickClickLineMode(BOOL bClickClick);	//レジストリにクリッククリックラインモードの情報を書き込む
+	unsigned IniReadJunctionSize();						//Get drawsize of JUNCTION from the registry
+	void IniWriteJunctionSize(unsigned junctionSize);	//Set drawsize of JUNCTION to the registry
 
+	unsigned IniReadBackupLevel();						//Get backup level from the registry
+	void IniWriteBackupLevel(unsigned n);				//Set backup level to the registry
 
 	//コメントのクラスにデフォルトのフォントを設定する
 	void SetDefaultFontSettingsToCommentClass();
@@ -678,6 +686,7 @@ protected:
 	afx_msg void OnUpdateEditAttribute(CCmdUI* pCmdUI);
 	afx_msg void OnEditAttribute();
 	afx_msg void OnFilePrint();
+	afx_msg void OnFileEmfDirect();	//2024/01/07
 	afx_msg void OnFilePrintPreview();
 	afx_msg void OnFileExpoBmp();
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
