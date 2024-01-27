@@ -54,7 +54,6 @@ using namespace std;
 static char THIS_FILE[] = __FILE__;
 #endif
 
-//bool g_bIsWin9x;
 bool g_bFillEndOfPtnLine;//倍率1においてパターン描画の水平、垂直描画直線の終端を補う。
 
 static int PinDataNormal[4][4]={
@@ -199,161 +198,6 @@ static int PinDataInvert[4][8]={
 //		}
 //	};
 
-
-void  DotLine9x(CDC* pDC,int x0,int y0,int x1,int y1,int width,bool& rbMark,int& rPos)
-{
-	int x=x0;
-	int y=y0;
-	int n;
-	int xd,yd;
-	int movePitch;
-	double incline;
-	if(width<1)width=1;
-	int pitch = width*3;
-	if(rPos>pitch)rPos=0;
-
-	if(x0==x1 && y0==y1)return;
-
-	pDC->MoveTo(x0,y0);
-	if(abs(x0-x1)>abs(y0-y1)){
-		xd=abs(x0-x1);	//abs of deleta X
-		yd=y1-y0;		//deleta Y
-		incline=(double)yd/xd;
-		movePitch =(int) sqrt(pitch*pitch/(1+incline*incline));
-//TRACE("%d,%d,%f\n",pitch,movePitch,incline);
-
-		if(rPos) n=movePitch*rPos/pitch;
-		else n=movePitch;
-		while(1){
-			if(n>=xd){
-				rPos=n-xd;
-				x=x1;
-				y=y1;
-			}else{
-				if(x0<x1){
-					x=x0+n;
-				}else{
-					x=x0-n;
-				}
-				y=y0+yd*n/xd;
-			}
-			if(rbMark){
-				pDC->LineTo(x,y);
-			}else{
-				pDC->MoveTo(x,y);
-			}
-			if(n>xd)break;
-			rbMark=!rbMark;
-			if(x==x1)break;
-			n+=movePitch;
-		}
-	}else{
-		yd=abs(y0-y1);	//abs of deleta Y
-		xd=x1-x0;		//deleta X
-		incline=(double)xd/yd;
-		movePitch =(int) sqrt(pitch*pitch/(1+incline*incline));
-
-		if(rPos) n=movePitch*rPos/pitch;
-		else n=movePitch;
-
-//TRACE("%d,%d,%d,%f\n",pitch,movePitch,n,incline);
-
-		while(1){
-			if(n>=yd){
-				rPos=n-yd;
-				x=x1;
-				y=y1;
-			}else{
-				if(y0<y1){
-					y=y0+n;
-				}else{
-					y=y0-n;
-				}
-				x=x0+xd*n/yd;
-			}
-			if(rbMark){
-				pDC->LineTo(x,y);
-			}else{
-				pDC->MoveTo(x,y);
-			}
-			if(n>yd)break;
-			rbMark=!rbMark;
-			if(y==y1)break;
-			n+=movePitch;
-		}
-	}
-	rPos=pitch*rPos/movePitch;
-//TRACE("     %d,%d\n",rbMark,rPos);
-}
-
-void DotPolygon9x(CDC* pDC,LPPOINT pPoint,int node,int width)
-{
-	if(node<2)return;
-	bool bMark=true;
-	int nPos=0;
-	int i;
-//TRACE("DotPolygon9x\n");
-	for(i=0;i<node-1;i++){
-		DotLine9x(pDC,	pPoint[i].x,   pPoint[i].y,
-						pPoint[i+1].x, pPoint[i+1].y,
-						width,bMark,nPos);
-	}
-	DotLine9x(pDC,	pPoint[node-1].x,   pPoint[node-1].y,
-					pPoint[0].x, pPoint[0].y,
-					width,bMark,nPos);
-}
-
-
-
-void DotArc9x(CDC* pDC,CRect* prc,CPoint ptBegin, CPoint ptEnd,int nWidth)
-{
-	double centerX,centerY;
-	double rv;
-	double hm;
-	double dBegin,dEnd,a;
-	int x0,y0,x1,y1;
-	bool bMark=true;
-	int nPos=0;
-	double width=prc->Width();
-	double height=prc->Height();
-
-	centerX=(double)(prc->left+prc->right)/2;
-	centerY=(double)(prc->top +prc->bottom)/2;
-	rv=(double)(prc->bottom)-centerY;
-	
-	if(height==0)height=1;
-	if(width==0)width=1;
-	hm=width/height;
-	if(ptBegin==ptEnd){
-		dBegin=0;
-		dEnd=2*M_PI;
-	}else{
-		dBegin = atan2(centerY-(double)ptBegin.y,((double)ptBegin.x-centerX)/hm);
-		dEnd = atan2(centerY-(double)ptEnd.y,((double)ptEnd.x-centerX)/hm);
-		if(dEnd<dBegin)dEnd+=2*M_PI;
-	}
-//TRACE("begin %f,end %f\n",dBegin,dEnd);
-	a=dBegin;
-	x0=(int)(centerX+rv*cos(a)*hm);
-	y0=(int)(centerY-rv*sin(a));
-	while(1){
-		//TRACE("%d,%d,%f,%f,%f\n",x0,y0,a,cos(a),sin(a));
-		a+=(2*M_PI)/32;
-		if(a>=dEnd){
-			a=dEnd;
-		}
-		x1=(int)(centerX+rv*cos(a)*hm);
-		y1=(int)(centerY-rv*sin(a));
-		//TRACE("%d,%d\n",bMark,nPos);
-		DotLine9x(pDC,x0,y0,x1,y1,nWidth,bMark,nPos);
-		if(a==dEnd)break;
-		x0=x1;
-		y0=y1;
-	}
-}
-
-
-
 void convDirXY(int&rx,int&ry,int dir,int cx,int cy)
 {
 	int x,y,w;
@@ -494,7 +338,6 @@ void g_DrawPtnLine(
 	CPen* pPenOld;
 	int x1,y1;
 	int xs,ys;
-	bool b9xDot=false;
 
 	int width = (pPtnObj->m_width * nVExt)/nWExt;
 	int style = pPtnObj->m_style;
@@ -503,18 +346,12 @@ void g_DrawPtnLine(
 		newPen.CreatePen(PS_SOLID,width,col);
 	}else{	//DOT LINE
 		if(width>1){
-			//if(::g_bIsWin9x){
-			//	newPen.CreatePen(PS_SOLID,width,col);
-			//	b9xDot=true;
-			//}else
-			{
-				DWORD adwPenStyle[2];
-				adwPenStyle[0]=adwPenStyle[1]=width*2;
-				LOGBRUSH logBrush;
-				logBrush.lbStyle = BS_SOLID;
-				logBrush.lbColor = col;
-				newPen.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND, width, &logBrush,2,adwPenStyle);
-			}
+			DWORD adwPenStyle[2];
+			adwPenStyle[0]=adwPenStyle[1]=width*2;
+			LOGBRUSH logBrush;
+			logBrush.lbStyle = BS_SOLID;
+			logBrush.lbColor = col;
+			newPen.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND, width, &logBrush,2,adwPenStyle);
 		}else{
 			newPen.CreatePen(PS_DOT,width,col);
 		}
@@ -545,11 +382,6 @@ void g_DrawPtnLine(
 		}
 	}
 
-	//if(b9xDot){
-	//	bool bMark=true;
-	//	int nPos=0;
-	//	DotLine9x(pDC,xs,ys,x1,y1,width,bMark,nPos);
-	//}else{
 	if(!pPtnObj->getCurve()){
 		int nOldBkMmode=pDC->SetBkMode(TRANSPARENT);
 		pDC->MoveTo(xs,ys);
@@ -598,7 +430,6 @@ void g_DrawPtnCircle(
 	CBrush* pBrushOld;
 
 	int x1,y1,x2,y2;
-	//bool b9xDot=false;
 	int fill = pPtnObj->m_nFill;
 
 
@@ -612,22 +443,12 @@ void g_DrawPtnCircle(
 		newPen.CreatePen(PS_SOLID,width,col);
 	}else /*if(style == 1)*/{
 		if(width>1){
-			//if(::g_bIsWin9x){
-			//	if(fill == -1){	//フィルなしのときだけまじめに点線描画
-			//		newPen.CreatePen(PS_SOLID,width,col);
-			//		b9xDot=true;
-			//	}else{
-			//		newPen.CreatePen(PS_DOT,1,col);
-			//	}
-			//}else
-			{
-				DWORD adwPenStyle[2];
-				adwPenStyle[0]=adwPenStyle[1]=width*2;
-				LOGBRUSH logBrush;
-				logBrush.lbStyle = BS_SOLID;
-				logBrush.lbColor = col;
-				newPen.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND, width, &logBrush,2,adwPenStyle);
-			}
+			DWORD adwPenStyle[2];
+			adwPenStyle[0]=adwPenStyle[1]=width*2;
+			LOGBRUSH logBrush;
+			logBrush.lbStyle = BS_SOLID;
+			logBrush.lbColor = col;
+			newPen.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND, width, &logBrush,2,adwPenStyle);
 		}else{
 			newPen.CreatePen(PS_DOT,width,col);
 		}
@@ -674,15 +495,10 @@ void g_DrawPtnCircle(
 		rc.bottom++;
 	}
 
-	//if(b9xDot){
-	//	CPoint pt(1,1);
-	//	DotArc9x(pDC,&rc,pt,pt,width);
-	//}else
-	{
-		int nOldBkMmode=pDC->SetBkMode(TRANSPARENT);
-		pDC->Ellipse(&rc);
-		pDC->SetBkMode(nOldBkMmode);
-	}
+	int nOldBkMmode=pDC->SetBkMode(TRANSPARENT);
+	pDC->Ellipse(&rc);
+	pDC->SetBkMode(nOldBkMmode);
+
 	pDC->SelectObject(pBrushOld);
 	pDC->SelectObject(pPenOld);
 }
@@ -704,7 +520,6 @@ void g_DrawPtnPolygon(
 	CBrush newBrush;
 	CBrush* pBrushOld;
 	static POINT aPoint[VECTPLOYGON_MAXNODE]; 
-	//bool b9xDot=false;
 	int fill = pPtnObj->m_nFill;
 	
 
@@ -733,22 +548,12 @@ void g_DrawPtnPolygon(
 
 	}else /*if(style == 1)*/{
 		if(width>1){
-			//if(::g_bIsWin9x){
-			//	if(fill == -1){	//フィルなしのときだけまじめに点線描画
-			//		newPen.CreatePen(PS_SOLID,width,col);
-			//		b9xDot=true;
-			//	}else{
-			//		newPen.CreatePen(PS_DOT,1,col);
-			//	}
-			//}else
-			{
-				DWORD adwPenStyle[2];
-				adwPenStyle[0]=adwPenStyle[1]=width*2;
-				LOGBRUSH logBrush;
-				logBrush.lbStyle = BS_SOLID;
-				logBrush.lbColor = col;
-				newPen.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND| PS_JOIN_ROUND, width, &logBrush,2,adwPenStyle);
-			}
+			DWORD adwPenStyle[2];
+			adwPenStyle[0]=adwPenStyle[1]=width*2;
+			LOGBRUSH logBrush;
+			logBrush.lbStyle = BS_SOLID;
+			logBrush.lbColor = col;
+			newPen.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND| PS_JOIN_ROUND, width, &logBrush,2,adwPenStyle);
 		}else{
 			//newPen.CreatePen(PS_DOT,width,col);
 			newPen.CreatePen(PS_GEOMETRIC | PS_DOT | PS_ENDCAP_ROUND | PS_JOIN_ROUND, width, &lb);
@@ -787,15 +592,12 @@ void g_DrawPtnPolygon(
 		aPoint[i].x=x1;
 		aPoint[i].y=y1;
 	}
-	//if(b9xDot){
-	//	DotPolygon9x(pDC,aPoint,node,width);
-	//}else
-	{
-		pDC->SetPolyFillMode(WINDING);
-		int nOldBkMmode=pDC->SetBkMode(TRANSPARENT);
-		pDC->Polygon(aPoint,node);
-		pDC->SetBkMode(nOldBkMmode);
-	}
+
+	pDC->SetPolyFillMode(WINDING);
+	int nOldBkMmode=pDC->SetBkMode(TRANSPARENT);
+	pDC->Polygon(aPoint,node);
+	pDC->SetBkMode(nOldBkMmode);
+
 	pDC->SelectObject(pBrushOld);
 	pDC->SelectObject(pPenOld);
 
@@ -815,7 +617,6 @@ void g_DrawPtnArc(
 {
 	CPen newPen;
 	CPen* pPenOld;
-	//bool b9xDot=false;
 
 	int x,y,r,x1,y1,x2,y2,x3,y3,x4,y4;
 
@@ -828,18 +629,12 @@ void g_DrawPtnArc(
 		newPen.CreatePen(PS_SOLID,width,col);
 	}else /*if(style == 1)*/{
 		if(width>1){
-			//if(::g_bIsWin9x){
-			//	newPen.CreatePen(PS_SOLID,width,col);
-			//	b9xDot=true;
-			//}else
-			{
-				DWORD adwPenStyle[2];
-				adwPenStyle[0]=adwPenStyle[1]=width*2;
-				LOGBRUSH logBrush;
-				logBrush.lbStyle = BS_SOLID;
-				logBrush.lbColor = col;
-				newPen.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND, width, &logBrush,2,adwPenStyle);
-			}
+			DWORD adwPenStyle[2];
+			adwPenStyle[0]=adwPenStyle[1]=width*2;
+			LOGBRUSH logBrush;
+			logBrush.lbStyle = BS_SOLID;
+			logBrush.lbColor = col;
+			newPen.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND, width, &logBrush,2,adwPenStyle);
 		}else{
 			newPen.CreatePen(PS_DOT,width,col);
 		}
@@ -908,14 +703,10 @@ void g_DrawPtnArc(
 		ptEnd=CPoint(x4,y4);
 	}
 
-	//if(b9xDot){
-	//	DotArc9x(pDC,&rc,ptBegin,ptEnd,width);
-	//}else
-	{
-		int nOldBkMmode=pDC->SetBkMode(TRANSPARENT);
-		pDC->Arc(&rc,ptBegin,ptEnd);
-		pDC->SetBkMode(nOldBkMmode);
-	}
+	int nOldBkMmode=pDC->SetBkMode(TRANSPARENT);
+	pDC->Arc(&rc,ptBegin,ptEnd);
+	pDC->SetBkMode(nOldBkMmode);
+
 	pDC->SelectObject(pPenOld);
 }
 
@@ -1095,33 +886,11 @@ void g_DrawDash(
 			penNew.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND, nWidth, &logBrush,2,adwPenStyle);
 		}
 	}
-	//bool b9xDot=false;
-	//if(nWidth>1){
-		//if(::g_bIsWin9x){
-		//	penNew.CreatePen(PS_SOLID,nWidth,col);
-		//	b9xDot=true;
-		//}else
-		//{
-		//	int pitchBase = nWidth;
-		//	if(pitchBase<1) pitchBase = 1;
-		//	DWORD adwPenStyle[2];
-		//	adwPenStyle[0]=adwPenStyle[1]=pitchBase*4;
-		//	LOGBRUSH logBrush;
-		//	logBrush.lbStyle = BS_SOLID;
-		//	logBrush.lbColor = col;
-		//	penNew.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND, nWidth, &logBrush,2,adwPenStyle);
-		//}
-	//}else{
-	//	penNew.CreatePen(PS_DOT,nWidth,col);
-	//}
+
 	nOldBkMmode=pDC->SetBkMode(TRANSPARENT);
 	ppenOld=pDC->SelectObject(&penNew);			//作成したペンの選択
 	nOldDrawMode=pDC->SetROP2(R2_COPYPEN);		//描画モードの設定
-	//if(b9xDot){
-	//	bool bMark=true;
-	//	int nPos=0;
-	//	DotLine9x(pDC,x0,y0,x1,y1,nWidth,bMark,nPos);
-	//}else
+
 	if(!pDash->curve()){
 		int x0,y0,x1,y1;
 		x0=(pDash->p1().x() * nVExt)/nWExt;
@@ -2155,12 +1924,12 @@ void g_DrawComment(
 
 
 	XFORM xform;
-	xform.eM11 = cos(rot);
-	xform.eM12 = sin(rot);
+	xform.eM11 = (FLOAT)cos(rot);
+	xform.eM12 = (FLOAT)sin(rot);
 	xform.eM21 = -xform.eM12;
 	xform.eM22 = xform.eM11;
-	xform.eDx = (xp * nVExt)/nWExt;
-	xform.eDy = (yp * nVExt)/nWExt;
+	xform.eDx = (FLOAT)(xp * nVExt)/nWExt;
+	xform.eDy = (FLOAT)(yp * nVExt)/nWExt;
 	int dcInfo = pDC->SaveDC();
 	int graphicsMode = pDC->SetGraphicsMode(GM_ADVANCED);
 

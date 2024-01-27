@@ -436,15 +436,6 @@ CBSchView::CBSchView()
 	m_bClickClickLineMode = false;	//0.69
 	m_nPlaceSequence = 0;			//0.69
 
-	//{
-	//	::g_bIsWin9x = false;
-	//	OSVERSIONINFO versionInfo;
-	//	versionInfo.dwOSVersionInfoSize=sizeof(OSVERSIONINFO);
-	//	if(GetVersionEx(&versionInfo)){
-	//		::g_bIsWin9x = (versionInfo.dwPlatformId == VER_PLATFORM_WIN32_WINDOWS);
-	//	}
-	//}
-
 	::g_bFillEndOfPtnLine = (AfxGetApp()->GetProfileInt(_T("Option"),_T("FillEndOfPtnLine"),0)!=0);
 	AfxGetApp()->WriteProfileInt(_T("Option"),_T("FillEndOfPtnLine"),g_bFillEndOfPtnLine);
 
@@ -5184,7 +5175,7 @@ void CBSchView::OnSetupDispblock()
 
 std::wstring CBSchView::GetAppPath()
 {
-	std:wstring res;
+	std::wstring res;
 	TCHAR fname[MAX_PATH];
 	fname[0] = _T('\0');
 	if (::GetModuleFileName(NULL, fname, MAX_PATH))

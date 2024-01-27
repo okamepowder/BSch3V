@@ -59,7 +59,7 @@ BOOL CDispBlockNum::OnInitDialog()
 void CDispBlockNum::OnOK()
 {
 	// TODO: ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。
-	CButton* pBtn;
+	//CButton* pBtn;
 	
 	if(((CButton*)GetDlgItem(IDC_RADIO_NOTDISPLAY))->GetCheck() ==  BST_CHECKED){
 		m_dispBN = DISP_BLOCKNUM_TYPE::NOTDISPLAY_BLOCKNUM;

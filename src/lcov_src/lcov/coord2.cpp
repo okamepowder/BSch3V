@@ -89,7 +89,7 @@ bool PointIsCloseToLineSide(const SPoint& ptPoint,const SPoint& ptLineBegin,cons
 		double dy =  (yp - cros_y);
 		if(abs(dx>limit) || abs(dy>limit))return false;
 		if((dx*dx+dy*dy)<=((double)limit*limit)){
-			ptCross = SPoint(cros_x,cros_y);
+			ptCross = SPoint((int)cros_x, (int)cros_y);
 			return true;
 		}
 	}

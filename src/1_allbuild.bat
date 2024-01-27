@@ -12,6 +12,7 @@ IF "%VSCMD_VER%"=="" goto err_vscmd_ver
 set OPTION= /p:Configuration=Release;Platform="Win32"
 @rem set OPTION=%OPTION% /t:rebuild
 @rem set OPTION=%OPTION% -tv:14.0
+OPTION=%OPTION% /p:DefineConstants="_CRT_SECURE_NO_WARNINGS"
 
 MSBuild.exe "%~dp0bsch3v_src\bsch3v\Bsch3V.sln" %OPTION%
 IF %ERRORLEVEL% NEQ 0 goto end

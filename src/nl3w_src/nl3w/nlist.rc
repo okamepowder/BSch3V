@@ -62,8 +62,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,81,10,1
- PRODUCTVERSION 0,81,10,1
+ FILEVERSION 0,84,0,0
+ PRODUCTVERSION 0,84,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -79,17 +79,17 @@ BEGIN
         BLOCK "041104e4"
         BEGIN
             VALUE "FileDescription", "ネットリスト作成"
-            VALUE "FileVersion", "0.81.10.1"
+            VALUE "FileVersion", "0.84.0.0"
             VALUE "InternalName", "NL3W"
             VALUE "LegalCopyright", "Copyright (C) 2004-2014 H.Okada(Suigyodo)"
             VALUE "OriginalFilename", "nl3w.exe"
             VALUE "ProductName", "NL3W"
-            VALUE "ProductVersion", "0.81.10.1"
+            VALUE "ProductVersion", "0.84.0.0"
         END
     END
     BLOCK "VarFileInfo"
     BEGIN
-        VALUE "Translation", 0x411, 1252
+        VALUE "Translation", 0x411, 932
     END
 END
 
@@ -220,7 +220,7 @@ BEGIN
     IDS_ADD_ADDIN           "アドインファイルの追加"
     IDS_ADDIN_INDEX_ERROR   "指定されたアドインがみつかりません"
     IDS_NO_NETINFO          "ネット情報がありません"
-    IDS_VERSION             "0.81.10"
+    IDS_VERSION             "0.84.0"
 END
 
 #endif    // 日本語 (日本) resources

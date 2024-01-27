@@ -62,22 +62,17 @@ CLCoVApp::CLCoVApp()
 		}
 	}
 
+	// 常にNT
 	//次にWindows 2000/XPにおいて
 	//\Documents and Settings\username\Local Settings\Application Data\SuigyodoONLINE\LCOV.INI を探す。
 	//これが見つかったときは、これをINIファイルとして使う。
-	OSVERSIONINFO versionInfo;
-	versionInfo.dwOSVersionInfoSize=sizeof(OSVERSIONINFO);
-	if(GetVersionEx(&versionInfo)){
-		if(versionInfo.dwPlatformId == VER_PLATFORM_WIN32_NT){
-			if(SHGetSpecialFolderPath(NULL,m_pszIniFileName,CSIDL_LOCAL_APPDATA,FALSE)){
-				TRACE(_T("CBSchApp::CBSchApp() %s\n"),m_pszIniFileName);
-				_tcscat(m_pszIniFileName,_T("\\SuigyodoONLINE\\LCOV.INI"));
-				FILE *pf=_tfopen(m_pszIniFileName,_T("rt, ccs=UTF-8"));
-				if(pf){
-					fclose(pf);
-					goto EndOfFunc;
-				}
-			}
+	if(SHGetSpecialFolderPath(NULL,m_pszIniFileName,CSIDL_LOCAL_APPDATA,FALSE)){
+		TRACE(_T("CBSchApp::CBSchApp() %s\n"),m_pszIniFileName);
+		_tcscat(m_pszIniFileName,_T("\\SuigyodoONLINE\\LCOV.INI"));
+		FILE *pf=_tfopen(m_pszIniFileName,_T("rt, ccs=UTF-8"));
+		if(pf){
+			fclose(pf);
+			goto EndOfFunc;
 		}
 	}
 

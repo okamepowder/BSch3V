@@ -59,16 +59,6 @@ CCompEditView::CCompEditView()
 
 	m_bIsCursorOnActivePolygon = false;
 
-	{
-		::g_bIsWin9x = false;
-//		OSVERSIONINFO versionInfo;
-//		versionInfo.dwOSVersionInfoSize=sizeof(OSVERSIONINFO);
-//		if(GetVersionEx(&versionInfo)){
-//			::g_bIsWin9x = (versionInfo.dwPlatformId == VER_PLATFORM_WIN32_WINDOWS);
-//		}
-//		g_bIsWin9x=true;	//test
-	}
-
 }
 
 CCompEditView::~CCompEditView()

@@ -302,8 +302,8 @@ public:
 	SCompInfoList	m_listCompInfo;			//読み込み込んだ部品クラスのリスト
 	SCompIndexList	m_listCompIndex;		//読み込み込んだ部品インデックスのリスト
 	PSCompIndex*	m_ppCompIndex;			//読み込み込んだ部品インデックスのポインタ配列
-	int				m_aux1;
-	int				m_aux2;
+	time_t			m_aux1;
+	time_t			m_aux2;
 
 	int				m_dataVersion;			//Version 0.80
 static const int m_nConstDataVersion = 82;	//Version 0.80 ライブラリデータのバージョン

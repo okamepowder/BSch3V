@@ -331,7 +331,7 @@ bool SXBSchLine::writeCe3Ex(SWriteCE3& wce3,const SPoint* pptOrigin,const TCHAR*
 		y2 -= pptOrigin->y();
 	}
 
-	_stprintf(sz,_T("+%s"),pTag);
+	_stprintf_s(sz, sizeof(sz) / sizeof(sz[0]), _T("+%s"), pTag);
 	wce3.WriteRecord(sz);
 	wce3.WriteRecordInt(_T("L"),m_Layer);
 	wce3.WriteRecordInt(_T("X1"),x1);
@@ -348,7 +348,7 @@ bool SXBSchLine::writeCe3Ex(SWriteCE3& wce3,const SPoint* pptOrigin,const TCHAR*
 //	sprintf(sz,"Y2:%d",y2);
 //	wce3.WriteRecord(sz);
 
-	_stprintf(sz,_T("-%s"),pTag);
+	_stprintf_s(sz, sizeof(sz) / sizeof(sz[0]), _T("-%s"), pTag);
 	wce3.WriteRecord(sz);
 	wce3.WriteEOL();
 	return true;
@@ -565,10 +565,10 @@ void SXBSchMarkerLine::outlinePoint(SPoint* pp)
 
 		double incFlag = (a>0 ? 1 : -1);
 
-		pp[0] = SPoint(_p1.x()-ext1-incFlag*ext2, _p1.y()+ext1-incFlag*ext2);
-		pp[1] = SPoint(_p2.x()+ext1-incFlag*ext2, _p2.y()+ext1+incFlag*ext2);
-		pp[2] = SPoint(_p2.x()+ext1+incFlag*ext2, _p2.y()-ext1+incFlag*ext2);
-		pp[3] = SPoint(_p1.x()-ext1+incFlag*ext2, _p1.y()-ext1-incFlag*ext2);
+		pp[0] = SPoint((int)(double)(_p1.x() - ext1 - incFlag * ext2), (int)(double)(_p1.y() + ext1 - incFlag * ext2));
+		pp[1] = SPoint((int)(double)(_p2.x() + ext1 - incFlag * ext2), (int)(double)(_p2.y() + ext1 + incFlag * ext2));
+		pp[2] = SPoint((int)(double)(_p2.x() + ext1 + incFlag * ext2), (int)(double)(_p2.y() - ext1 + incFlag * ext2));
+		pp[3] = SPoint((int)(double)(_p1.x() - ext1 + incFlag * ext2), (int)(double)(_p1.y() - ext1 - incFlag * ext2));
 
 	}
 }

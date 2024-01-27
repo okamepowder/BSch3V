@@ -1677,8 +1677,8 @@ bool SCompLib::readLibraryFile(LPCTSTR lpszFileName)
 	fpos_t filelength;
 	fgetpos(fp,&filelength); 
 	fseek(fp,0,SEEK_SET);
-	buff = new char[filelength+1];
-	size_t readSize = fread(buff,1,filelength,fp);
+	buff = new char[(unsigned int)filelength+1];
+	size_t readSize = fread(buff,1,(size_t)filelength,fp);
 	fclose(fp);
 
 	if(readSize<filelength) goto RdErr;
@@ -1686,7 +1686,7 @@ bool SCompLib::readLibraryFile(LPCTSTR lpszFileName)
 
 
 	//‚±‚±‚©‚çƒo[ƒWƒ‡ƒ“”»’è
-	wcBuff = new wchar_t[filelength+1];
+	wcBuff = new wchar_t[(unsigned int)filelength+1];
 	for(int i=0;i<(filelength+1);i++){
 		wcBuff[i]=buff[i];
 	}
@@ -1744,7 +1744,7 @@ bool SCompLib::readLibraryFile(LPCTSTR lpszFileName)
 	delete[]wcBuff;
 
 	int n;
-	int len;
+	//int len;
 
 	nCount = m_listCompIndex.size();
 

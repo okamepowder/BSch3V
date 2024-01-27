@@ -17,8 +17,6 @@ using namespace std;
 #include "bschfont.h"
 #define M_PI       3.14159265358979323846
 
-bool g_bIsWin9x;
-
 static int PinDataNormal[4][4]={
 		{	//L
 			-10,		0,
@@ -89,161 +87,6 @@ static int PinDataInvert[4][8]={
 			INVCIR_SIZE,		INVCIR_SIZE*2
 		}
 	};
-
-
-void  DotLine9x(CDC* pDC,int x0,int y0,int x1,int y1,int width,bool& rbMark,int& rPos)
-{
-	int x=x0;
-	int y=y0;
-	int n;
-	int xd,yd;
-	int movePitch;
-	double incline;
-	if(width<1)width=1;
-	int pitch = width*3;
-	if(rPos>pitch)rPos=0;
-
-	if(x0==x1 && y0==y1)return;
-
-	pDC->MoveTo(x0,y0);
-	if(abs(x0-x1)>abs(y0-y1)){
-		xd=abs(x0-x1);	//abs of deleta X
-		yd=y1-y0;		//deleta Y
-		incline=(double)yd/xd;
-		movePitch = sqrt(pitch*pitch/(1+incline*incline));
-//TRACE("%d,%d,%f\n",pitch,movePitch,incline);
-
-		if(rPos) n=movePitch*rPos/pitch;
-		else n=movePitch;
-		while(1){
-			if(n>=xd){
-				rPos=n-xd;
-				x=x1;
-				y=y1;
-			}else{
-				if(x0<x1){
-					x=x0+n;
-				}else{
-					x=x0-n;
-				}
-				y=y0+yd*n/xd;
-			}
-			if(rbMark){
-				pDC->LineTo(x,y);
-			}else{
-				pDC->MoveTo(x,y);
-			}
-			if(n>xd)break;
-			rbMark=!rbMark;
-			if(x==x1)break;
-			n+=movePitch;
-		}
-	}else{
-		yd=abs(y0-y1);	//abs of deleta Y
-		xd=x1-x0;		//deleta X
-		incline=(double)xd/yd;
-		movePitch = sqrt(pitch*pitch/(1+incline*incline));
-
-		if(rPos) n=movePitch*rPos/pitch;
-		else n=movePitch;
-
-//TRACE("%d,%d,%d,%f\n",pitch,movePitch,n,incline);
-
-		while(1){
-			if(n>=yd){
-				rPos=n-yd;
-				x=x1;
-				y=y1;
-			}else{
-				if(y0<y1){
-					y=y0+n;
-				}else{
-					y=y0-n;
-				}
-				x=x0+xd*n/yd;
-			}
-			if(rbMark){
-				pDC->LineTo(x,y);
-			}else{
-				pDC->MoveTo(x,y);
-			}
-			if(n>yd)break;
-			rbMark=!rbMark;
-			if(y==y1)break;
-			n+=movePitch;
-		}
-	}
-	rPos=pitch*rPos/movePitch;
-//TRACE("     %d,%d\n",rbMark,rPos);
-}
-
-void DotPolygon9x(CDC* pDC,LPPOINT pPoint,int node,int width)
-{
-	if(node<2)return;
-	bool bMark=true;
-	int nPos=0;
-	int i;
-//TRACE("DotPolygon9x\n");
-	for(i=0;i<node-1;i++){
-		DotLine9x(pDC,	pPoint[i].x,   pPoint[i].y,
-						pPoint[i+1].x, pPoint[i+1].y,
-						width,bMark,nPos);
-	}
-	DotLine9x(pDC,	pPoint[node-1].x,   pPoint[node-1].y,
-					pPoint[0].x, pPoint[0].y,
-					width,bMark,nPos);
-}
-
-
-
-void DotArc9x(CDC* pDC,CRect* prc,CPoint ptBegin, CPoint ptEnd,int nWidth)
-{
-	double centerX,centerY;
-	double rv;
-	double hm;
-	double dBegin,dEnd,a;
-	int x0,y0,x1,y1;
-	bool bMark=true;
-	int nPos=0;
-	double width=prc->Width();
-	double height=prc->Height();
-
-	centerX=(double)(prc->left+prc->right)/2;
-	centerY=(double)(prc->top +prc->bottom)/2;
-	rv=(double)(prc->bottom)-centerY;
-	
-	if(height==0)height=1;
-	if(width==0)width=1;
-	hm=width/height;
-	if(ptBegin==ptEnd){
-		dBegin=0;
-		dEnd=2*M_PI;
-	}else{
-		dBegin = atan2(centerY-(double)ptBegin.y,((double)ptBegin.x-centerX)/hm);
-		dEnd = atan2(centerY-(double)ptEnd.y,((double)ptEnd.x-centerX)/hm);
-		if(dEnd<dBegin)dEnd+=2*M_PI;
-	}
-//TRACE("begin %f,end %f\n",dBegin,dEnd);
-	a=dBegin;
-	x0=centerX+rv*cos(a)*hm;
-	y0=centerY-rv*sin(a);
-	while(1){
-		//TRACE("%d,%d,%f,%f,%f\n",x0,y0,a,cos(a),sin(a));
-		a+=(2*M_PI)/32;
-		if(a>=dEnd){
-			a=dEnd;
-		}
-		x1=centerX+rv*cos(a)*hm;
-		y1=centerY-rv*sin(a);
-		//TRACE("%d,%d\n",bMark,nPos);
-		DotLine9x(pDC,x0,y0,x1,y1,nWidth,bMark,nPos);
-		if(a==dEnd)break;
-		x0=x1;
-		y0=y1;
-	}
-}
-
-
 
 
 void convDirXY(int&rx,int&ry,int dir,int cx,int cy)
@@ -385,7 +228,6 @@ void g_DrawPtnLine(
 	CPen* pPenOld;
 	int x1,y1;
 	int xs,ys;
-	//bool b9xDot=false;
 
 	int width = (pObj->m_width * nVExt)/nWExt;
 	int style = pObj->m_style;
@@ -394,17 +236,12 @@ void g_DrawPtnLine(
 		newPen.CreatePen(PS_SOLID,width,col);
 	}else /*if(style == 1)*/{
 		if(width>1){
-			//if(::g_bIsWin9x){
-			//	newPen.CreatePen(PS_SOLID,width,col);
-			//	b9xDot=true;
-			//}else{
-				DWORD adwPenStyle[2];
-				adwPenStyle[0]=adwPenStyle[1]=width*2;
-				LOGBRUSH logBrush;
-				logBrush.lbStyle = BS_SOLID;
-				logBrush.lbColor = col;
-				newPen.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND, width, &logBrush,2,adwPenStyle);
-			//}
+			DWORD adwPenStyle[2];
+			adwPenStyle[0]=adwPenStyle[1]=width*2;
+			LOGBRUSH logBrush;
+			logBrush.lbStyle = BS_SOLID;
+			logBrush.lbColor = col;
+			newPen.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND, width, &logBrush,2,adwPenStyle);
 		}else{
 			newPen.CreatePen(PS_DOT,width,col);
 		}
@@ -422,11 +259,7 @@ void g_DrawPtnLine(
 	x1+=x0;  y1+=y0;
 	x1 = (x1*nVExt)/nWExt;
 	y1 = (y1*nVExt)/nWExt;
-	//if(b9xDot){
-	//	bool bMark=true;
-	//	int nPos=0;
-	//	DotLine9x(pDC,xs,ys,x1,y1,width,bMark,nPos);
-	//}else{
+
 	if(!pObj->getCurve()){
 		int nOldBkMmode=pDC->SetBkMode(TRANSPARENT);
 		pDC->MoveTo(xs,ys);
@@ -477,7 +310,6 @@ void g_DrawPtnCircle(
 	CBrush* pBrushOld;
 
 	int x1,y1,x2,y2;
-	bool b9xDot=false;
 	int fill = pObj->m_nFill;
 
 
@@ -489,21 +321,12 @@ void g_DrawPtnCircle(
 		newPen.CreatePen(PS_SOLID,width,col);
 	}else /*if(style == 1)*/{
 		if(width>1){
-			if(::g_bIsWin9x){
-				if(fill == -1){	//フィルなしのときだけまじめに点線描画
-					newPen.CreatePen(PS_SOLID,width,col);
-					b9xDot=true;
-				}else{
-					newPen.CreatePen(PS_DOT,1,col);
-				}
-			}else{
-				DWORD adwPenStyle[2];
-				adwPenStyle[0]=adwPenStyle[1]=width*2;
-				LOGBRUSH logBrush;
-				logBrush.lbStyle = BS_SOLID;
-				logBrush.lbColor = col;
-				newPen.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND, width, &logBrush,2,adwPenStyle);
-			}
+			DWORD adwPenStyle[2];
+			adwPenStyle[0]=adwPenStyle[1]=width*2;
+			LOGBRUSH logBrush;
+			logBrush.lbStyle = BS_SOLID;
+			logBrush.lbColor = col;
+			newPen.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND, width, &logBrush,2,adwPenStyle);
 		}else{
 			newPen.CreatePen(PS_DOT,width,col);
 		}
@@ -556,16 +379,9 @@ void g_DrawPtnCircle(
 //	pDC->Ellipse(&rc);
 //	pDC->SetBkMode(nOldBkMmode);
 
-
-	if(b9xDot){
-		CPoint pt(1,1);
-		DotArc9x(pDC,&rc,pt,pt,width);
-	}else{
-		int nOldBkMmode=pDC->SetBkMode(TRANSPARENT);
-		pDC->Ellipse(&rc);
-		pDC->SetBkMode(nOldBkMmode);
-	}
-
+	int nOldBkMmode=pDC->SetBkMode(TRANSPARENT);
+	pDC->Ellipse(&rc);
+	pDC->SetBkMode(nOldBkMmode);
 
 	pDC->SelectObject(pBrushOld);
 	pDC->SelectObject(pPenOld);
@@ -589,7 +405,6 @@ void g_DrawPtnPolygon(
 	CBrush newBrush;
 	CBrush* pBrushOld;
 	static POINT aPoint[VECTPLOYGON_MAXNODE]; 
-	bool b9xDot=false;
 	int fill = pObj->m_nFill;
 	
 
@@ -605,21 +420,12 @@ void g_DrawPtnPolygon(
 		newPen.CreatePen(PS_SOLID,width,col);
 	}else /*if(style == 1)*/{
 		if(width>1){
-			if(::g_bIsWin9x){
-				if(fill == -1){	//フィルなしのときだけまじめに点線描画
-					newPen.CreatePen(PS_SOLID,width,col);
-					b9xDot=true;
-				}else{
-					newPen.CreatePen(PS_DOT,1,col);
-				}
-			}else{
-				DWORD adwPenStyle[2];
-				adwPenStyle[0]=adwPenStyle[1]=width*2;
-				LOGBRUSH logBrush;
-				logBrush.lbStyle = BS_SOLID;
-				logBrush.lbColor = col;
-				newPen.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND, width, &logBrush,2,adwPenStyle);
-			}
+			DWORD adwPenStyle[2];
+			adwPenStyle[0]=adwPenStyle[1]=width*2;
+			LOGBRUSH logBrush;
+			logBrush.lbStyle = BS_SOLID;
+			logBrush.lbColor = col;
+			newPen.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND, width, &logBrush,2,adwPenStyle);
 		}else{
 			newPen.CreatePen(PS_DOT,width,col);
 		}
@@ -655,14 +461,12 @@ void g_DrawPtnPolygon(
 		aPoint[i].x=x1;
 		aPoint[i].y=y1;
 	}
-	if(b9xDot){
-		DotPolygon9x(pDC,aPoint,node,width);
-	}else{
-		pDC->SetPolyFillMode(WINDING);
-		int nOldBkMmode=pDC->SetBkMode(TRANSPARENT);
-		pDC->Polygon(aPoint,node);
-		pDC->SetBkMode(nOldBkMmode);
-	}
+
+	pDC->SetPolyFillMode(WINDING);
+	int nOldBkMmode=pDC->SetBkMode(TRANSPARENT);
+	pDC->Polygon(aPoint,node);
+	pDC->SetBkMode(nOldBkMmode);
+
 	pDC->SelectObject(pBrushOld);
 	pDC->SelectObject(pPenOld);
 }
@@ -685,23 +489,17 @@ void g_DrawPtnArc(
 	int x,y,r,x1,y1,x2,y2,x3,y3,x4,y4;
 	int width = (pObj->m_width * nVExt)/nWExt;
 	int style = pObj->m_style;
-	bool b9xDot=false;
 
 	if(style == 0){
 		newPen.CreatePen(PS_SOLID,width,col);
 	}else /*if(style == 1)*/{
 		if(width>1){
-			if(::g_bIsWin9x){
-				newPen.CreatePen(PS_SOLID,width,col);
-				b9xDot=true;
-			}else{
-				DWORD adwPenStyle[2];
-				adwPenStyle[0]=adwPenStyle[1]=width*2;
-				LOGBRUSH logBrush;
-				logBrush.lbStyle = BS_SOLID;
-				logBrush.lbColor = col;
-				newPen.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND, width, &logBrush,2,adwPenStyle);
-			}
+			DWORD adwPenStyle[2];
+			adwPenStyle[0]=adwPenStyle[1]=width*2;
+			LOGBRUSH logBrush;
+			logBrush.lbStyle = BS_SOLID;
+			logBrush.lbColor = col;
+			newPen.CreatePen(PS_USERSTYLE|PS_GEOMETRIC|PS_ENDCAP_ROUND, width, &logBrush,2,adwPenStyle);
 		}else{
 			newPen.CreatePen(PS_DOT,width,col);
 		}
@@ -762,13 +560,11 @@ void g_DrawPtnArc(
 		ptBegin=CPoint(x3,y3);
 		ptEnd=CPoint(x4,y4);
 	}
-	if(b9xDot){
-		DotArc9x(pDC,&rc,ptBegin,ptEnd,width);
-	}else{
-		int nOldBkMmode=pDC->SetBkMode(TRANSPARENT);
-		pDC->Arc(&rc,ptBegin,ptEnd);
-		pDC->SetBkMode(nOldBkMmode);
-	}
+
+	int nOldBkMmode=pDC->SetBkMode(TRANSPARENT);
+	pDC->Arc(&rc,ptBegin,ptEnd);
+	pDC->SetBkMode(nOldBkMmode);
+	
 	pDC->SelectObject(pPenOld);
 }
 

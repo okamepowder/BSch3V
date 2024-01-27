@@ -327,7 +327,7 @@ void CFind2::OnBnClickedButtonSearch()
 	CBSchDoc* pDoc = m_pView->GetDocument();
 
 	int setIndex = 0;
-	unsigned int foundType;
+	//unsigned int foundType;
 	const SXBSchObj* pObj= pDoc->FindStart(strSearch,m_fi.m_bMatchWhole,m_fi.m_bCaseSensitive,m_fi.m_targetFlag,false);
 	while(pObj!=NULL){
 		CString str;

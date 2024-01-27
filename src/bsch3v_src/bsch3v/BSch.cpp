@@ -146,24 +146,19 @@ CBSchApp::CBSchApp()
 		}
 	}
 
+	// WINVERの設定で常にNT上での動作。
 	//次にWindows 2000/XPにおいて
 	//\Documents and Settings\username\Local Settings\Application Data\SuigyodoONLINE\BSCH3.INI を探す。
 	//これが見つかったときは、これをINIファイルとして使う。
-	OSVERSIONINFO versionInfo;
-	versionInfo.dwOSVersionInfoSize=sizeof(OSVERSIONINFO);
-	if(GetVersionEx(&versionInfo)){
-		if(versionInfo.dwPlatformId == VER_PLATFORM_WIN32_NT){
-			if(SHGetSpecialFolderPath(NULL,m_pszIniFileName,CSIDL_LOCAL_APPDATA,FALSE)){
-				TRACE(_T("CBSchApp::CBSchApp() %s\n"),m_pszIniFileName);
-				_tcscat(m_pszIniFileName,_T("\\SuigyodoONLINE\\BSCH3.INI"));
-				FILE *pf=_tfopen(m_pszIniFileName,_T("rt"));
-				if(pf){
-					fclose(pf);
-					goto EndOfFunc;
-					//m_pszProfileName=m_pszIniFileName;	//作成した文字列のポインタをm_pszProfileNameにコピー
-					//return;
-				}
-			}
+	if(SHGetSpecialFolderPath(NULL,m_pszIniFileName,CSIDL_LOCAL_APPDATA,FALSE)){
+		TRACE(_T("CBSchApp::CBSchApp() %s\n"),m_pszIniFileName);
+		_tcscat(m_pszIniFileName,_T("\\SuigyodoONLINE\\BSCH3.INI"));
+		FILE *pf=_tfopen(m_pszIniFileName,_T("rt"));
+		if(pf){
+			fclose(pf);
+			goto EndOfFunc;
+			//m_pszProfileName=m_pszIniFileName;	//作成した文字列のポインタをm_pszProfileNameにコピー
+			//return;
 		}
 	}
 

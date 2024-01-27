@@ -6,7 +6,6 @@
 #ifndef DRAWOBJ_H
 #define DRAWOBJ_H
 
-//extern bool g_bIsWin9x;
 extern bool g_bFillEndOfPtnLine;
 
 //ƒoƒXü‚Ì•`‰æ

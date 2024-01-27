@@ -1242,7 +1242,7 @@ int SXBSchDoc::ce3FileCheck(const TCHAR* fname)
 	readSize = fread(charBuff,1,1023,fp);
 	charBuff[readSize] = 0;
 	fclose(fp);
-	for(int i=0;i<=readSize;i++){
+	for(int i = 0; i <= (int) readSize; i++){
 		wcharBuff[i] = charBuff[i];
 	}
 	SReadCE3 rce3;
@@ -1295,8 +1295,8 @@ int SXBSchDoc::readFile(const TCHAR* fname)
 		fpos_t filelength;
 		fgetpos(fp,&filelength); 
 		fseek(fp,0,SEEK_SET);
-		char* buff = new char[filelength+1];
-		size_t readSize = fread(buff,1,filelength,fp);
+		char* buff = new char[(size_t)filelength+1];
+		size_t readSize = fread(buff,1,(size_t)filelength,fp);
 		if(readSize<filelength) goto RdErr;
 		buff[filelength]=0;
 		int wcBuffSize = ::MultiByteToWideChar(CP_THREAD_ACP, 0, buff, -1, NULL,0);

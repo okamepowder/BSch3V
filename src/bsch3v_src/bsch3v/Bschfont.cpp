@@ -19,8 +19,6 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-//extern bool g_bIsWin9x;
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // CBSchFont のコンストラクタ
@@ -413,13 +411,6 @@ CSize CBSchFont::PutWinFontML(
 
 	int right = x+width;
 	int bottom = y+10000;
-
-	//if(::g_bIsWin9x){
-	//	if(right>32000) right=32000;
-	//	if(bottom>32000) bottom=32000;
-	//	if(x>right)x=right-100;
-	//	if(y>bottom)y=bottom-100;
-	//}
 
 	CRect rc(x,y,right,bottom);
 

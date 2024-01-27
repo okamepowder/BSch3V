@@ -310,7 +310,7 @@ void CMainFrame::addExtensionMenu()
 	menuPopup.CreatePopupMenu();
 	n=0;
 	while(n<10){
-		_stprintf(szKey,_T("Menu%d"),n);
+		_stprintf_s(szKey,sizeof(szKey)/sizeof(szKey[0]),_T("Menu%d"),n);
 		CString strMenuInfo=AfxGetApp()->GetProfileString(_T("ExtensionMenu"),szKey);
 		if(strMenuInfo.IsEmpty()) break;
 		int top,end;

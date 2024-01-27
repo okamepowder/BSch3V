@@ -85,8 +85,8 @@ IDB_BITMAP_SORTMARK     BITMAP                  "res\\bitmap_sortmark.bmp"
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,81,10,0
- PRODUCTVERSION 0,81,10,0
+ FILEVERSION 0,84,0,0
+ PRODUCTVERSION 0,84,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -102,17 +102,17 @@ BEGIN
         BLOCK "041104e4"
         BEGIN
             VALUE "FileDescription", "BSch3V回路図ファイル用の検索ソフト"
-            VALUE "FileVersion", "0.81.10"
+            VALUE "FileVersion", "0.84.0"
             VALUE "InternalName", "CE3Search"
             VALUE "LegalCopyright", "Copyright (C) 2010-2014 H.Okada(Suigyodo)"
             VALUE "OriginalFilename", "CE3Search.exe"
             VALUE "ProductName", "CE3Search"
-            VALUE "ProductVersion", "0.81.10"
+            VALUE "ProductVersion", "0.84.0"
         END
     END
     BLOCK "VarFileInfo"
     BEGIN
-        VALUE "Translation", 0x411, 1252
+        VALUE "Translation", 0x411, 932
     END
 END
 
@@ -128,7 +128,7 @@ CAPTION "CE3Search について"
 FONT 11, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,14,14,20,20
-    LTEXT           "CE3Search, Version 0.81.10",IDC_STATIC,42,14,114,8,SS_NOPREFIX
+    LTEXT           "CE3Search, Version 0.84.0",IDC_STATIC,42,14,114,8,SS_NOPREFIX
     LTEXT           "Copyright (C) 2010-2014 H.Okada(Suigyodo)",IDC_STATIC,42,26,159,8
     DEFPUSHBUTTON   "OK",IDOK,147,42,50,14,WS_GROUP
 END

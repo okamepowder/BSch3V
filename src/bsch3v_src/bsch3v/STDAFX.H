@@ -10,6 +10,8 @@
 
 //#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS      // some CString constructors will be explicit
 
+#define _CRT_SECURE_NO_WARNINGS
+
 
 #include <afxwin.h>         // MFC の標準コンポーネント
 #include <afxext.h>         // MFC の拡張部分

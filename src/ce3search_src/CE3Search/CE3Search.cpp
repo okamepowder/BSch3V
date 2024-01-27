@@ -37,23 +37,18 @@ CCE3SearchApp::CCE3SearchApp()
 	//モジュールのパスを調べる。
 	::GetModuleFileName(NULL,pathExe,_MAX_PATH);
 
+	// 常にNT
 	//Windows 2000/XPにおいて
 	//\Documents and Settings\username\Local Settings\Application Data\SuigyodoONLINE\NL3W.INI を探す。
 	//これが見つかったときは、これをINIファイルとして使う。
-	OSVERSIONINFO versionInfo;
-	versionInfo.dwOSVersionInfoSize=sizeof(OSVERSIONINFO);
-	if(GetVersionEx(&versionInfo)){
-		if(versionInfo.dwPlatformId == VER_PLATFORM_WIN32_NT){
-			if(SHGetSpecialFolderPath(NULL,m_pszIniFileName,CSIDL_LOCAL_APPDATA,FALSE)){
-				TRACE("CBSchApp::CBSchApp() %s\n",m_pszIniFileName);
-				_tcscat(m_pszIniFileName,_T("\\SuigyodoONLINE\\CE3Search.INI"));
-				FILE *pf=_tfopen(m_pszIniFileName,_T("rt, ccs=UTF-8"));
-				if(pf){
-					fclose(pf);
-					m_pszProfileName=m_pszIniFileName;	//作成した文字列のポインタをm_pszProfileNameにコピー
-					return;
-				}
-			}
+	if(SHGetSpecialFolderPath(NULL,m_pszIniFileName,CSIDL_LOCAL_APPDATA,FALSE)){
+		TRACE("CBSchApp::CBSchApp() %s\n",m_pszIniFileName);
+		_tcscat(m_pszIniFileName,_T("\\SuigyodoONLINE\\CE3Search.INI"));
+		FILE *pf=_tfopen(m_pszIniFileName,_T("rt, ccs=UTF-8"));
+		if(pf){
+			fclose(pf);
+			m_pszProfileName=m_pszIniFileName;	//作成した文字列のポインタをm_pszProfileNameにコピー
+			return;
 		}
 	}
 

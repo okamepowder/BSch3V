@@ -114,7 +114,7 @@ void CSelPart::AutoUpdate()
 		const SCompLib* pCompLib = g_LibraryInfo(n);
 		_wfinddata64i32_t findData;
 		if(_tfindfirst(pCompLib->m_lpszLibraryName,&findData)==-1) continue;
-		int wr_time = findData.time_write;
+		time_t wr_time = findData.time_write;
 		if(wr_time <= pCompLib->m_aux1){
 			continue;
 		}else{

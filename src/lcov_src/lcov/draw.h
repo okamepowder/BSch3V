@@ -53,8 +53,6 @@ class SPtnObjPolygon;
 class SPtnObjArc;
 class SPtnObjText;
 
-extern bool g_bIsWin9x;
-
 //ƒpƒ^[ƒ“‚ÌLine‚Ì•`‰æ
 void g_DrawPtnLine(
 			CDC* pDC,				//•`‰æ

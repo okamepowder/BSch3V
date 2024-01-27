@@ -132,9 +132,9 @@ bool SImageDIB::LoadWithGdiPlus(const TCHAR* fname,int imagetype)
 	CComPtr<IStream> pStream;
 	pStream = NULL;
 
-	HGLOBAL hMem = ::GlobalAlloc(GHND, filesize); 
+	HGLOBAL hMem = ::GlobalAlloc(GHND, (size_t)filesize);
 	LPVOID pGBuff = ::GlobalLock(hMem);
-	memcpy(pGBuff, m_pbuff+54, filesize);
+	memcpy(pGBuff, m_pbuff+54, (size_t)filesize);
 	::GlobalUnlock(hMem);
 
 	CreateStreamOnHGlobal(hMem, TRUE, &pStream);
@@ -157,7 +157,7 @@ bool SImageDIB::LoadWithGdiPlus(const TCHAR* fname,int imagetype)
 	m_pBmpInfo	= (BITMAPINFO*)m_pBmpIH;
 	m_pBitData	= m_pbuff + 54;
 
-	m_pBmpFH->bfSize = filesize+54;
+	m_pBmpFH->bfSize = (DWORD)(filesize+54);
 	m_pBmpFH->bfType = 0x4D42;
 	m_pBmpFH->bfOffBits = 54;
 
@@ -167,7 +167,7 @@ bool SImageDIB::LoadWithGdiPlus(const TCHAR* fname,int imagetype)
 	m_pBmpIH->biPlanes = 1;
 	m_pBmpIH->biHeight = image.GetHeight();
 	m_pBmpIH->biWidth = image.GetWidth();
-	m_pBmpIH->biSizeImage = filesize;
+	m_pBmpIH->biSizeImage = (DWORD)filesize;
 
 	image.Destroy();
 	::GlobalFree(hMem);

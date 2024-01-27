@@ -113,7 +113,7 @@ bool SPtnObjArc::testIntersect(const SPoint& ptest)
 	if(e>1) return false;
 
 	double rad = PointRad(m_ptC.x(),m_ptC.y(),r,ptest.x(),ptest.y());
-	int deg = (180.0*16*rad)/M_PI+0.5;
+	int deg = (int)(double)((180.0*16*rad)/M_PI+0.5);
 	int nEnd;
 	normalizeAngle();
 	if(m_nBegin>m_nEnd){
@@ -219,7 +219,7 @@ void SPtnObjArc::setBeginPoint(int x,int y)
 	double r = sqrt(dx*dx + dy*dy);
 
 	double rad = PointRad(m_ptC.x(),m_ptC.y(),r,x,y);
-	m_nBegin = (180.0*16*rad)/M_PI+0.5;
+	m_nBegin = (int)(double)((180.0*16*rad)/M_PI+0.5);
 	m_ptBegin = AngleToPoint500(m_nBegin);
 }
 
@@ -231,7 +231,7 @@ void SPtnObjArc::setEndPoint(int x,int y)
 	double r = sqrt(dx*dx + dy*dy);
 
 	double rad = PointRad(m_ptC.x(),m_ptC.y(),r,x,y);
-	m_nEnd = (180.0*16*rad)/M_PI+0.5;
+	m_nEnd = (int)(double)((180.0*16*rad)/M_PI+0.5);
 	m_ptEnd   = AngleToPoint500(m_nEnd);
 }
 
@@ -241,8 +241,8 @@ SPoint SPtnObjArc::AngleToPoint(int nAngle)
 	int x,y;
 	double angle;
 	angle = nAngle*M_PI/(180*16); 
-	x =m_ptC.x() + ((double)m_nR*cos(angle));
-	y =m_ptC.y() - ((double)m_nR*sin(angle));
+	x = (int)(double)(m_ptC.x() + ((double)m_nR*cos(angle)));
+	y = (int)(double)(m_ptC.y() - ((double)m_nR*sin(angle)));
 	return SPoint(x,y);
 }
 
@@ -251,8 +251,8 @@ SPoint SPtnObjArc::AngleToPoint500(int nAngle)
 	int x,y;
 	double angle;
 	angle = nAngle*M_PI/(180*16); 
-	x =m_ptC.x() + (500.0*cos(angle));
-	y =m_ptC.y() - (500.0*sin(angle));
+	x = (int)(double)(m_ptC.x() + (500.0*cos(angle)));
+	y = (int)(double)(m_ptC.y() - (500.0*sin(angle)));
 	return SPoint(x,y);
 }
 

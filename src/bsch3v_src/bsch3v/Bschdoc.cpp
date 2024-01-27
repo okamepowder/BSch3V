@@ -607,7 +607,7 @@ BOOL CBSchDoc::OnSaveDocument(LPCTSTR lpszPathName)
 		::_tsplitpath(lpszPathName, drive, dir, fname, NULL);
 
 		int i;
-		for (i = 1; i <= g_backupLevel; i++) {
+		for (i = 1; i <= (int)g_backupLevel; i++) {
 			_stprintf(ext, _T("ce3$%d"), i);
 			::_tmakepath(path_a, drive, dir, fname,ext);
 			FILE* pf = _tfopen(path_a, _T("rt"));
@@ -619,9 +619,9 @@ BOOL CBSchDoc::OnSaveDocument(LPCTSTR lpszPathName)
 			}
 		}
 
-		if (i > g_backupLevel) {
+		if (i > (int)g_backupLevel) {
 			_tremove(path_a);
-			i = g_backupLevel;
+			i = (int)g_backupLevel;
 		}
 
 		while (i >= 1) {

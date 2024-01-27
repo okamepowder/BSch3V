@@ -78,17 +78,17 @@ BEGIN
         BLOCK "041104e4"
         BEGIN
             VALUE "FileDescription", "部品番号振り付け"
-            VALUE "FileVersion", "0.82.2.1"
+            VALUE "FileVersion", "0.84.0.0"
             VALUE "InternalName", "NUT3W"
             VALUE "LegalCopyright", "Copyright (C) 2004-2014 H.Okada(Suigyodo)"
             VALUE "OriginalFilename", "nut3w.exe"
             VALUE "ProductName", "NUT3W"
-            VALUE "ProductVersion", "0.82.2.1"
+            VALUE "ProductVersion", "0.84.0.0"
         END
     END
     BLOCK "VarFileInfo"
     BEGIN
-        VALUE "Translation", 0x411, 1252
+        VALUE "Translation", 0x411, 932
     END
 END
 
@@ -204,7 +204,7 @@ BEGIN
     IDS_INIT_RANGE_ERR      "番号初期値の範囲は1～%dです"
     IDS_STEP_RANGE_ERR      "番号ステップ値の範囲は1～%dです"
     IDS_LATERVERSION        "このファイルはより新しいバージョンのBSch3Vで作成されています\n続行するといくつかのデータが失われるかもしれません\n続行しますか?"
-    IDS_VERSION             "0.82.02"
+    IDS_VERSION             "0.84.0"
 END
 
 #endif    // 日本語 (日本) resources
